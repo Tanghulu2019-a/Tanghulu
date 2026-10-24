@@ -1,0 +1,7 @@
+{
+  "required": false,
+  "package": "dev.tanghulu.ancientapple.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["XaeroMapAppleMixin", "XaeroWorldAppleMixin", "XaeroFullMapAppleMixin"],
+  "injectors": {"defaultRequire": 0}
+}

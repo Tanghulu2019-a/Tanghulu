@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "ancient-apple-hunter",
+  "version": "${version}",
+  "name": "Ancient Apple Hunter",
+  "description": "古城附魔金苹果箱预测与定位；无坐标航标、独立黑名单窗口。",
+  "authors": [
+    "Tanghulu"
+  ],
+  "license": "GPL-3.0-only",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "dev.tanghulu.ancientapple.AncientAppleAddon"
+    ]
+  },
+  "mixins": [
+    "ancient-apple-hunter.mixins.json",
+    "ancient-apple-hunter.xaero.mixins.json"
+  ],
+  "depends": {
+    "java": ">=21",
+    "minecraft": "1.21.11",
+    "fabricloader": ">=0.18.2",
+    "meteor-client": "1.21.11-86"
+  },
+  "suggests": {
+    "xaerominimap": ">=26.4.2",
+    "xaeroworldmap": ">=1.44.2"
+  },
+  "custom": {
+    "meteor-client:color": "255,185,45"
+  }
+}

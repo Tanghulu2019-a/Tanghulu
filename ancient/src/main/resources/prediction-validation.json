@@ -1,0 +1,7529 @@
+{
+  "passed": true,
+  "minecraft": "1.21.11",
+  "algorithm": "java-1.21.11-a3-order-aware",
+  "certaintyPolicy": "verify-order-sensitive",
+  "sourceHash": "71078511a3922a0fa202ffd1749e6dd98f47389ccf63ab7d9f69ff2213188011",
+  "templateAudit": {
+    "iceBoxes": 1,
+    "templates": 58,
+    "fixedChests": 1,
+    "pools": 7,
+    "treasureChestPositions": 13
+  },
+  "boundarySearch": {
+    "allTargetsInsideRadius": true,
+    "targets": 14,
+    "foundOutsideStartChest": true
+  },
+  "seeds": 10,
+  "cities": 43,
+  "records": [
+    {
+      "chests": [
+        {
+          "z": 1362,
+          "lootSeed": -6775849326743773006,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 782,
+          "y": -50
+        },
+        {
+          "z": 1251,
+          "lootSeed": -6933813245192795891,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 828,
+          "y": -49
+        },
+        {
+          "z": 1278,
+          "lootSeed": -193928381394826789,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 867,
+          "y": -48
+        },
+        {
+          "z": 1286,
+          "lootSeed": 2858756560459657823,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 892,
+          "y": -47
+        },
+        {
+          "z": 1214,
+          "lootSeed": 347516805602407492,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 709,
+          "y": -50
+        },
+        {
+          "z": 1221,
+          "lootSeed": 5046269532336016360,
+          "verificationRequired": true,
+          "apples": 2,
+          "x": 737,
+          "y": -47
+        },
+        {
+          "z": 1207,
+          "lootSeed": -5820155879472930386,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 781,
+          "y": -48
+        },
+        {
+          "z": 1247,
+          "lootSeed": -4465671132491050306,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 902,
+          "y": -50
+        },
+        {
+          "z": 1173,
+          "lootSeed": 9207020855132741888,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 819,
+          "y": -47
+        },
+        {
+          "z": 1248,
+          "lootSeed": 6133002584520489929,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 841,
+          "y": -48
+        },
+        {
+          "z": 1221,
+          "lootSeed": 7710579452877482319,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": 745,
+          "y": -47
+        },
+        {
+          "z": 1350,
+          "lootSeed": 1598794729388611607,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 775,
+          "y": -50
+        },
+        {
+          "z": 1332,
+          "lootSeed": -1420968727626900454,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 734,
+          "y": -49
+        },
+        {
+          "z": 1240,
+          "lootSeed": -9153536403772435026,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 889,
+          "y": -47
+        },
+        {
+          "z": 1276,
+          "lootSeed": -4043133393263082784,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 882,
+          "y": -50
+        },
+        {
+          "z": 1221,
+          "lootSeed": -3362647006219624110,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 820,
+          "y": -44
+        },
+        {
+          "z": 1243,
+          "lootSeed": 9161383080157362029,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 896,
+          "y": -44
+        },
+        {
+          "z": 1248,
+          "lootSeed": 9084617148916076731,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 889,
+          "y": -47
+        },
+        {
+          "z": 1199,
+          "lootSeed": 7710829568877346861,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 811,
+          "y": -48
+        },
+        {
+          "z": 1278,
+          "lootSeed": 7030074220559286364,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": 892,
+          "y": -47
+        },
+        {
+          "z": 1325,
+          "lootSeed": 4184033307270301384,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 783,
+          "y": -49
+        },
+        {
+          "z": 1173,
+          "lootSeed": -8685882978279202489,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 811,
+          "y": -47
+        },
+        {
+          "z": 1248,
+          "lootSeed": 9163727130080020851,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 860,
+          "y": -48
+        }
+      ],
+      "seed": 0,
+      "chunkX": 50,
+      "apples": 7,
+      "chunkZ": 79
+    },
+    {
+      "chests": [
+        {
+          "z": 1685,
+          "lootSeed": 3435390420947463751,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -702,
+          "y": -35
+        },
+        {
+          "z": 1796,
+          "lootSeed": 7967601103758573234,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -598,
+          "y": -49
+        },
+        {
+          "z": 1741,
+          "lootSeed": 8671978798600380842,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -735,
+          "y": -49
+        },
+        {
+          "z": 1714,
+          "lootSeed": 4346340758915289203,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -719,
+          "y": -48
+        },
+        {
+          "z": 1627,
+          "lootSeed": -917532042889888608,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -643,
+          "y": -37
+        },
+        {
+          "z": 1791,
+          "lootSeed": 7594394432002522361,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -635,
+          "y": -48
+        },
+        {
+          "z": 1833,
+          "lootSeed": -4028959347733130213,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -704,
+          "y": -44
+        },
+        {
+          "z": 1685,
+          "lootSeed": -3861426553632206920,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -670,
+          "y": -50
+        },
+        {
+          "z": 1764,
+          "lootSeed": 6524460153774860983,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -587,
+          "y": -47
+        },
+        {
+          "z": 1749,
+          "lootSeed": -8796666056441399622,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -718,
+          "y": -37
+        },
+        {
+          "z": 1708,
+          "lootSeed": -8292797828186683961,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -765,
+          "y": -49
+        },
+        {
+          "z": 1764,
+          "lootSeed": -8973913864313827169,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -595,
+          "y": -47
+        },
+        {
+          "z": 1813,
+          "lootSeed": 1126001728763860455,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -631,
+          "y": -35
+        },
+        {
+          "z": 1770,
+          "lootSeed": -6697006519162024882,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -631,
+          "y": -49
+        },
+        {
+          "z": 1698,
+          "lootSeed": -739597462111787080,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -622,
+          "y": -49
+        }
+      ],
+      "seed": 0,
+      "chunkX": -43,
+      "apples": 5,
+      "chunkZ": 108
+    },
+    {
+      "chests": [
+        {
+          "z": 2243,
+          "lootSeed": 82798865182858804,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -594,
+          "y": -48
+        },
+        {
+          "z": 2270,
+          "lootSeed": 3962152926251327500,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -591,
+          "y": -49
+        },
+        {
+          "z": 2366,
+          "lootSeed": 6389526238115141116,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -527,
+          "y": -50
+        },
+        {
+          "z": 2343,
+          "lootSeed": -5097540390757456268,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -589,
+          "y": -49
+        },
+        {
+          "z": 2271,
+          "lootSeed": 20626312333458762,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -609,
+          "y": -50
+        },
+        {
+          "z": 2243,
+          "lootSeed": -6305642054427400811,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -577,
+          "y": -48
+        },
+        {
+          "z": 2312,
+          "lootSeed": 4900678558841720799,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -448,
+          "y": -44
+        },
+        {
+          "z": 2352,
+          "lootSeed": -6815338492294036133,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -449,
+          "y": -37
+        },
+        {
+          "z": 2309,
+          "lootSeed": 9153830986556597072,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -47
+        },
+        {
+          "z": 2395,
+          "lootSeed": -1943482046942309373,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -564,
+          "y": -49
+        },
+        {
+          "z": 2243,
+          "lootSeed": 721606256487269928,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -502,
+          "y": -48
+        },
+        {
+          "z": 2344,
+          "lootSeed": -196760618667677245,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -606,
+          "y": -50
+        },
+        {
+          "z": 2312,
+          "lootSeed": 7985880149508781842,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -588,
+          "y": -35
+        },
+        {
+          "z": 2347,
+          "lootSeed": 140468779305414213,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -478,
+          "y": -48
+        },
+        {
+          "z": 2403,
+          "lootSeed": -6711500460478367903,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -530,
+          "y": -50
+        },
+        {
+          "z": 2317,
+          "lootSeed": -6084113813812539118,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -47
+        },
+        {
+          "z": 2319,
+          "lootSeed": -500548818512163271,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -605,
+          "y": -49
+        },
+        {
+          "z": 2413,
+          "lootSeed": 6720660319688077528,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -566,
+          "y": -47
+        },
+        {
+          "z": 2316,
+          "lootSeed": 3011611176883907568,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -442,
+          "y": -50
+        },
+        {
+          "z": 2292,
+          "lootSeed": 6119131306903157586,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -637,
+          "y": -49
+        },
+        {
+          "z": 2413,
+          "lootSeed": -8304256550443540414,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -558,
+          "y": -47
+        },
+        {
+          "z": 2443,
+          "lootSeed": -5840848973688812960,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -558,
+          "y": -48
+        },
+        {
+          "z": 2274,
+          "lootSeed": -276354247722551871,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -575,
+          "y": -50
+        },
+        {
+          "z": 2246,
+          "lootSeed": 3832413622804422569,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -515,
+          "y": -49
+        },
+        {
+          "z": 2283,
+          "lootSeed": 8771329210713860093,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -519,
+          "y": -48
+        },
+        {
+          "z": 2344,
+          "lootSeed": -5659905053168070697,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -645,
+          "y": -50
+        },
+        {
+          "z": 2278,
+          "lootSeed": -2854960158166778670,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -569,
+          "y": -44
+        },
+        {
+          "z": 2360,
+          "lootSeed": 8081123416890903528,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -523,
+          "y": -44
+        }
+      ],
+      "seed": 0,
+      "chunkX": -34,
+      "apples": 4,
+      "chunkZ": 146
+    },
+    {
+      "chests": [
+        {
+          "z": 2605,
+          "lootSeed": -6330545410256252934,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1290,
+          "y": -47
+        },
+        {
+          "z": 2509,
+          "lootSeed": 3210314086329195750,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1320,
+          "y": -47
+        },
+        {
+          "z": 2437,
+          "lootSeed": -6175348753308725798,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1358,
+          "y": -48
+        },
+        {
+          "z": 2595,
+          "lootSeed": -7654389863912763781,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1426,
+          "y": -50
+        },
+        {
+          "z": 2499,
+          "lootSeed": 4017860231896505286,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1330,
+          "y": -50
+        },
+        {
+          "z": 2500,
+          "lootSeed": -1975964543202184886,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1355,
+          "y": -49
+        },
+        {
+          "z": 2605,
+          "lootSeed": -6678505861409897193,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1383,
+          "y": -47
+        },
+        {
+          "z": 2509,
+          "lootSeed": -7944703838807221575,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1328,
+          "y": -47
+        },
+        {
+          "z": 2605,
+          "lootSeed": 8159778329740484370,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1263,
+          "y": -48
+        },
+        {
+          "z": 2561,
+          "lootSeed": -4615345968243413062,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1243,
+          "y": -50
+        },
+        {
+          "z": 2570,
+          "lootSeed": -216846435670297428,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1427,
+          "y": -49
+        },
+        {
+          "z": 2609,
+          "lootSeed": 2864445887419849389,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1318,
+          "y": -50
+        },
+        {
+          "z": 2601,
+          "lootSeed": 2531268234864992987,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1373,
+          "y": -35
+        },
+        {
+          "z": 2535,
+          "lootSeed": -6388939537611525390,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1244,
+          "y": -50
+        },
+        {
+          "z": 2525,
+          "lootSeed": 7433815766090259857,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1289,
+          "y": -47
+        },
+        {
+          "z": 2485,
+          "lootSeed": -2363543890779415370,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1328,
+          "y": -48
+        },
+        {
+          "z": 2517,
+          "lootSeed": -238021491203868529,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 1355,
+          "y": -49
+        },
+        {
+          "z": 2510,
+          "lootSeed": 2536097742107473066,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1401,
+          "y": -44
+        },
+        {
+          "z": 2533,
+          "lootSeed": -719777815673952568,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1289,
+          "y": -47
+        },
+        {
+          "z": 2597,
+          "lootSeed": -3268009229088103644,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1290,
+          "y": -47
+        },
+        {
+          "z": 2528,
+          "lootSeed": -8415068830542355108,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1303,
+          "y": -37
+        },
+        {
+          "z": 2511,
+          "lootSeed": -6884337805056362013,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1438,
+          "y": -50
+        },
+        {
+          "z": 2597,
+          "lootSeed": 3792880083732340908,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1383,
+          "y": -47
+        },
+        {
+          "z": 2530,
+          "lootSeed": -3838086298173355974,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1412,
+          "y": -50
+        }
+      ],
+      "seed": 0,
+      "chunkX": 84,
+      "apples": 1,
+      "chunkZ": 159
+    },
+    {
+      "chests": [
+        {
+          "z": 50420,
+          "lootSeed": -2489643745161457458,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51970,
+          "y": -48
+        },
+        {
+          "z": 50326,
+          "lootSeed": -9208006791372700377,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51934,
+          "y": -50
+        },
+        {
+          "z": 50315,
+          "lootSeed": -5156548110810283401,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52009,
+          "y": -48
+        },
+        {
+          "z": 50416,
+          "lootSeed": 2965777080510273874,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52044,
+          "y": -48
+        },
+        {
+          "z": 50386,
+          "lootSeed": -8349219378435309743,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52049,
+          "y": -37
+        },
+        {
+          "z": 50351,
+          "lootSeed": 9050054598952051374,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52049,
+          "y": -50
+        },
+        {
+          "z": 50378,
+          "lootSeed": -3123840943295507889,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51934,
+          "y": -47
+        },
+        {
+          "z": 50317,
+          "lootSeed": -8390802865020615797,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51958,
+          "y": -50
+        },
+        {
+          "z": 50387,
+          "lootSeed": 6907929753348992831,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51900,
+          "y": -44
+        },
+        {
+          "z": 50386,
+          "lootSeed": -7204512676097906077,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51934,
+          "y": -47
+        },
+        {
+          "z": 50441,
+          "lootSeed": 6102668399284443245,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52000,
+          "y": -47
+        },
+        {
+          "z": 50351,
+          "lootSeed": -4647654058777459744,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51902,
+          "y": -49
+        },
+        {
+          "z": 50275,
+          "lootSeed": -869675767515470899,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52009,
+          "y": -48
+        },
+        {
+          "z": 50469,
+          "lootSeed": -4530665630014827677,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51973,
+          "y": -49
+        },
+        {
+          "z": 50427,
+          "lootSeed": -5567811604452146770,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51962,
+          "y": -47
+        },
+        {
+          "z": 50441,
+          "lootSeed": -2178448989219967395,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52008,
+          "y": -47
+        },
+        {
+          "z": 50427,
+          "lootSeed": -8966543203134070437,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51970,
+          "y": -47
+        },
+        {
+          "z": 50278,
+          "lootSeed": -253152769853668105,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52049,
+          "y": -49
+        },
+        {
+          "z": 50317,
+          "lootSeed": -2089131232312210387,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52048,
+          "y": -50
+        },
+        {
+          "z": 50460,
+          "lootSeed": -8796864581801369690,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52000,
+          "y": -47
+        },
+        {
+          "z": 50451,
+          "lootSeed": -600400017254423143,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51965,
+          "y": -37
+        },
+        {
+          "z": 50344,
+          "lootSeed": -8114206313584703067,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 52069,
+          "y": -37
+        },
+        {
+          "z": 50271,
+          "lootSeed": -8396424431583373482,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51956,
+          "y": -35
+        },
+        {
+          "z": 50460,
+          "lootSeed": -3180250417028741849,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 52008,
+          "y": -47
+        },
+        {
+          "z": 50275,
+          "lootSeed": -4885060749117203769,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 51916,
+          "y": -48
+        }
+      ],
+      "seed": 0,
+      "chunkX": 3249,
+      "apples": 1,
+      "chunkZ": 3148
+    },
+    {
+      "chests": [
+        {
+          "z": 97182,
+          "lootSeed": -6849707897159612255,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -99554,
+          "y": -49
+        },
+        {
+          "z": 97139,
+          "lootSeed": -4910967940460361510,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99500,
+          "y": -37
+        },
+        {
+          "z": 97214,
+          "lootSeed": 3793495982692658874,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99361,
+          "y": -47
+        },
+        {
+          "z": 97135,
+          "lootSeed": -5725908746087767417,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99445,
+          "y": -48
+        },
+        {
+          "z": 97222,
+          "lootSeed": 241337726940974975,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99361,
+          "y": -47
+        },
+        {
+          "z": 97179,
+          "lootSeed": -8229578589322082018,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99387,
+          "y": -37
+        },
+        {
+          "z": 97245,
+          "lootSeed": -8974492898605793287,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99506,
+          "y": -49
+        },
+        {
+          "z": 97138,
+          "lootSeed": 6793257847420336316,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99484,
+          "y": -44
+        },
+        {
+          "z": 97211,
+          "lootSeed": -4834400765925253227,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -99373,
+          "y": -49
+        },
+        {
+          "z": 97284,
+          "lootSeed": 3345926969584154139,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99476,
+          "y": -48
+        },
+        {
+          "z": 97100,
+          "lootSeed": -614996235584085741,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99440,
+          "y": -35
+        },
+        {
+          "z": 97131,
+          "lootSeed": -8666744504564239988,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99424,
+          "y": -49
+        },
+        {
+          "z": 97153,
+          "lootSeed": -2865904363431512885,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99445,
+          "y": -48
+        },
+        {
+          "z": 97104,
+          "lootSeed": -5026709310157133673,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99427,
+          "y": -48
+        },
+        {
+          "z": 97184,
+          "lootSeed": -7408043316750131800,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99347,
+          "y": -47
+        },
+        {
+          "z": 97225,
+          "lootSeed": -2908450360360159997,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99412,
+          "y": -47
+        },
+        {
+          "z": 97232,
+          "lootSeed": -8638574081077002545,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -99509,
+          "y": -48
+        },
+        {
+          "z": 97176,
+          "lootSeed": 1022817172433349326,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99347,
+          "y": -47
+        },
+        {
+          "z": 97225,
+          "lootSeed": -2950414971313820091,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99404,
+          "y": -47
+        },
+        {
+          "z": 97263,
+          "lootSeed": -5659316965590366229,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -99437,
+          "y": -44
+        }
+      ],
+      "seed": 0,
+      "chunkX": -6216,
+      "apples": 4,
+      "chunkZ": 6075
+    },
+    {
+      "chests": [
+        {
+          "z": -148528,
+          "lootSeed": -6413558097561533815,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151459,
+          "y": -48
+        },
+        {
+          "z": -148607,
+          "lootSeed": 3682292474362621929,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151594,
+          "y": -49
+        },
+        {
+          "z": -148576,
+          "lootSeed": 4220744777165147946,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151432,
+          "y": -50
+        },
+        {
+          "z": -148570,
+          "lootSeed": -5629805712104826375,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151460,
+          "y": -47
+        },
+        {
+          "z": -148499,
+          "lootSeed": -6327288873568849495,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151566,
+          "y": -48
+        },
+        {
+          "z": -148589,
+          "lootSeed": -7118206644798863946,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 151598,
+          "y": -50
+        },
+        {
+          "z": -148605,
+          "lootSeed": 7546727468503183629,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151455,
+          "y": -48
+        },
+        {
+          "z": -148570,
+          "lootSeed": -3916281243728803326,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151452,
+          "y": -47
+        },
+        {
+          "z": -148523,
+          "lootSeed": 1411432883980755067,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151414,
+          "y": -37
+        },
+        {
+          "z": -148451,
+          "lootSeed": 5333556674311758164,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151557,
+          "y": -47
+        },
+        {
+          "z": -148474,
+          "lootSeed": 2328321795567092892,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151454,
+          "y": -49
+        },
+        {
+          "z": -148595,
+          "lootSeed": -2500830317903971227,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151602,
+          "y": -44
+        },
+        {
+          "z": -148480,
+          "lootSeed": 4163238847945536574,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151601,
+          "y": -35
+        },
+        {
+          "z": -148609,
+          "lootSeed": 6118327476701099654,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151492,
+          "y": -37
+        },
+        {
+          "z": -148451,
+          "lootSeed": 9036013147876137651,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151565,
+          "y": -47
+        },
+        {
+          "z": -148447,
+          "lootSeed": 5634176847860403175,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151495,
+          "y": -50
+        },
+        {
+          "z": -148500,
+          "lootSeed": 6642628724880163588,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 151520,
+          "y": -49
+        },
+        {
+          "z": -148476,
+          "lootSeed": 1925520899920031722,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 151566,
+          "y": -44
+        }
+      ],
+      "seed": 0,
+      "chunkX": 9469,
+      "apples": 4,
+      "chunkZ": -9284
+    },
+    {
+      "chests": [
+        {
+          "z": 1219,
+          "lootSeed": 1338724346578608743,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1794,
+          "y": -49
+        },
+        {
+          "z": 1299,
+          "lootSeed": 4946092342478687291,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1905,
+          "y": -50
+        },
+        {
+          "z": 1328,
+          "lootSeed": 1331338755812903665,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1803,
+          "y": -48
+        },
+        {
+          "z": 1166,
+          "lootSeed": 69159883783046118,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1829,
+          "y": -48
+        },
+        {
+          "z": 1277,
+          "lootSeed": -4470688644122134957,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1898,
+          "y": -37
+        },
+        {
+          "z": 1250,
+          "lootSeed": 1446817892190166628,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1741,
+          "y": -35
+        },
+        {
+          "z": 1272,
+          "lootSeed": -2747779254128475945,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1830,
+          "y": -48
+        },
+        {
+          "z": 1203,
+          "lootSeed": 1491606203980029437,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1891,
+          "y": -50
+        },
+        {
+          "z": 1246,
+          "lootSeed": -8698621786831450334,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1766,
+          "y": -47
+        },
+        {
+          "z": 1149,
+          "lootSeed": 7078555668406632555,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1829,
+          "y": -48
+        },
+        {
+          "z": 1146,
+          "lootSeed": -8777296122944210239,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1891,
+          "y": -50
+        },
+        {
+          "z": 1254,
+          "lootSeed": 5943593857921148341,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1766,
+          "y": -47
+        },
+        {
+          "z": 1262,
+          "lootSeed": 3902042299992823923,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1906,
+          "y": -49
+        },
+        {
+          "z": 1188,
+          "lootSeed": 337322864763823138,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1856,
+          "y": -49
+        },
+        {
+          "z": 1294,
+          "lootSeed": 5279164527195335572,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1833,
+          "y": -49
+        },
+        {
+          "z": 1300,
+          "lootSeed": 5920957898629634754,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1807,
+          "y": -50
+        },
+        {
+          "z": 1161,
+          "lootSeed": -5666342473511180122,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1891,
+          "y": -47
+        },
+        {
+          "z": 1243,
+          "lootSeed": 8965808530903134500,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1777,
+          "y": -49
+        },
+        {
+          "z": 1135,
+          "lootSeed": 2420125305515001851,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1831,
+          "y": -50
+        },
+        {
+          "z": 1244,
+          "lootSeed": -285035655654643622,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1813,
+          "y": -50
+        },
+        {
+          "z": 1169,
+          "lootSeed": -920985358002126040,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1891,
+          "y": -47
+        },
+        {
+          "z": 1133,
+          "lootSeed": -4399086331025520515,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1856,
+          "y": -49
+        },
+        {
+          "z": 1187,
+          "lootSeed": 1255167405614796838,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1941,
+          "y": -48
+        },
+        {
+          "z": 1293,
+          "lootSeed": 6786946178647043565,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1858,
+          "y": -50
+        },
+        {
+          "z": 1251,
+          "lootSeed": -4493597564431739044,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1797,
+          "y": -37
+        },
+        {
+          "z": 1146,
+          "lootSeed": 3713280128463655381,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1865,
+          "y": -50
+        }
+      ],
+      "seed": 1,
+      "chunkX": -115,
+      "apples": 7,
+      "chunkZ": 77
+    },
+    {
+      "chests": [
+        {
+          "z": -2329,
+          "lootSeed": -4315500418297758652,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2317,
+          "y": -50
+        },
+        {
+          "z": -2322,
+          "lootSeed": 4235184589024064489,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2341,
+          "y": -49
+        },
+        {
+          "z": -2369,
+          "lootSeed": -5613556123833892017,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2214,
+          "y": -49
+        },
+        {
+          "z": -2263,
+          "lootSeed": -7777611824085119612,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2194,
+          "y": -50
+        },
+        {
+          "z": -2289,
+          "lootSeed": 3254669271173615774,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2298,
+          "y": -49
+        },
+        {
+          "z": -2337,
+          "lootSeed": -1865513252201140826,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2285,
+          "y": -50
+        },
+        {
+          "z": -2297,
+          "lootSeed": 9001333862878313716,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2324,
+          "y": -50
+        },
+        {
+          "z": -2265,
+          "lootSeed": -6490991997201591245,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2358,
+          "y": -49
+        },
+        {
+          "z": -2262,
+          "lootSeed": 4168167310572683327,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2295,
+          "y": -48
+        },
+        {
+          "z": -2288,
+          "lootSeed": -8220698316479287076,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2158,
+          "y": -49
+        },
+        {
+          "z": -2288,
+          "lootSeed": 5188960451225853494,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2193,
+          "y": -49
+        }
+      ],
+      "seed": 1,
+      "chunkX": -141,
+      "apples": 0,
+      "chunkZ": -142
+    },
+    {
+      "chests": [
+        {
+          "z": -1814,
+          "lootSeed": 4267854353019549872,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2197,
+          "y": -47
+        },
+        {
+          "z": -1814,
+          "lootSeed": 170952348482305936,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2189,
+          "y": -47
+        },
+        {
+          "z": -1682,
+          "lootSeed": -2045673768475965419,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2121,
+          "y": -37
+        },
+        {
+          "z": -1789,
+          "lootSeed": -7269363443136697107,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2187,
+          "y": -50
+        },
+        {
+          "z": -1793,
+          "lootSeed": -7219661530590826590,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2139,
+          "y": -49
+        },
+        {
+          "z": -1871,
+          "lootSeed": -7037256008530999573,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2123,
+          "y": -47
+        },
+        {
+          "z": -1715,
+          "lootSeed": 744017677747216430,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2189,
+          "y": -48
+        },
+        {
+          "z": -1871,
+          "lootSeed": -9075670435953716512,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2115,
+          "y": -47
+        },
+        {
+          "z": -1818,
+          "lootSeed": -6984917345856246721,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2138,
+          "y": -50
+        },
+        {
+          "z": -1817,
+          "lootSeed": -5068965690447212352,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2046,
+          "y": -47
+        },
+        {
+          "z": -1724,
+          "lootSeed": 1913832492069500877,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2124,
+          "y": -47
+        },
+        {
+          "z": -1742,
+          "lootSeed": -3591781766097942743,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2030,
+          "y": -35
+        },
+        {
+          "z": -1695,
+          "lootSeed": -8592888879048090483,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2121,
+          "y": -44
+        },
+        {
+          "z": -1781,
+          "lootSeed": 4701395175977565830,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2033,
+          "y": -44
+        },
+        {
+          "z": -1793,
+          "lootSeed": -5574365942686567645,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2154,
+          "y": -44
+        },
+        {
+          "z": -1817,
+          "lootSeed": -4612872073527391827,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2038,
+          "y": -47
+        },
+        {
+          "z": -1724,
+          "lootSeed": -8407402317605277094,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2116,
+          "y": -47
+        },
+        {
+          "z": -1787,
+          "lootSeed": -6788127738321113354,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2158,
+          "y": -50
+        },
+        {
+          "z": -1859,
+          "lootSeed": 5065969776478227783,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2084,
+          "y": -48
+        },
+        {
+          "z": -1701,
+          "lootSeed": 2083781148776844353,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": -2117,
+          "y": -50
+        },
+        {
+          "z": -1778,
+          "lootSeed": 6643006404734649523,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2047,
+          "y": -37
+        },
+        {
+          "z": -1777,
+          "lootSeed": -6225006954283360927,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2027,
+          "y": -50
+        },
+        {
+          "z": -1806,
+          "lootSeed": 507523071371644249,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2162,
+          "y": -49
+        },
+        {
+          "z": -1717,
+          "lootSeed": 8340978571540314094,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2154,
+          "y": -50
+        },
+        {
+          "z": -1721,
+          "lootSeed": -8281797946703151959,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2086,
+          "y": -48
+        }
+      ],
+      "seed": 1,
+      "chunkX": -131,
+      "apples": 2,
+      "chunkZ": -110
+    },
+    {
+      "chests": [
+        {
+          "z": -952,
+          "lootSeed": -6813128044884373363,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2278,
+          "y": -47
+        },
+        {
+          "z": -960,
+          "lootSeed": -6158304069112857913,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2304,
+          "y": -48
+        },
+        {
+          "z": -1049,
+          "lootSeed": -2219172062386954231,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2180,
+          "y": -47
+        },
+        {
+          "z": -1021,
+          "lootSeed": -2565998457898090357,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2106,
+          "y": -44
+        },
+        {
+          "z": -899,
+          "lootSeed": -6737150527685205179,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2231,
+          "y": -50
+        },
+        {
+          "z": -955,
+          "lootSeed": -5792007964766172775,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2256,
+          "y": -37
+        },
+        {
+          "z": -949,
+          "lootSeed": -2323319799600885139,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2110,
+          "y": -44
+        },
+        {
+          "z": -1021,
+          "lootSeed": -6854368282916439296,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2227,
+          "y": -44
+        },
+        {
+          "z": -1031,
+          "lootSeed": -7328830349644054555,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2188,
+          "y": -47
+        },
+        {
+          "z": -908,
+          "lootSeed": -3484352111176090327,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2218,
+          "y": -50
+        },
+        {
+          "z": -962,
+          "lootSeed": 2513335000916034957,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2290,
+          "y": -50
+        },
+        {
+          "z": -1029,
+          "lootSeed": 8740989995768420393,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2153,
+          "y": -47
+        },
+        {
+          "z": -991,
+          "lootSeed": 6255785843717973589,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2288,
+          "y": -50
+        },
+        {
+          "z": -997,
+          "lootSeed": 7152079414976382201,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2115,
+          "y": -47
+        },
+        {
+          "z": -932,
+          "lootSeed": 6857006449883921846,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2217,
+          "y": -50
+        },
+        {
+          "z": -960,
+          "lootSeed": 2175798084817806622,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2278,
+          "y": -47
+        },
+        {
+          "z": -1029,
+          "lootSeed": 3437633214647643135,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2145,
+          "y": -47
+        },
+        {
+          "z": -1049,
+          "lootSeed": 595981764351877022,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2188,
+          "y": -47
+        },
+        {
+          "z": -926,
+          "lootSeed": -159727924629874721,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2146,
+          "y": -44
+        },
+        {
+          "z": -997,
+          "lootSeed": -6361405387967958249,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2107,
+          "y": -47
+        },
+        {
+          "z": -963,
+          "lootSeed": -7240369997951994915,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2237,
+          "y": -49
+        },
+        {
+          "z": -995,
+          "lootSeed": -2099527181859938720,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2294,
+          "y": -44
+        },
+        {
+          "z": -915,
+          "lootSeed": 4698237261243174295,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2191,
+          "y": -50
+        },
+        {
+          "z": -1070,
+          "lootSeed": -3881537162133508507,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2191,
+          "y": -49
+        },
+        {
+          "z": -907,
+          "lootSeed": 2833853324021749528,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2158,
+          "y": -49
+        },
+        {
+          "z": -900,
+          "lootSeed": -8681242690716163514,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2222,
+          "y": -50
+        },
+        {
+          "z": -943,
+          "lootSeed": -8942674481765855358,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2114,
+          "y": -50
+        },
+        {
+          "z": -1031,
+          "lootSeed": -6444188415535564111,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2180,
+          "y": -47
+        },
+        {
+          "z": -891,
+          "lootSeed": -5905147903162870538,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2157,
+          "y": -50
+        }
+      ],
+      "seed": 1,
+      "chunkX": -138,
+      "apples": 0,
+      "chunkZ": -61
+    },
+    {
+      "chests": [
+        {
+          "z": 68,
+          "lootSeed": 4332177870798909117,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 843,
+          "y": -50
+        },
+        {
+          "z": 2,
+          "lootSeed": 2675503190900451179,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 945,
+          "y": -49
+        },
+        {
+          "z": 58,
+          "lootSeed": -8531853123088109596,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1021,
+          "y": -47
+        },
+        {
+          "z": 36,
+          "lootSeed": 4165594631201722961,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 921,
+          "y": -49
+        },
+        {
+          "z": 9,
+          "lootSeed": 4980986798747574829,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 981,
+          "y": -48
+        },
+        {
+          "z": 58,
+          "lootSeed": -3282671831032332081,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1029,
+          "y": -47
+        },
+        {
+          "z": 126,
+          "lootSeed": 3014444791771457649,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 993,
+          "y": -50
+        },
+        {
+          "z": 138,
+          "lootSeed": 1623265470025676770,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 859,
+          "y": -50
+        },
+        {
+          "z": 143,
+          "lootSeed": 8057386217578496551,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 954,
+          "y": -49
+        },
+        {
+          "z": 69,
+          "lootSeed": -5413087008455001284,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 902,
+          "y": -49
+        },
+        {
+          "z": 145,
+          "lootSeed": -3476791924482218490,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1018,
+          "y": -49
+        },
+        {
+          "z": 15,
+          "lootSeed": -2593820704923478992,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 864,
+          "y": -50
+        },
+        {
+          "z": 148,
+          "lootSeed": 3307638754630464206,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 991,
+          "y": -48
+        },
+        {
+          "z": 93,
+          "lootSeed": 6768557766877957789,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 825,
+          "y": -49
+        },
+        {
+          "z": 122,
+          "lootSeed": 2095468609866629222,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1021,
+          "y": -48
+        },
+        {
+          "z": 137,
+          "lootSeed": -2300662066106329518,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 911,
+          "y": -49
+        },
+        {
+          "z": 24,
+          "lootSeed": 2909031096586369278,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 865,
+          "y": -50
+        },
+        {
+          "z": -2,
+          "lootSeed": 4583653319563161880,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 913,
+          "y": -37
+        },
+        {
+          "z": -17,
+          "lootSeed": -6048970269878297656,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 946,
+          "y": -50
+        },
+        {
+          "z": 68,
+          "lootSeed": -596716683323584779,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 826,
+          "y": -50
+        },
+        {
+          "z": 93,
+          "lootSeed": -5599577334912148826,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 900,
+          "y": -49
+        },
+        {
+          "z": 109,
+          "lootSeed": 307085246255266839,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 979,
+          "y": -50
+        },
+        {
+          "z": 28,
+          "lootSeed": 1278299517320173833,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 873,
+          "y": -50
+        },
+        {
+          "z": 138,
+          "lootSeed": -7080711605707127719,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 894,
+          "y": -50
+        },
+        {
+          "z": 17,
+          "lootSeed": 7219320150520471855,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 921,
+          "y": -49
+        },
+        {
+          "z": 54,
+          "lootSeed": 2587912561802447725,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 979,
+          "y": -50
+        }
+      ],
+      "seed": -1,
+      "chunkX": 58,
+      "apples": 0,
+      "chunkZ": 5
+    },
+    {
+      "chests": [
+        {
+          "z": 1652,
+          "lootSeed": 4834942910918489882,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1772,
+          "y": -48
+        },
+        {
+          "z": 1559,
+          "lootSeed": 2602128583840903709,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1733,
+          "y": -37
+        },
+        {
+          "z": 1639,
+          "lootSeed": 1620312158561486368,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1700,
+          "y": -50
+        },
+        {
+          "z": 1624,
+          "lootSeed": 5278195163853519415,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1780,
+          "y": -47
+        },
+        {
+          "z": 1681,
+          "lootSeed": 933128527090179576,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1670,
+          "y": -49
+        },
+        {
+          "z": 1705,
+          "lootSeed": -6462874439778432896,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1661,
+          "y": -49
+        },
+        {
+          "z": 1729,
+          "lootSeed": -8873866486363032456,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1666,
+          "y": -50
+        },
+        {
+          "z": 1621,
+          "lootSeed": 3967358996854540155,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1693,
+          "y": -37
+        },
+        {
+          "z": 1624,
+          "lootSeed": 9069481154121043734,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1772,
+          "y": -47
+        },
+        {
+          "z": 1769,
+          "lootSeed": -5475841868271760642,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1764,
+          "y": -50
+        },
+        {
+          "z": 1587,
+          "lootSeed": -2928216139991061217,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1675,
+          "y": -49
+        },
+        {
+          "z": 1636,
+          "lootSeed": 2770481503058425903,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1726,
+          "y": -50
+        },
+        {
+          "z": 1754,
+          "lootSeed": -8743415759246699514,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1685,
+          "y": -49
+        },
+        {
+          "z": 1623,
+          "lootSeed": -3981637047414831628,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1728,
+          "y": -48
+        },
+        {
+          "z": 1760,
+          "lootSeed": 742550283928714945,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1765,
+          "y": -50
+        },
+        {
+          "z": 1645,
+          "lootSeed": 5872495733760996069,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1610,
+          "y": -44
+        },
+        {
+          "z": 1688,
+          "lootSeed": 8105557472478615660,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1612,
+          "y": -35
+        },
+        {
+          "z": 1756,
+          "lootSeed": 7976558331575793288,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1773,
+          "y": -50
+        },
+        {
+          "z": 1730,
+          "lootSeed": 2470018214067040098,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1683,
+          "y": -49
+        },
+        {
+          "z": 1729,
+          "lootSeed": 7087635963116880719,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1648,
+          "y": -50
+        },
+        {
+          "z": 1656,
+          "lootSeed": 4227963510787645443,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1669,
+          "y": -50
+        },
+        {
+          "z": 1655,
+          "lootSeed": 5347647256001984164,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1794,
+          "y": -50
+        }
+      ],
+      "seed": -1,
+      "chunkX": -107,
+      "apples": 3,
+      "chunkZ": 104
+    },
+    {
+      "chests": [
+        {
+          "z": 1753,
+          "lootSeed": 7655034032208397847,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2096,
+          "y": -48
+        },
+        {
+          "z": 1659,
+          "lootSeed": 1336342585233175616,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -2162,
+          "y": -48
+        },
+        {
+          "z": 1730,
+          "lootSeed": -2900107226603194075,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2198,
+          "y": -47
+        },
+        {
+          "z": 1721,
+          "lootSeed": -1528011913929863145,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2032,
+          "y": -50
+        },
+        {
+          "z": 1790,
+          "lootSeed": -5773811071388462901,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2096,
+          "y": -48
+        },
+        {
+          "z": 1696,
+          "lootSeed": 882787176953603330,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2067,
+          "y": -49
+        },
+        {
+          "z": 1723,
+          "lootSeed": -5473390036247805313,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2010,
+          "y": -48
+        },
+        {
+          "z": 1722,
+          "lootSeed": 7086368162337696469,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2198,
+          "y": -47
+        },
+        {
+          "z": 1727,
+          "lootSeed": -2098588417950094021,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2157,
+          "y": -37
+        },
+        {
+          "z": 1614,
+          "lootSeed": -3597965863559863609,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2138,
+          "y": -37
+        },
+        {
+          "z": 1750,
+          "lootSeed": -3039192836985698869,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2126,
+          "y": -47
+        },
+        {
+          "z": 1659,
+          "lootSeed": -7590908584641399271,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2069,
+          "y": -48
+        },
+        {
+          "z": 1731,
+          "lootSeed": -6364926610360028354,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2075,
+          "y": -47
+        },
+        {
+          "z": 1614,
+          "lootSeed": 1699102825641030234,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2157,
+          "y": -37
+        },
+        {
+          "z": 1659,
+          "lootSeed": 4267236109810092519,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2145,
+          "y": -48
+        },
+        {
+          "z": 1771,
+          "lootSeed": -5302794502908922104,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": -2096,
+          "y": -48
+        },
+        {
+          "z": 1622,
+          "lootSeed": -7169007351298929331,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2083,
+          "y": -49
+        },
+        {
+          "z": 1723,
+          "lootSeed": -1811600612326586760,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2047,
+          "y": -48
+        },
+        {
+          "z": 1750,
+          "lootSeed": 4137138313127300306,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2134,
+          "y": -47
+        },
+        {
+          "z": 1723,
+          "lootSeed": 913021262111278702,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2075,
+          "y": -47
+        },
+        {
+          "z": 1650,
+          "lootSeed": 5374950744303513645,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2046,
+          "y": -44
+        },
+        {
+          "z": 1694,
+          "lootSeed": -3007536867380659678,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2191,
+          "y": -50
+        },
+        {
+          "z": 1622,
+          "lootSeed": -2716164924071596261,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2175,
+          "y": -49
+        },
+        {
+          "z": 1621,
+          "lootSeed": -6964693195347161850,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2047,
+          "y": -50
+        }
+      ],
+      "seed": -1,
+      "chunkX": -132,
+      "apples": 3,
+      "chunkZ": 107
+    },
+    {
+      "chests": [
+        {
+          "z": 2153,
+          "lootSeed": -1834346165189011942,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2233,
+          "y": -47
+        },
+        {
+          "z": 2043,
+          "lootSeed": 6104051198010185443,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2187,
+          "y": -47
+        },
+        {
+          "z": 2077,
+          "lootSeed": 1020457832218512662,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2065,
+          "y": -48
+        },
+        {
+          "z": 2080,
+          "lootSeed": 3928833891023636664,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2100,
+          "y": -49
+        },
+        {
+          "z": 1994,
+          "lootSeed": -5462488836103515926,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2172,
+          "y": -44
+        },
+        {
+          "z": 2145,
+          "lootSeed": -4274116897328610832,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -2233,
+          "y": -47
+        },
+        {
+          "z": 2035,
+          "lootSeed": 1891915219160005811,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2187,
+          "y": -47
+        },
+        {
+          "z": 2112,
+          "lootSeed": -8899201622056021055,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2039,
+          "y": -44
+        },
+        {
+          "z": 2033,
+          "lootSeed": 9077071725320337999,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2096,
+          "y": -48
+        },
+        {
+          "z": 2108,
+          "lootSeed": -4209640415245758915,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2045,
+          "y": -50
+        },
+        {
+          "z": 2046,
+          "lootSeed": -236659389939300859,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2114,
+          "y": -49
+        },
+        {
+          "z": 2112,
+          "lootSeed": -7084331017548994730,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2103,
+          "y": -37
+        },
+        {
+          "z": 2176,
+          "lootSeed": -3617148466252370207,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2159,
+          "y": -48
+        },
+        {
+          "z": 2177,
+          "lootSeed": -6054229549802654881,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2128,
+          "y": -48
+        }
+      ],
+      "seed": -1,
+      "chunkX": -134,
+      "apples": 3,
+      "chunkZ": 131
+    },
+    {
+      "chests": [
+        {
+          "z": -703,
+          "lootSeed": -5203120406074209142,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 751,
+          "y": -37
+        },
+        {
+          "z": -670,
+          "lootSeed": -4909786084214532826,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 841,
+          "y": -44
+        },
+        {
+          "z": -818,
+          "lootSeed": 6689575983219837641,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 888,
+          "y": -47
+        },
+        {
+          "z": -742,
+          "lootSeed": 1276519958568086159,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 870,
+          "y": -50
+        },
+        {
+          "z": -810,
+          "lootSeed": -6201900875628104563,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 888,
+          "y": -47
+        },
+        {
+          "z": -738,
+          "lootSeed": -4211376857128341000,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 878,
+          "y": -50
+        },
+        {
+          "z": -716,
+          "lootSeed": -1145306645679565931,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 756,
+          "y": -48
+        },
+        {
+          "z": -852,
+          "lootSeed": -2532933657282014084,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 748,
+          "y": -37
+        },
+        {
+          "z": -687,
+          "lootSeed": -981127597475145838,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 837,
+          "y": -37
+        },
+        {
+          "z": -842,
+          "lootSeed": 5858154204375878481,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 789,
+          "y": -49
+        },
+        {
+          "z": -725,
+          "lootSeed": -2828647078106025038,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 805,
+          "y": -49
+        },
+        {
+          "z": -843,
+          "lootSeed": 312321823395779904,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 863,
+          "y": -50
+        },
+        {
+          "z": -775,
+          "lootSeed": -7066926762104406526,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 924,
+          "y": -44
+        },
+        {
+          "z": -854,
+          "lootSeed": -668611703637894472,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 846,
+          "y": -44
+        },
+        {
+          "z": -818,
+          "lootSeed": 483028420787847957,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 844,
+          "y": -49
+        },
+        {
+          "z": -805,
+          "lootSeed": 7868370968032777888,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 766,
+          "y": -48
+        },
+        {
+          "z": -729,
+          "lootSeed": 5427544956406159651,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 879,
+          "y": -50
+        },
+        {
+          "z": -794,
+          "lootSeed": -4094209268655475363,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 913,
+          "y": -50
+        },
+        {
+          "z": -776,
+          "lootSeed": 339081956531957534,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 751,
+          "y": -35
+        }
+      ],
+      "seed": 42,
+      "chunkX": 51,
+      "apples": 0,
+      "chunkZ": -47
+    },
+    {
+      "chests": [
+        {
+          "z": 1581,
+          "lootSeed": 323709496165353097,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2055,
+          "y": -48
+        },
+        {
+          "z": 1571,
+          "lootSeed": 6766875632062018631,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2172,
+          "y": -44
+        },
+        {
+          "z": 1549,
+          "lootSeed": -8772037818356468661,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2083,
+          "y": -50
+        },
+        {
+          "z": 1573,
+          "lootSeed": 1970991376818802507,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2008,
+          "y": -47
+        },
+        {
+          "z": 1609,
+          "lootSeed": -3151957487890038353,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2015,
+          "y": -50
+        },
+        {
+          "z": 1619,
+          "lootSeed": -1823146954302486499,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2076,
+          "y": -47
+        },
+        {
+          "z": 1632,
+          "lootSeed": 8540258232355118953,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2126,
+          "y": -48
+        },
+        {
+          "z": 1635,
+          "lootSeed": -2150637861045789094,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2096,
+          "y": -47
+        },
+        {
+          "z": 1608,
+          "lootSeed": -3664096360097958271,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2155,
+          "y": -50
+        },
+        {
+          "z": 1682,
+          "lootSeed": -1398261493872222600,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2131,
+          "y": -37
+        },
+        {
+          "z": 1635,
+          "lootSeed": 2927045469988055552,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -2088,
+          "y": -47
+        },
+        {
+          "z": 1580,
+          "lootSeed": 6742430094276836196,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2185,
+          "y": -47
+        },
+        {
+          "z": 1611,
+          "lootSeed": -9093808601154827939,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2076,
+          "y": -47
+        },
+        {
+          "z": 1608,
+          "lootSeed": -5834637568014514745,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2173,
+          "y": -50
+        },
+        {
+          "z": 1677,
+          "lootSeed": -3815026511994688912,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2092,
+          "y": -49
+        },
+        {
+          "z": 1577,
+          "lootSeed": -5959395549878677854,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2033,
+          "y": -35
+        },
+        {
+          "z": 1609,
+          "lootSeed": -7124266495423516462,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2051,
+          "y": -50
+        },
+        {
+          "z": 1642,
+          "lootSeed": 7553372706821657472,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2096,
+          "y": -48
+        },
+        {
+          "z": 1581,
+          "lootSeed": 40131861503908893,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2008,
+          "y": -47
+        },
+        {
+          "z": 1702,
+          "lootSeed": 8295797918545792786,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2123,
+          "y": -49
+        },
+        {
+          "z": 1680,
+          "lootSeed": 1696780402599703354,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2144,
+          "y": -48
+        },
+        {
+          "z": 1610,
+          "lootSeed": 4901231770789738354,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2188,
+          "y": -48
+        },
+        {
+          "z": 1584,
+          "lootSeed": 5411040921037908436,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2067,
+          "y": -49
+        },
+        {
+          "z": 1572,
+          "lootSeed": -3680393523250451682,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2185,
+          "y": -47
+        },
+        {
+          "z": 1703,
+          "lootSeed": 250494451034466560,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2098,
+          "y": -50
+        }
+      ],
+      "seed": 42,
+      "chunkX": -132,
+      "apples": 3,
+      "chunkZ": 100
+    },
+    {
+      "chests": [
+        {
+          "z": 2209,
+          "lootSeed": 6888063342574804545,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2115,
+          "y": -35
+        },
+        {
+          "z": 2177,
+          "lootSeed": -510314338284880758,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2099,
+          "y": -47
+        },
+        {
+          "z": 2170,
+          "lootSeed": 6629801090518819249,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2057,
+          "y": -44
+        },
+        {
+          "z": 2166,
+          "lootSeed": -8860175508282009924,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2063,
+          "y": -50
+        },
+        {
+          "z": 2177,
+          "lootSeed": -3643888850194449224,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2173,
+          "y": -50
+        },
+        {
+          "z": 2128,
+          "lootSeed": 1748221449241390393,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2189,
+          "y": -49
+        },
+        {
+          "z": 2130,
+          "lootSeed": -1189540980608221113,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2065,
+          "y": -50
+        },
+        {
+          "z": 2032,
+          "lootSeed": 1068523189310764543,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2121,
+          "y": -44
+        },
+        {
+          "z": 2211,
+          "lootSeed": 5545348137812576628,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2180,
+          "y": -49
+        },
+        {
+          "z": 2129,
+          "lootSeed": -4544679876104267590,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2101,
+          "y": -49
+        },
+        {
+          "z": 2029,
+          "lootSeed": -6496638493854133032,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2161,
+          "y": -50
+        },
+        {
+          "z": 2035,
+          "lootSeed": -5530838329016156220,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2165,
+          "y": -44
+        },
+        {
+          "z": 2089,
+          "lootSeed": -37184009032864225,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2160,
+          "y": -48
+        },
+        {
+          "z": 2097,
+          "lootSeed": 8601598725852562823,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2063,
+          "y": -37
+        },
+        {
+          "z": 2177,
+          "lootSeed": 8863697483376035292,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2091,
+          "y": -47
+        },
+        {
+          "z": 2101,
+          "lootSeed": -2247776538801864383,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2245,
+          "y": -48
+        },
+        {
+          "z": 2047,
+          "lootSeed": -4729439981633319345,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2157,
+          "y": -49
+        }
+      ],
+      "seed": 42,
+      "chunkX": -134,
+      "apples": 0,
+      "chunkZ": 132
+    },
+    {
+      "chests": [
+        {
+          "z": 1262,
+          "lootSeed": 1357689557388544357,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2571,
+          "y": -47
+        },
+        {
+          "z": 1330,
+          "lootSeed": 1305799463160557183,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2576,
+          "y": -49
+        },
+        {
+          "z": 1297,
+          "lootSeed": 4346298559219122588,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2738,
+          "y": -50
+        },
+        {
+          "z": 1373,
+          "lootSeed": -6177730860625082482,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2682,
+          "y": -48
+        },
+        {
+          "z": 1270,
+          "lootSeed": -7182111847432197382,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2571,
+          "y": -47
+        },
+        {
+          "z": 1249,
+          "lootSeed": 8519879819474500500,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2539,
+          "y": -37
+        },
+        {
+          "z": 1269,
+          "lootSeed": 6012543489860882692,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2537,
+          "y": -50
+        },
+        {
+          "z": 1262,
+          "lootSeed": 5838021300782610815,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -2590,
+          "y": -47
+        },
+        {
+          "z": 1371,
+          "lootSeed": -3326513554436157459,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2707,
+          "y": -50
+        },
+        {
+          "z": 1297,
+          "lootSeed": 8606849148538385123,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2598,
+          "y": -49
+        },
+        {
+          "z": 1304,
+          "lootSeed": 5842591522640571767,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2721,
+          "y": -37
+        },
+        {
+          "z": 1305,
+          "lootSeed": -4322380161598535346,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2575,
+          "y": -50
+        },
+        {
+          "z": 1330,
+          "lootSeed": -3061890284394877775,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2688,
+          "y": -49
+        },
+        {
+          "z": 1269,
+          "lootSeed": 1089288733757115647,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2687,
+          "y": -48
+        },
+        {
+          "z": 1270,
+          "lootSeed": 7698812255565942433,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2590,
+          "y": -47
+        },
+        {
+          "z": 1239,
+          "lootSeed": 6283164883317223996,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2659,
+          "y": -49
+        },
+        {
+          "z": 1238,
+          "lootSeed": 4687115004252800258,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2621,
+          "y": -50
+        },
+        {
+          "z": 1373,
+          "lootSeed": 3726397739070496374,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2590,
+          "y": -48
+        },
+        {
+          "z": 1265,
+          "lootSeed": 2858885746479315608,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2543,
+          "y": -44
+        },
+        {
+          "z": 1330,
+          "lootSeed": 3929817533321329656,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2613,
+          "y": -49
+        }
+      ],
+      "seed": 42,
+      "chunkX": -165,
+      "apples": 5,
+      "chunkZ": 80
+    },
+    {
+      "chests": [
+        {
+          "z": -596,
+          "lootSeed": -4017078811974942547,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -229,
+          "y": -47
+        },
+        {
+          "z": -546,
+          "lootSeed": 6959002358319133376,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -183,
+          "y": -47
+        },
+        {
+          "z": -623,
+          "lootSeed": -224597697546554906,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -301,
+          "y": -48
+        },
+        {
+          "z": -604,
+          "lootSeed": -3857215517463984870,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -256,
+          "y": -49
+        },
+        {
+          "z": -581,
+          "lootSeed": 7926994941297532372,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -139,
+          "y": -37
+        },
+        {
+          "z": -641,
+          "lootSeed": 5076370448462853471,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -256,
+          "y": -49
+        },
+        {
+          "z": -538,
+          "lootSeed": 4776266818520850433,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -183,
+          "y": -47
+        },
+        {
+          "z": -633,
+          "lootSeed": 3881712128451061729,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -229,
+          "y": -47
+        },
+        {
+          "z": -596,
+          "lootSeed": 9070743720149618501,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -221,
+          "y": -47
+        },
+        {
+          "z": -456,
+          "lootSeed": 7082717907204379934,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -264,
+          "y": -35
+        },
+        {
+          "z": -580,
+          "lootSeed": -7195069838995499368,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -194,
+          "y": -35
+        },
+        {
+          "z": -622,
+          "lootSeed": 7339489789913351944,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -231,
+          "y": -50
+        },
+        {
+          "z": -489,
+          "lootSeed": 2704944399252159809,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -305,
+          "y": -47
+        },
+        {
+          "z": -633,
+          "lootSeed": -6859863165914796403,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -221,
+          "y": -47
+        },
+        {
+          "z": -573,
+          "lootSeed": 3157906065204314833,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -175,
+          "y": -49
+        },
+        {
+          "z": -497,
+          "lootSeed": -5469979041344900988,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -305,
+          "y": -47
+        },
+        {
+          "z": -580,
+          "lootSeed": -4151507936338151488,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -158,
+          "y": -35
+        },
+        {
+          "z": -574,
+          "lootSeed": -9081829512035328533,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -212,
+          "y": -50
+        },
+        {
+          "z": -498,
+          "lootSeed": 6947883174891496736,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -338,
+          "y": -37
+        },
+        {
+          "z": -548,
+          "lootSeed": 1382764670301510871,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -161,
+          "y": -50
+        },
+        {
+          "z": -602,
+          "lootSeed": -5265176982392172745,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -333,
+          "y": -48
+        },
+        {
+          "z": -513,
+          "lootSeed": -2970299354973822260,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -331,
+          "y": -50
+        }
+      ],
+      "seed": 123456,
+      "chunkX": -15,
+      "apples": 2,
+      "chunkZ": -35
+    },
+    {
+      "chests": [
+        {
+          "z": -344,
+          "lootSeed": 2972648110255591983,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1666,
+          "y": -49
+        },
+        {
+          "z": -310,
+          "lootSeed": 7773987401566985377,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1791,
+          "y": -49
+        },
+        {
+          "z": -312,
+          "lootSeed": -1353019976716951655,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1669,
+          "y": -44
+        },
+        {
+          "z": -406,
+          "lootSeed": -316230983805815543,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 1725,
+          "y": -50
+        },
+        {
+          "z": -283,
+          "lootSeed": -622285383740605385,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1831,
+          "y": -48
+        },
+        {
+          "z": -446,
+          "lootSeed": -6814515477685377450,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1728,
+          "y": -47
+        },
+        {
+          "z": -419,
+          "lootSeed": 4129173530349510213,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1767,
+          "y": -44
+        },
+        {
+          "z": -443,
+          "lootSeed": -6355164826880783024,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1758,
+          "y": -48
+        },
+        {
+          "z": -405,
+          "lootSeed": 2001326192379327149,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1716,
+          "y": -50
+        },
+        {
+          "z": -414,
+          "lootSeed": -439263603979666920,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1729,
+          "y": -50
+        },
+        {
+          "z": -316,
+          "lootSeed": 4637473169871006881,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1663,
+          "y": -50
+        },
+        {
+          "z": -238,
+          "lootSeed": -6183913791449841970,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1812,
+          "y": -44
+        },
+        {
+          "z": -446,
+          "lootSeed": -3838660443251990536,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1720,
+          "y": -47
+        },
+        {
+          "z": -234,
+          "lootSeed": 2262958268951598363,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1676,
+          "y": -44
+        },
+        {
+          "z": -242,
+          "lootSeed": -6853434335659549019,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1806,
+          "y": -50
+        },
+        {
+          "z": -296,
+          "lootSeed": -3108811134795132545,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1702,
+          "y": -49
+        },
+        {
+          "z": -320,
+          "lootSeed": -3630811191034300017,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1682,
+          "y": -49
+        },
+        {
+          "z": -278,
+          "lootSeed": 8818778096644393439,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 1702,
+          "y": -49
+        },
+        {
+          "z": -237,
+          "lootSeed": 6543512898578326928,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1726,
+          "y": -49
+        }
+      ],
+      "seed": 123456,
+      "chunkX": 109,
+      "apples": 4,
+      "chunkZ": -21
+    },
+    {
+      "chests": [
+        {
+          "z": 79,
+          "lootSeed": -3371893916007480353,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1696,
+          "y": -50
+        },
+        {
+          "z": 139,
+          "lootSeed": 5928476189282709349,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1574,
+          "y": -47
+        },
+        {
+          "z": 63,
+          "lootSeed": 3508417668778702406,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 1729,
+          "y": -37
+        },
+        {
+          "z": 100,
+          "lootSeed": -8104735240195927331,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1586,
+          "y": -48
+        },
+        {
+          "z": 175,
+          "lootSeed": -2880612109695863265,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 1735,
+          "y": -47
+        },
+        {
+          "z": 140,
+          "lootSeed": -7415925333783666782,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1619,
+          "y": -44
+        },
+        {
+          "z": 100,
+          "lootSeed": -4637052465906625438,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 1729,
+          "y": -37
+        },
+        {
+          "z": 79,
+          "lootSeed": -7373281340991374480,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1613,
+          "y": -49
+        },
+        {
+          "z": 85,
+          "lootSeed": -673362624510409345,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1676,
+          "y": -50
+        },
+        {
+          "z": 82,
+          "lootSeed": -7820859867171971506,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1586,
+          "y": -48
+        },
+        {
+          "z": 86,
+          "lootSeed": 3290758368718438123,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1648,
+          "y": -48
+        },
+        {
+          "z": 44,
+          "lootSeed": 7138456400157874355,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1722,
+          "y": -50
+        },
+        {
+          "z": 131,
+          "lootSeed": 8418315965979744168,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1574,
+          "y": -47
+        },
+        {
+          "z": 79,
+          "lootSeed": -1044153875106351856,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 1722,
+          "y": -50
+        },
+        {
+          "z": 44,
+          "lootSeed": 3616615516738297479,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1696,
+          "y": -50
+        },
+        {
+          "z": 44,
+          "lootSeed": -3315724016209379410,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1639,
+          "y": -44
+        },
+        {
+          "z": 167,
+          "lootSeed": 3683005397024944667,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1735,
+          "y": -47
+        }
+      ],
+      "seed": 123456,
+      "chunkX": 104,
+      "apples": 6,
+      "chunkZ": 7
+    },
+    {
+      "chests": [
+        {
+          "z": -1861,
+          "lootSeed": -621106228812250164,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1769,
+          "y": -35
+        },
+        {
+          "z": -1726,
+          "lootSeed": -2258285569264091038,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1775,
+          "y": -48
+        },
+        {
+          "z": -1834,
+          "lootSeed": 1765950501788697586,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1702,
+          "y": -48
+        },
+        {
+          "z": -1762,
+          "lootSeed": 4300061595632595782,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1627,
+          "y": -50
+        },
+        {
+          "z": -1822,
+          "lootSeed": -5195078001284372116,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1763,
+          "y": -50
+        },
+        {
+          "z": -1760,
+          "lootSeed": -2292172933042229032,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1602,
+          "y": -47
+        },
+        {
+          "z": -1819,
+          "lootSeed": -4351825449695260668,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1704,
+          "y": -50
+        },
+        {
+          "z": -1695,
+          "lootSeed": 5310047206386674825,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1738,
+          "y": -49
+        },
+        {
+          "z": -1818,
+          "lootSeed": 1919481906256696326,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1729,
+          "y": -49
+        },
+        {
+          "z": -1752,
+          "lootSeed": 4247714613818202084,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1602,
+          "y": -47
+        },
+        {
+          "z": -1747,
+          "lootSeed": -7311405208821501332,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1763,
+          "y": -50
+        },
+        {
+          "z": -1788,
+          "lootSeed": 3595081119192173613,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1610,
+          "y": -50
+        },
+        {
+          "z": -1790,
+          "lootSeed": 4738641473574588081,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1681,
+          "y": -48
+        },
+        {
+          "z": -1704,
+          "lootSeed": 8039343608844221493,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1765,
+          "y": -47
+        },
+        {
+          "z": -1854,
+          "lootSeed": 5802442099621487938,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1729,
+          "y": -49
+        },
+        {
+          "z": -1755,
+          "lootSeed": -8019269631579008148,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1670,
+          "y": -44
+        },
+        {
+          "z": -1858,
+          "lootSeed": -6824606504844286491,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1701,
+          "y": -50
+        },
+        {
+          "z": -1693,
+          "lootSeed": -6054469589557924198,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1762,
+          "y": -49
+        },
+        {
+          "z": -1719,
+          "lootSeed": 8566065713762511434,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1659,
+          "y": -49
+        },
+        {
+          "z": -1704,
+          "lootSeed": 1795215767703601559,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 1773,
+          "y": -47
+        },
+        {
+          "z": -1759,
+          "lootSeed": 649006722751104458,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1664,
+          "y": -50
+        },
+        {
+          "z": -1852,
+          "lootSeed": 8547115859425658245,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1697,
+          "y": -44
+        },
+        {
+          "z": -1798,
+          "lootSeed": 3781902525263867926,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1673,
+          "y": -47
+        },
+        {
+          "z": -1743,
+          "lootSeed": 2006375780631437766,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1679,
+          "y": -49
+        },
+        {
+          "z": -1731,
+          "lootSeed": 7657991178786117933,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1738,
+          "y": -49
+        },
+        {
+          "z": -1830,
+          "lootSeed": -6061739732328633430,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1813,
+          "y": -44
+        },
+        {
+          "z": -1790,
+          "lootSeed": 6986588220837163193,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 1673,
+          "y": -47
+        }
+      ],
+      "seed": 123456,
+      "chunkX": 107,
+      "apples": 1,
+      "chunkZ": -111
+    },
+    {
+      "chests": [
+        {
+          "z": -220,
+          "lootSeed": -6077019782688870424,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -466,
+          "y": -44
+        },
+        {
+          "z": -147,
+          "lootSeed": -7051741510029833946,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -512,
+          "y": -49
+        },
+        {
+          "z": -168,
+          "lootSeed": -5041740286365959863,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -562,
+          "y": -47
+        },
+        {
+          "z": -143,
+          "lootSeed": -4263742736213052346,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -434,
+          "y": -50
+        },
+        {
+          "z": -276,
+          "lootSeed": -7235902961347087367,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -547,
+          "y": -44
+        },
+        {
+          "z": -206,
+          "lootSeed": -6855695023815270831,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -559,
+          "y": -48
+        },
+        {
+          "z": -176,
+          "lootSeed": 649920146129781303,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -562,
+          "y": -47
+        },
+        {
+          "z": -168,
+          "lootSeed": 6326845857533616599,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -635,
+          "y": -47
+        },
+        {
+          "z": -236,
+          "lootSeed": 1047667289520216509,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -536,
+          "y": -50
+        },
+        {
+          "z": -149,
+          "lootSeed": -7175601563129427176,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -430,
+          "y": -44
+        },
+        {
+          "z": -206,
+          "lootSeed": -909343885462965570,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -632,
+          "y": -48
+        },
+        {
+          "z": -176,
+          "lootSeed": 4846058689465125128,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -635,
+          "y": -47
+        },
+        {
+          "z": -168,
+          "lootSeed": -3087882855116632484,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -580,
+          "y": -47
+        },
+        {
+          "z": -225,
+          "lootSeed": 1928229378648209416,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -435,
+          "y": -48
+        },
+        {
+          "z": -93,
+          "lootSeed": 997619888727288672,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -500,
+          "y": -44
+        },
+        {
+          "z": -176,
+          "lootSeed": -5168298809285922217,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -580,
+          "y": -47
+        },
+        {
+          "z": -127,
+          "lootSeed": -6600788429441983510,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -539,
+          "y": -48
+        },
+        {
+          "z": -232,
+          "lootSeed": -7032800513419205422,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -467,
+          "y": -47
+        },
+        {
+          "z": -272,
+          "lootSeed": -135748849984605837,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -459,
+          "y": -50
+        },
+        {
+          "z": -211,
+          "lootSeed": 3355793389309942570,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -607,
+          "y": -37
+        },
+        {
+          "z": -276,
+          "lootSeed": -5615379665958057998,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -467,
+          "y": -50
+        },
+        {
+          "z": -232,
+          "lootSeed": 5664833996927220717,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -47
+        },
+        {
+          "z": -150,
+          "lootSeed": 6949887242675548184,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -544,
+          "y": -37
+        },
+        {
+          "z": -285,
+          "lootSeed": -31581764618057220,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -468,
+          "y": -50
+        },
+        {
+          "z": -146,
+          "lootSeed": 5590922295306424513,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -48
+        }
+      ],
+      "seed": 61359933871276778,
+      "chunkX": -33,
+      "apples": 0,
+      "chunkZ": -12
+    },
+    {
+      "chests": [
+        {
+          "z": -541,
+          "lootSeed": -2627899923646546786,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1527,
+          "y": -44
+        },
+        {
+          "z": -608,
+          "lootSeed": -2328662771204286003,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1423,
+          "y": -37
+        },
+        {
+          "z": -726,
+          "lootSeed": -4797909135445489855,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1567,
+          "y": -44
+        },
+        {
+          "z": -722,
+          "lootSeed": 5520557289615940103,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1487,
+          "y": -50
+        },
+        {
+          "z": -558,
+          "lootSeed": 5849302949623082845,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1527,
+          "y": -44
+        },
+        {
+          "z": -721,
+          "lootSeed": -6752243169134421903,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1550,
+          "y": -35
+        },
+        {
+          "z": -572,
+          "lootSeed": 7755967964772574549,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1518,
+          "y": -48
+        },
+        {
+          "z": -569,
+          "lootSeed": 5414440126203239317,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1488,
+          "y": -47
+        },
+        {
+          "z": -609,
+          "lootSeed": 7355821114288593573,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1567,
+          "y": -37
+        },
+        {
+          "z": -720,
+          "lootSeed": -1245415940507395598,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1454,
+          "y": -37
+        },
+        {
+          "z": -609,
+          "lootSeed": -6323006658060384320,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1453,
+          "y": -49
+        },
+        {
+          "z": -641,
+          "lootSeed": -7917628309562873325,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1601,
+          "y": -49
+        },
+        {
+          "z": -569,
+          "lootSeed": 4945947802283002622,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1480,
+          "y": -47
+        },
+        {
+          "z": -674,
+          "lootSeed": 3067846818374628851,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1474,
+          "y": -49
+        },
+        {
+          "z": -524,
+          "lootSeed": 1627198905086295542,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1523,
+          "y": -37
+        },
+        {
+          "z": -715,
+          "lootSeed": -3872677658125637124,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1533,
+          "y": -50
+        }
+      ],
+      "seed": 61359933871276778,
+      "chunkX": -94,
+      "apples": 3,
+      "chunkZ": -39
+    },
+    {
+      "chests": [
+        {
+          "z": -275,
+          "lootSeed": -5806775914715832164,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1415,
+          "y": -50
+        },
+        {
+          "z": -332,
+          "lootSeed": -4525220524360384751,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1390,
+          "y": -50
+        },
+        {
+          "z": -387,
+          "lootSeed": 6653127590808753203,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1365,
+          "y": -49
+        },
+        {
+          "z": -431,
+          "lootSeed": -52174339114123588,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1350,
+          "y": -47
+        },
+        {
+          "z": -455,
+          "lootSeed": 1366044344950644653,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1451,
+          "y": -47
+        },
+        {
+          "z": -321,
+          "lootSeed": 1587345659937572416,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1490,
+          "y": -49
+        },
+        {
+          "z": -284,
+          "lootSeed": -8416823542549968630,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1402,
+          "y": -50
+        },
+        {
+          "z": -307,
+          "lootSeed": 844920017001887134,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1354,
+          "y": -47
+        },
+        {
+          "z": -431,
+          "lootSeed": 6899397526335019963,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1515,
+          "y": -47
+        },
+        {
+          "z": -283,
+          "lootSeed": -3925763706121377385,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1411,
+          "y": -50
+        },
+        {
+          "z": -321,
+          "lootSeed": 9167682107681075753,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1444,
+          "y": -48
+        },
+        {
+          "z": -307,
+          "lootSeed": -5812023177387955441,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1362,
+          "y": -47
+        },
+        {
+          "z": -410,
+          "lootSeed": 7062250683474109463,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1408,
+          "y": -37
+        },
+        {
+          "z": -439,
+          "lootSeed": -6391023739507031185,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1515,
+          "y": -47
+        },
+        {
+          "z": -289,
+          "lootSeed": -512600567311483948,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1442,
+          "y": -50
+        },
+        {
+          "z": -422,
+          "lootSeed": 7759589249245323473,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1405,
+          "y": -47
+        },
+        {
+          "z": -336,
+          "lootSeed": -2559451339893150812,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1362,
+          "y": -48
+        },
+        {
+          "z": -338,
+          "lootSeed": 5839675670591521373,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1490,
+          "y": -49
+        },
+        {
+          "z": -423,
+          "lootSeed": -5577443161382266830,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1350,
+          "y": -47
+        },
+        {
+          "z": -455,
+          "lootSeed": 6250745282619415105,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1443,
+          "y": -47
+        },
+        {
+          "z": -422,
+          "lootSeed": -2663178394524442340,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1413,
+          "y": -47
+        }
+      ],
+      "seed": 61359933871276778,
+      "chunkX": -89,
+      "apples": 0,
+      "chunkZ": -23
+    },
+    {
+      "chests": [
+        {
+          "z": -1856,
+          "lootSeed": -4976045440664832478,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1740,
+          "y": -49
+        },
+        {
+          "z": -1819,
+          "lootSeed": -9186343912920638903,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1774,
+          "y": -48
+        },
+        {
+          "z": -1918,
+          "lootSeed": -4716321324069052545,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1684,
+          "y": -50
+        },
+        {
+          "z": -1882,
+          "lootSeed": 6984642020773757178,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1646,
+          "y": -47
+        },
+        {
+          "z": -1781,
+          "lootSeed": 963082075125937130,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1724,
+          "y": -50
+        },
+        {
+          "z": -1806,
+          "lootSeed": 6766933807325193168,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1763,
+          "y": -49
+        },
+        {
+          "z": -1822,
+          "lootSeed": 7534801549406348467,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1668,
+          "y": -49
+        },
+        {
+          "z": -1970,
+          "lootSeed": 4487447158739380646,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -1712,
+          "y": -48
+        },
+        {
+          "z": -1900,
+          "lootSeed": 7615503331318626336,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1678,
+          "y": -35
+        },
+        {
+          "z": -1879,
+          "lootSeed": 5324238347918532437,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1616,
+          "y": -49
+        },
+        {
+          "z": -1843,
+          "lootSeed": 4778598748245639075,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1636,
+          "y": -44
+        },
+        {
+          "z": -1779,
+          "lootSeed": 4467026217393895239,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1645,
+          "y": -48
+        },
+        {
+          "z": -1890,
+          "lootSeed": 3094894175384041612,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1628,
+          "y": -47
+        },
+        {
+          "z": -1779,
+          "lootSeed": 9185593631702302155,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1674,
+          "y": -47
+        },
+        {
+          "z": -1956,
+          "lootSeed": -858199922935412978,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1685,
+          "y": -49
+        },
+        {
+          "z": -1854,
+          "lootSeed": 5222884755875752671,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1653,
+          "y": -50
+        },
+        {
+          "z": -1890,
+          "lootSeed": 5359561640496401745,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1646,
+          "y": -47
+        },
+        {
+          "z": -1913,
+          "lootSeed": -1925223950035645874,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1717,
+          "y": -44
+        },
+        {
+          "z": -1882,
+          "lootSeed": 2552698597268862817,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1628,
+          "y": -47
+        },
+        {
+          "z": -1771,
+          "lootSeed": 8940472138590250952,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1674,
+          "y": -47
+        }
+      ],
+      "seed": 61359933871276778,
+      "chunkX": -106,
+      "apples": 5,
+      "chunkZ": -117
+    },
+    {
+      "chests": [
+        {
+          "z": -703,
+          "lootSeed": 1651851307636098675,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 36,
+          "y": -48
+        },
+        {
+          "z": -635,
+          "lootSeed": -568790081121112006,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -62,
+          "y": -44
+        },
+        {
+          "z": -596,
+          "lootSeed": -3011131968814413183,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 0,
+          "y": -37
+        },
+        {
+          "z": -707,
+          "lootSeed": -4887041333660048375,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 6,
+          "y": -47
+        },
+        {
+          "z": -721,
+          "lootSeed": 7049419966226135470,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 81,
+          "y": -50
+        },
+        {
+          "z": -598,
+          "lootSeed": -6580206296079439473,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 35,
+          "y": -48
+        },
+        {
+          "z": -687,
+          "lootSeed": -6382032724691583257,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 75,
+          "y": -35
+        },
+        {
+          "z": -755,
+          "lootSeed": 1132600046979793898,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 33,
+          "y": -49
+        },
+        {
+          "z": -640,
+          "lootSeed": -5373701976689819811,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -55,
+          "y": -47
+        },
+        {
+          "z": -613,
+          "lootSeed": -2870332288361296018,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 109,
+          "y": -48
+        },
+        {
+          "z": -719,
+          "lootSeed": -7732705987669154615,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -3,
+          "y": -44
+        },
+        {
+          "z": -577,
+          "lootSeed": -7184813891189711778,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 7,
+          "y": -50
+        },
+        {
+          "z": -668,
+          "lootSeed": 8525544776656285433,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -83,
+          "y": -50
+        },
+        {
+          "z": -632,
+          "lootSeed": -1173594451207670982,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -55,
+          "y": -47
+        },
+        {
+          "z": -670,
+          "lootSeed": 4718259462002123288,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -67,
+          "y": -48
+        },
+        {
+          "z": -639,
+          "lootSeed": 7887645054653558922,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -68,
+          "y": -50
+        },
+        {
+          "z": -611,
+          "lootSeed": -771044697342408567,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 32,
+          "y": -49
+        },
+        {
+          "z": -627,
+          "lootSeed": 7878874709529488619,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 107,
+          "y": -50
+        },
+        {
+          "z": -679,
+          "lootSeed": -7267566120161755772,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -29,
+          "y": -44
+        },
+        {
+          "z": -707,
+          "lootSeed": 2487815143954427422,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2,
+          "y": -47
+        }
+      ],
+      "seed": 5000697870809672599,
+      "chunkX": 1,
+      "apples": 5,
+      "chunkZ": -41
+    },
+    {
+      "chests": [
+        {
+          "z": -1534,
+          "lootSeed": 2438028654420843288,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -714,
+          "y": -49
+        },
+        {
+          "z": -1420,
+          "lootSeed": -5401651302184908684,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -650,
+          "y": -49
+        },
+        {
+          "z": -1561,
+          "lootSeed": -304177859737897118,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -607,
+          "y": -49
+        },
+        {
+          "z": -1591,
+          "lootSeed": 1230441622848404270,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -574,
+          "y": -48
+        },
+        {
+          "z": -1518,
+          "lootSeed": -5206824380356085896,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -580,
+          "y": -47
+        },
+        {
+          "z": -1440,
+          "lootSeed": -8845590685031473258,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -674,
+          "y": -49
+        },
+        {
+          "z": -1458,
+          "lootSeed": 5205049258389794588,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -675,
+          "y": -50
+        },
+        {
+          "z": -1518,
+          "lootSeed": -6587832416031639126,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -572,
+          "y": -47
+        },
+        {
+          "z": -1583,
+          "lootSeed": 4369605341656915801,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -604,
+          "y": -48
+        },
+        {
+          "z": -1569,
+          "lootSeed": 4570589138468885836,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -715,
+          "y": -50
+        }
+      ],
+      "seed": 5000697870809672599,
+      "chunkX": -39,
+      "apples": 1,
+      "chunkZ": -94
+    },
+    {
+      "chests": [
+        {
+          "z": -1844,
+          "lootSeed": -5321153128149253003,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -730,
+          "y": -50
+        },
+        {
+          "z": -1941,
+          "lootSeed": 4016566814034532012,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -628,
+          "y": -44
+        },
+        {
+          "z": -1986,
+          "lootSeed": 2996621668338719640,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -651,
+          "y": -48
+        },
+        {
+          "z": -1983,
+          "lootSeed": -6431022712834906478,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -754,
+          "y": -49
+        },
+        {
+          "z": -1934,
+          "lootSeed": 8505292559812337822,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -643,
+          "y": -50
+        },
+        {
+          "z": -1987,
+          "lootSeed": -1370980551372481767,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -779,
+          "y": -50
+        },
+        {
+          "z": -1963,
+          "lootSeed": -3635758776855128169,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -668,
+          "y": -44
+        },
+        {
+          "z": -2016,
+          "lootSeed": 5269733103349976711,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -677,
+          "y": -48
+        },
+        {
+          "z": -1908,
+          "lootSeed": 5918697690924420789,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -661,
+          "y": -50
+        },
+        {
+          "z": -1818,
+          "lootSeed": -4618871806749982597,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -669,
+          "y": -44
+        },
+        {
+          "z": -1937,
+          "lootSeed": -2171378368405325334,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -622,
+          "y": -50
+        },
+        {
+          "z": -1902,
+          "lootSeed": -1250365764149685725,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -607,
+          "y": -35
+        },
+        {
+          "z": -1941,
+          "lootSeed": -8059297469750350991,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -608,
+          "y": -44
+        },
+        {
+          "z": -1875,
+          "lootSeed": -429117496583288947,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -669,
+          "y": -44
+        },
+        {
+          "z": -1966,
+          "lootSeed": -7233721624144168205,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -779,
+          "y": -50
+        },
+        {
+          "z": -1888,
+          "lootSeed": -3951741049205987495,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -754,
+          "y": -49
+        },
+        {
+          "z": -1906,
+          "lootSeed": 6128019953938887603,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -639,
+          "y": -48
+        },
+        {
+          "z": -1860,
+          "lootSeed": -395283004230402327,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -786,
+          "y": -49
+        },
+        {
+          "z": -1947,
+          "lootSeed": 6752986398758913789,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -746,
+          "y": -37
+        },
+        {
+          "z": -1936,
+          "lootSeed": -8338562358512492906,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -665,
+          "y": -48
+        },
+        {
+          "z": -1937,
+          "lootSeed": 4154649751931794891,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -602,
+          "y": -50
+        },
+        {
+          "z": -1960,
+          "lootSeed": -4242832807446247532,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -707,
+          "y": -48
+        },
+        {
+          "z": -1837,
+          "lootSeed": 2239517944050093260,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -706,
+          "y": -50
+        },
+        {
+          "z": -1892,
+          "lootSeed": 8671220966151442817,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -779,
+          "y": -50
+        },
+        {
+          "z": -2014,
+          "lootSeed": 8770552103775822123,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -655,
+          "y": -50
+        },
+        {
+          "z": -1970,
+          "lootSeed": 4276137252312048143,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -751,
+          "y": -48
+        },
+        {
+          "z": -1873,
+          "lootSeed": 6542969832797227910,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -708,
+          "y": -48
+        }
+      ],
+      "seed": 5000697870809672599,
+      "chunkX": -43,
+      "apples": 3,
+      "chunkZ": -120
+    },
+    {
+      "chests": [
+        {
+          "z": -1820,
+          "lootSeed": -7115723964296290665,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 46,
+          "y": -50
+        },
+        {
+          "z": -1945,
+          "lootSeed": -1229293453548374160,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 144,
+          "y": -48
+        },
+        {
+          "z": -1855,
+          "lootSeed": 1685306332220756991,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 46,
+          "y": -50
+        },
+        {
+          "z": -1981,
+          "lootSeed": 4434186937715478314,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 47,
+          "y": -50
+        },
+        {
+          "z": -1853,
+          "lootSeed": -5553005557803458000,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 7,
+          "y": -35
+        },
+        {
+          "z": -1909,
+          "lootSeed": -9023734595983983828,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 109,
+          "y": -49
+        },
+        {
+          "z": -1955,
+          "lootSeed": -5771339964196023311,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -34,
+          "y": -50
+        },
+        {
+          "z": -1892,
+          "lootSeed": 2606801084606669672,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2,
+          "y": -44
+        },
+        {
+          "z": -1991,
+          "lootSeed": 1383492532360549664,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -27,
+          "y": -47
+        },
+        {
+          "z": -1830,
+          "lootSeed": 6477908542439202811,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 11,
+          "y": -48
+        },
+        {
+          "z": -1934,
+          "lootSeed": 977562725041414117,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 110,
+          "y": -50
+        },
+        {
+          "z": -1863,
+          "lootSeed": -5034016403368697957,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 77,
+          "y": -49
+        },
+        {
+          "z": -1964,
+          "lootSeed": -8575758533792566155,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 48,
+          "y": -49
+        },
+        {
+          "z": -1983,
+          "lootSeed": 3501961852960776262,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -27,
+          "y": -47
+        },
+        {
+          "z": -2004,
+          "lootSeed": 1744296175506506497,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 40,
+          "y": -37
+        },
+        {
+          "z": -1980,
+          "lootSeed": 8970629965429406421,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 11,
+          "y": -48
+        },
+        {
+          "z": -1853,
+          "lootSeed": -4531775927611101620,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -26,
+          "y": -49
+        },
+        {
+          "z": -1961,
+          "lootSeed": -2100833195738031637,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 116,
+          "y": -50
+        },
+        {
+          "z": -1824,
+          "lootSeed": 6421411564442204233,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 74,
+          "y": -48
+        }
+      ],
+      "seed": 5000697870809672599,
+      "chunkX": 4,
+      "apples": 1,
+      "chunkZ": -120
+    },
+    {
+      "chests": [
+        {
+          "z": 83,
+          "lootSeed": -8103229697490328365,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -227,
+          "y": -49
+        },
+        {
+          "z": 148,
+          "lootSeed": -8471459563858417963,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -324,
+          "y": -48
+        },
+        {
+          "z": 104,
+          "lootSeed": -5062882202272870894,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -405,
+          "y": -47
+        },
+        {
+          "z": -18,
+          "lootSeed": -7361936212358648578,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -295,
+          "y": -50
+        },
+        {
+          "z": 75,
+          "lootSeed": -3549612927538781450,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -278,
+          "y": -49
+        },
+        {
+          "z": 96,
+          "lootSeed": 7137616919584478034,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -357,
+          "y": -48
+        },
+        {
+          "z": 104,
+          "lootSeed": 762479875250931657,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -397,
+          "y": -47
+        },
+        {
+          "z": 124,
+          "lootSeed": 672618942715945606,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -321,
+          "y": -49
+        },
+        {
+          "z": 4,
+          "lootSeed": 4196694653020924750,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -227,
+          "y": -47
+        },
+        {
+          "z": -1,
+          "lootSeed": 8058777421422835120,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -250,
+          "y": -37
+        },
+        {
+          "z": 76,
+          "lootSeed": 8218315167881478583,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -202,
+          "y": -50
+        },
+        {
+          "z": -4,
+          "lootSeed": 8639380539575688203,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -227,
+          "y": -47
+        },
+        {
+          "z": 46,
+          "lootSeed": 588768277069284392,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -219,
+          "y": -37
+        },
+        {
+          "z": -6,
+          "lootSeed": -7613132446751699081,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -358,
+          "y": -50
+        },
+        {
+          "z": -35,
+          "lootSeed": 7577032192559292379,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -296,
+          "y": -49
+        },
+        {
+          "z": -1,
+          "lootSeed": -7774574220331383887,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -287,
+          "y": -37
+        },
+        {
+          "z": 105,
+          "lootSeed": -624049944036942089,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -254,
+          "y": -48
+        },
+        {
+          "z": 114,
+          "lootSeed": -5355161875460436202,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -357,
+          "y": -48
+        },
+        {
+          "z": 0,
+          "lootSeed": -7876892907112283635,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -362,
+          "y": -44
+        },
+        {
+          "z": 109,
+          "lootSeed": -2316816250189487402,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -285,
+          "y": -44
+        }
+      ],
+      "seed": -8694405306540134269,
+      "chunkX": -19,
+      "apples": 5,
+      "chunkZ": 4
+    },
+    {
+      "chests": [
+        {
+          "z": 424,
+          "lootSeed": -2273901512193881284,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -370,
+          "y": -47
+        },
+        {
+          "z": 333,
+          "lootSeed": 2423420429033659609,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -286,
+          "y": -49
+        },
+        {
+          "z": 386,
+          "lootSeed": -7660078314715976676,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -367,
+          "y": -48
+        },
+        {
+          "z": 462,
+          "lootSeed": 1661521921002049569,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -319,
+          "y": -50
+        },
+        {
+          "z": 475,
+          "lootSeed": 3266050083018937223,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -317,
+          "y": -48
+        },
+        {
+          "z": 336,
+          "lootSeed": 4538155728757275440,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -245,
+          "y": -50
+        },
+        {
+          "z": 355,
+          "lootSeed": -5162565062316342591,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -343,
+          "y": -49
+        },
+        {
+          "z": 322,
+          "lootSeed": 4570654405196005867,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -346,
+          "y": -48
+        },
+        {
+          "z": 374,
+          "lootSeed": 8649414888845361840,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -397,
+          "y": -50
+        },
+        {
+          "z": 337,
+          "lootSeed": -7807306647020877992,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -355,
+          "y": -44
+        },
+        {
+          "z": 383,
+          "lootSeed": -5927942712127629418,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -396,
+          "y": -50
+        },
+        {
+          "z": 299,
+          "lootSeed": 2457148908332908118,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -343,
+          "y": -49
+        },
+        {
+          "z": 314,
+          "lootSeed": 5964185832637233362,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -279,
+          "y": -35
+        },
+        {
+          "z": 389,
+          "lootSeed": -6359117227053966291,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -432,
+          "y": -49
+        },
+        {
+          "z": 437,
+          "lootSeed": -9201001170117476382,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -355,
+          "y": -47
+        },
+        {
+          "z": 414,
+          "lootSeed": -361645026504299840,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -417,
+          "y": -50
+        },
+        {
+          "z": 444,
+          "lootSeed": -3545414353924443004,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -319,
+          "y": -50
+        },
+        {
+          "z": 416,
+          "lootSeed": -8974498888804138837,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -388,
+          "y": -47
+        },
+        {
+          "z": 437,
+          "lootSeed": -1110760286189067242,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -347,
+          "y": -47
+        },
+        {
+          "z": 421,
+          "lootSeed": -1625483971547207894,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -438,
+          "y": -37
+        },
+        {
+          "z": 387,
+          "lootSeed": -1924923874437347342,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -388,
+          "y": -50
+        },
+        {
+          "z": 424,
+          "lootSeed": -2499130552106821519,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -388,
+          "y": -47
+        },
+        {
+          "z": 448,
+          "lootSeed": 6209270591731435901,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -286,
+          "y": -49
+        },
+        {
+          "z": 471,
+          "lootSeed": 4959819734086635182,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -243,
+          "y": -47
+        },
+        {
+          "z": 416,
+          "lootSeed": 5108403334403849675,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -370,
+          "y": -47
+        },
+        {
+          "z": 471,
+          "lootSeed": 8481266734659173540,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -235,
+          "y": -47
+        },
+        {
+          "z": 483,
+          "lootSeed": 3824615340396963221,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -347,
+          "y": -48
+        }
+      ],
+      "seed": -8694405306540134269,
+      "chunkX": -21,
+      "apples": 3,
+      "chunkZ": 25
+    },
+    {
+      "chests": [
+        {
+          "z": -632,
+          "lootSeed": -434884602230608187,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -483,
+          "y": -47
+        },
+        {
+          "z": -642,
+          "lootSeed": -5646756664845591798,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -591,
+          "y": -35
+        },
+        {
+          "z": -787,
+          "lootSeed": 7778200142567849265,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -556,
+          "y": -48
+        },
+        {
+          "z": -762,
+          "lootSeed": -6919614260444240016,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -483,
+          "y": -47
+        },
+        {
+          "z": -747,
+          "lootSeed": -6445073966366006489,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -584,
+          "y": -50
+        },
+        {
+          "z": -632,
+          "lootSeed": 8678338979425965316,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -47
+        },
+        {
+          "z": -784,
+          "lootSeed": -4493872806072079047,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -583,
+          "y": -49
+        },
+        {
+          "z": -621,
+          "lootSeed": 8148096299147208230,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -587,
+          "y": -48
+        },
+        {
+          "z": -661,
+          "lootSeed": 759315772543229461,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -483,
+          "y": -48
+        },
+        {
+          "z": -762,
+          "lootSeed": 3368533615535158764,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -475,
+          "y": -47
+        },
+        {
+          "z": -749,
+          "lootSeed": -4603284332294517141,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -474,
+          "y": -44
+        },
+        {
+          "z": -683,
+          "lootSeed": -7857612262344754162,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -672,
+          "y": -50
+        },
+        {
+          "z": -680,
+          "lootSeed": -86107648114278477,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -646,
+          "y": -47
+        },
+        {
+          "z": -674,
+          "lootSeed": 452074471133697384,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -526,
+          "y": -49
+        },
+        {
+          "z": -624,
+          "lootSeed": 199043533264087837,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -559,
+          "y": -50
+        },
+        {
+          "z": -640,
+          "lootSeed": -5223183555144880033,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -510,
+          "y": -49
+        },
+        {
+          "z": -726,
+          "lootSeed": 7984013289900935613,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -615,
+          "y": -47
+        },
+        {
+          "z": -661,
+          "lootSeed": 1047661968811000972,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -518,
+          "y": -44
+        },
+        {
+          "z": -688,
+          "lootSeed": -1091065321837139908,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -646,
+          "y": -47
+        },
+        {
+          "z": -747,
+          "lootSeed": 8647016840766439018,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -558,
+          "y": -50
+        },
+        {
+          "z": -718,
+          "lootSeed": -865787930928065389,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -615,
+          "y": -47
+        },
+        {
+          "z": -655,
+          "lootSeed": 2978756729044687467,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -522,
+          "y": -50
+        },
+        {
+          "z": -673,
+          "lootSeed": 114383688275726511,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -478,
+          "y": -37
+        },
+        {
+          "z": -750,
+          "lootSeed": -1114040087580847870,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -511,
+          "y": -50
+        },
+        {
+          "z": -661,
+          "lootSeed": 3010795545074150816,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -596,
+          "y": -44
+        },
+        {
+          "z": -801,
+          "lootSeed": -3231213853414982293,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -559,
+          "y": -49
+        },
+        {
+          "z": -732,
+          "lootSeed": -5701668127209260000,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -486,
+          "y": -49
+        }
+      ],
+      "seed": -8694405306540134269,
+      "chunkX": -36,
+      "apples": 6,
+      "chunkZ": -44
+    },
+    {
+      "chests": [
+        {
+          "z": -219,
+          "lootSeed": -6979347960262026489,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -536,
+          "y": -50
+        },
+        {
+          "z": -229,
+          "lootSeed": -8902836122595325024,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -563,
+          "y": -49
+        },
+        {
+          "z": -196,
+          "lootSeed": 3256195788841931205,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -599,
+          "y": -44
+        },
+        {
+          "z": -145,
+          "lootSeed": -4635747436689283937,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -590,
+          "y": -47
+        },
+        {
+          "z": -202,
+          "lootSeed": -1239250839664219627,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -437,
+          "y": -50
+        },
+        {
+          "z": -238,
+          "lootSeed": -1125295630540311763,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -536,
+          "y": -50
+        },
+        {
+          "z": -231,
+          "lootSeed": 6647639869726282079,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -599,
+          "y": -44
+        },
+        {
+          "z": -274,
+          "lootSeed": -5815492355379515737,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -535,
+          "y": -49
+        },
+        {
+          "z": -262,
+          "lootSeed": 4019890546994714723,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -538,
+          "y": -47
+        },
+        {
+          "z": -113,
+          "lootSeed": -929798802324394024,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -502,
+          "y": -49
+        },
+        {
+          "z": -239,
+          "lootSeed": 39875597059360193,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -473,
+          "y": -48
+        },
+        {
+          "z": -145,
+          "lootSeed": 8756105490686391721,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -598,
+          "y": -47
+        },
+        {
+          "z": -242,
+          "lootSeed": 5959879662038829260,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -438,
+          "y": -49
+        },
+        {
+          "z": -101,
+          "lootSeed": 8191928308220317893,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -580,
+          "y": -49
+        },
+        {
+          "z": -212,
+          "lootSeed": 2082051375962479669,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -563,
+          "y": -49
+        },
+        {
+          "z": -156,
+          "lootSeed": -4500982485919589675,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -588,
+          "y": -50
+        },
+        {
+          "z": -262,
+          "lootSeed": -8288059963130288706,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -546,
+          "y": -47
+        }
+      ],
+      "seed": -8694405306540134269,
+      "chunkX": -33,
+      "apples": 5,
+      "chunkZ": -11
+    },
+    {
+      "chests": [
+        {
+          "z": 186,
+          "lootSeed": -4289516138799767554,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 149,
+          "y": -50
+        },
+        {
+          "z": 199,
+          "lootSeed": -2204578251156812784,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 270,
+          "y": -50
+        },
+        {
+          "z": 281,
+          "lootSeed": 5807208324500262700,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 120,
+          "y": -49
+        },
+        {
+          "z": 180,
+          "lootSeed": -3029017634404009459,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 108,
+          "y": -37
+        },
+        {
+          "z": 223,
+          "lootSeed": -448443806436091715,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 116,
+          "y": -49
+        },
+        {
+          "z": 318,
+          "lootSeed": -8359398520650183157,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 191,
+          "y": -50
+        },
+        {
+          "z": 250,
+          "lootSeed": 3733255357618154214,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 100,
+          "y": -48
+        },
+        {
+          "z": 310,
+          "lootSeed": -7622827582828302096,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 195,
+          "y": -50
+        },
+        {
+          "z": 307,
+          "lootSeed": -4021926367781831368,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 158,
+          "y": -35
+        },
+        {
+          "z": 147,
+          "lootSeed": 8188004064560376794,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 144,
+          "y": -48
+        },
+        {
+          "z": 187,
+          "lootSeed": 3355977973470222518,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 200,
+          "y": -48
+        },
+        {
+          "z": 273,
+          "lootSeed": 1080795490753163248,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 270,
+          "y": -50
+        },
+        {
+          "z": 182,
+          "lootSeed": -112148504135903081,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 143,
+          "y": -44
+        },
+        {
+          "z": 221,
+          "lootSeed": -5389396639414360631,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 234,
+          "y": -48
+        },
+        {
+          "z": 251,
+          "lootSeed": -3681187241076557748,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 269,
+          "y": -47
+        },
+        {
+          "z": 150,
+          "lootSeed": -8065620230336892132,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 112,
+          "y": -49
+        },
+        {
+          "z": 222,
+          "lootSeed": 2817044650666382246,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 133,
+          "y": -50
+        },
+        {
+          "z": 309,
+          "lootSeed": 8500817487952519723,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 204,
+          "y": -50
+        },
+        {
+          "z": 289,
+          "lootSeed": -8846764236100975304,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 239,
+          "y": -44
+        },
+        {
+          "z": 285,
+          "lootSeed": -9081806113123411631,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 233,
+          "y": -50
+        },
+        {
+          "z": 259,
+          "lootSeed": 4317814274566571275,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 269,
+          "y": -47
+        },
+        {
+          "z": 250,
+          "lootSeed": 7521299613044481075,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 82,
+          "y": -48
+        }
+      ],
+      "seed": 5629499605952483,
+      "chunkX": 11,
+      "apples": 1,
+      "chunkZ": 15
+    },
+    {
+      "chests": [
+        {
+          "z": 832,
+          "lootSeed": -5171409283264497703,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2371,
+          "y": -48
+        },
+        {
+          "z": 784,
+          "lootSeed": -6119361432829651382,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2487,
+          "y": -48
+        },
+        {
+          "z": 844,
+          "lootSeed": -1990716319864317882,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2445,
+          "y": -48
+        },
+        {
+          "z": 730,
+          "lootSeed": 4072397406032335244,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2553,
+          "y": -44
+        },
+        {
+          "z": 781,
+          "lootSeed": 4683540636068831793,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2544,
+          "y": -47
+        },
+        {
+          "z": 757,
+          "lootSeed": 3265361084877846303,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2490,
+          "y": -49
+        },
+        {
+          "z": 736,
+          "lootSeed": 5417408150453742835,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2371,
+          "y": -48
+        },
+        {
+          "z": 848,
+          "lootSeed": 6377898369394842406,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2479,
+          "y": -35
+        },
+        {
+          "z": 663,
+          "lootSeed": -7464986322344937011,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2496,
+          "y": -44
+        },
+        {
+          "z": 738,
+          "lootSeed": -5383815272465213781,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2406,
+          "y": -37
+        },
+        {
+          "z": 672,
+          "lootSeed": -4509027661382459277,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2443,
+          "y": -48
+        },
+        {
+          "z": 731,
+          "lootSeed": 5761048695829843269,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2436,
+          "y": -47
+        },
+        {
+          "z": 797,
+          "lootSeed": -7223109675265486528,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2402,
+          "y": -44
+        },
+        {
+          "z": 786,
+          "lootSeed": -6200836595191546193,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2365,
+          "y": -49
+        },
+        {
+          "z": 672,
+          "lootSeed": -7700605565064432908,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2472,
+          "y": -47
+        },
+        {
+          "z": 781,
+          "lootSeed": 1343689026469570570,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2552,
+          "y": -47
+        },
+        {
+          "z": 817,
+          "lootSeed": 1193990573025192747,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2399,
+          "y": -50
+        },
+        {
+          "z": 731,
+          "lootSeed": -7299359911955375482,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2444,
+          "y": -47
+        },
+        {
+          "z": 664,
+          "lootSeed": 1206859773178686248,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2472,
+          "y": -47
+        },
+        {
+          "z": 711,
+          "lootSeed": 5611896617925790945,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2498,
+          "y": -44
+        },
+        {
+          "z": 817,
+          "lootSeed": -8593559050439328348,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2367,
+          "y": -35
+        },
+        {
+          "z": 811,
+          "lootSeed": -8405212313731711645,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -2473,
+          "y": -50
+        }
+      ],
+      "seed": 5629499605952483,
+      "chunkX": -154,
+      "apples": 6,
+      "chunkZ": 48
+    },
+    {
+      "chests": [
+        {
+          "z": 1340,
+          "lootSeed": -1933652100178010837,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2678,
+          "y": -44
+        },
+        {
+          "z": 1362,
+          "lootSeed": -3861721983145904304,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2641,
+          "y": -49
+        },
+        {
+          "z": 1242,
+          "lootSeed": 8453728810411630193,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2550,
+          "y": -47
+        },
+        {
+          "z": 1403,
+          "lootSeed": -6367809459007114651,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2640,
+          "y": -50
+        },
+        {
+          "z": 1250,
+          "lootSeed": 3484357730486908410,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2550,
+          "y": -47
+        },
+        {
+          "z": 1244,
+          "lootSeed": 3707889502710322706,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2644,
+          "y": -48
+        },
+        {
+          "z": 1410,
+          "lootSeed": 5476230153364034838,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2607,
+          "y": -37
+        },
+        {
+          "z": 1329,
+          "lootSeed": 6890295205778236,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2533,
+          "y": -49
+        },
+        {
+          "z": 1300,
+          "lootSeed": 8002349137189217664,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2493,
+          "y": -37
+        },
+        {
+          "z": 1405,
+          "lootSeed": -3472038583497178795,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2505,
+          "y": -48
+        },
+        {
+          "z": 1282,
+          "lootSeed": -5493381658319848991,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": -2636,
+          "y": -48
+        },
+        {
+          "z": 1331,
+          "lootSeed": -975438597282663867,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2654,
+          "y": -48
+        },
+        {
+          "z": 1330,
+          "lootSeed": 6686283728753545539,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2496,
+          "y": -50
+        },
+        {
+          "z": 1363,
+          "lootSeed": 1729157966420441695,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2490,
+          "y": -50
+        },
+        {
+          "z": 1252,
+          "lootSeed": 4269763420433743437,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2539,
+          "y": -50
+        },
+        {
+          "z": 1297,
+          "lootSeed": 1933351468972105545,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -2474,
+          "y": -37
+        }
+      ],
+      "seed": 5629499605952483,
+      "chunkX": -161,
+      "apples": 0,
+      "chunkZ": 82
+    },
+    {
+      "chests": [
+        {
+          "z": -845,
+          "lootSeed": 1635082621849971959,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2829,
+          "y": -48
+        },
+        {
+          "z": -693,
+          "lootSeed": 392005933937880169,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2966,
+          "y": -47
+        },
+        {
+          "z": -772,
+          "lootSeed": 4078916770895837539,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2833,
+          "y": -48
+        },
+        {
+          "z": -651,
+          "lootSeed": 5181546052719138584,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2869,
+          "y": -49
+        },
+        {
+          "z": -732,
+          "lootSeed": 923530647214592041,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2866,
+          "y": -47
+        },
+        {
+          "z": -706,
+          "lootSeed": -6131623658586573085,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2868,
+          "y": -50
+        },
+        {
+          "z": -815,
+          "lootSeed": 7358785816550243196,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2912,
+          "y": -48
+        },
+        {
+          "z": -720,
+          "lootSeed": 5625025144322301100,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2923,
+          "y": -37
+        },
+        {
+          "z": -733,
+          "lootSeed": -8851825892373293360,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2782,
+          "y": -44
+        },
+        {
+          "z": -672,
+          "lootSeed": -8176934420228921168,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 2847,
+          "y": -48
+        },
+        {
+          "z": -843,
+          "lootSeed": 537287281526005719,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2947,
+          "y": -50
+        },
+        {
+          "z": -722,
+          "lootSeed": -8402502041314853876,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2958,
+          "y": -48
+        },
+        {
+          "z": -777,
+          "lootSeed": -4059313106370747908,
+          "verificationRequired": true,
+          "apples": 0,
+          "x": 2803,
+          "y": -37
+        },
+        {
+          "z": -815,
+          "lootSeed": -1728304714600392170,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2856,
+          "y": -48
+        },
+        {
+          "z": -693,
+          "lootSeed": 2938979501269746696,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2958,
+          "y": -47
+        },
+        {
+          "z": -772,
+          "lootSeed": 2906256996218791372,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2825,
+          "y": -47
+        },
+        {
+          "z": -771,
+          "lootSeed": -1389108143617136967,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2919,
+          "y": -48
+        },
+        {
+          "z": -742,
+          "lootSeed": 3668078854902045753,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2794,
+          "y": -47
+        },
+        {
+          "z": -732,
+          "lootSeed": -2759621493890821621,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2858,
+          "y": -47
+        },
+        {
+          "z": -744,
+          "lootSeed": -7169882460317887434,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2836,
+          "y": -50
+        },
+        {
+          "z": -734,
+          "lootSeed": 1607514271310930931,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2794,
+          "y": -47
+        },
+        {
+          "z": -845,
+          "lootSeed": -7732865699317300041,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2848,
+          "y": -48
+        },
+        {
+          "z": -705,
+          "lootSeed": 7707508686654631400,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2905,
+          "y": -44
+        },
+        {
+          "z": -666,
+          "lootSeed": 3788229698544922776,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2893,
+          "y": -49
+        },
+        {
+          "z": -814,
+          "lootSeed": -1729128277074113068,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2943,
+          "y": -48
+        },
+        {
+          "z": -780,
+          "lootSeed": -2715761885385760612,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 2825,
+          "y": -47
+        }
+      ],
+      "seed": 5629499605952483,
+      "chunkX": 180,
+      "apples": 2,
+      "chunkZ": -47
+    },
+    {
+      "chests": [
+        {
+          "z": -204,
+          "lootSeed": -5494017203977241123,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -235,
+          "y": -35
+        },
+        {
+          "z": -146,
+          "lootSeed": 588379980058563109,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -192,
+          "y": -47
+        },
+        {
+          "z": -287,
+          "lootSeed": 4767381270615253830,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -227,
+          "y": -44
+        },
+        {
+          "z": -268,
+          "lootSeed": 4773272801747326502,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -227,
+          "y": -44
+        },
+        {
+          "z": -137,
+          "lootSeed": -6507291356590520020,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -219,
+          "y": -48
+        },
+        {
+          "z": -260,
+          "lootSeed": -8288244125238977512,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -188,
+          "y": -47
+        },
+        {
+          "z": -293,
+          "lootSeed": -2267888637515085722,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -115,
+          "y": -48
+        },
+        {
+          "z": -325,
+          "lootSeed": 8142085745830493937,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -169,
+          "y": -44
+        },
+        {
+          "z": -321,
+          "lootSeed": 6813459848373228808,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -163,
+          "y": -50
+        },
+        {
+          "z": -269,
+          "lootSeed": -5731066582796442492,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -110,
+          "y": -37
+        },
+        {
+          "z": -138,
+          "lootSeed": 2281987745518644783,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -192,
+          "y": -47
+        },
+        {
+          "z": -260,
+          "lootSeed": 3251155099032248741,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -180,
+          "y": -47
+        }
+      ],
+      "seed": -9223372036854775808,
+      "chunkX": -13,
+      "apples": 1,
+      "chunkZ": -14
+    },
+    {
+      "chests": [
+        {
+          "z": 251,
+          "lootSeed": 116771508338466462,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -260,
+          "y": -50
+        },
+        {
+          "z": 176,
+          "lootSeed": -4929879962916702995,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -183,
+          "y": -48
+        },
+        {
+          "z": 148,
+          "lootSeed": 8249064828396611715,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": -215,
+          "y": -50
+        },
+        {
+          "z": 149,
+          "lootSeed": -6567907082734900617,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -282,
+          "y": -50
+        },
+        {
+          "z": 256,
+          "lootSeed": 728430797117535709,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -289,
+          "y": -50
+        },
+        {
+          "z": 237,
+          "lootSeed": 2632490816455847825,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -322,
+          "y": -37
+        },
+        {
+          "z": 255,
+          "lootSeed": 2094838420909964112,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -252,
+          "y": -50
+        },
+        {
+          "z": 152,
+          "lootSeed": 7774827764031843628,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -243,
+          "y": -48
+        },
+        {
+          "z": 123,
+          "lootSeed": 4583511629591732572,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -209,
+          "y": -49
+        },
+        {
+          "z": 264,
+          "lootSeed": 1436314258038788924,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -251,
+          "y": -50
+        },
+        {
+          "z": 261,
+          "lootSeed": -6996707136004809156,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -210,
+          "y": -44
+        },
+        {
+          "z": 206,
+          "lootSeed": 1021034322527249991,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -192,
+          "y": -48
+        },
+        {
+          "z": 96,
+          "lootSeed": -5702177160620761979,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -212,
+          "y": -48
+        },
+        {
+          "z": 174,
+          "lootSeed": -663364077176522556,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -322,
+          "y": -49
+        }
+      ],
+      "seed": -9223372036854775808,
+      "chunkX": -14,
+      "apples": 3,
+      "chunkZ": 12
+    },
+    {
+      "chests": [
+        {
+          "z": -998,
+          "lootSeed": -7116160049097869446,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 145,
+          "y": -37
+        },
+        {
+          "z": -959,
+          "lootSeed": 7609350772795505381,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 160,
+          "y": -50
+        },
+        {
+          "z": -931,
+          "lootSeed": -6199118356967492575,
+          "verificationRequired": false,
+          "apples": 1,
+          "x": 292,
+          "y": -48
+        },
+        {
+          "z": -926,
+          "lootSeed": -8840605803667963800,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 175,
+          "y": -37
+        },
+        {
+          "z": -1032,
+          "lootSeed": -8399717113590686510,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 268,
+          "y": -50
+        },
+        {
+          "z": -1107,
+          "lootSeed": 8811981965905189501,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 268,
+          "y": -47
+        },
+        {
+          "z": -966,
+          "lootSeed": -731943272239978211,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 250,
+          "y": -37
+        },
+        {
+          "z": -933,
+          "lootSeed": -2697721712750576745,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 270,
+          "y": -50
+        },
+        {
+          "z": -1107,
+          "lootSeed": -5903788087064061483,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 200,
+          "y": -48
+        },
+        {
+          "z": -961,
+          "lootSeed": -3389653202139326127,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 173,
+          "y": -48
+        },
+        {
+          "z": -1115,
+          "lootSeed": 8965442932409736490,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 268,
+          "y": -47
+        },
+        {
+          "z": -966,
+          "lootSeed": -7516968262495753823,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 193,
+          "y": -37
+        },
+        {
+          "z": -1073,
+          "lootSeed": 2737874252702629510,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 206,
+          "y": -37
+        },
+        {
+          "z": -1035,
+          "lootSeed": -8996108635946660573,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 159,
+          "y": -48
+        },
+        {
+          "z": -1007,
+          "lootSeed": -7859801487414878298,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 162,
+          "y": -50
+        },
+        {
+          "z": -934,
+          "lootSeed": 9014786507667850335,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 251,
+          "y": -49
+        },
+        {
+          "z": -1057,
+          "lootSeed": -8444947271590216202,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 324,
+          "y": -35
+        },
+        {
+          "z": -1073,
+          "lootSeed": -1138253048977316604,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": 244,
+          "y": -37
+        },
+        {
+          "z": -1031,
+          "lootSeed": -6549049158740589540,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 287,
+          "y": -49
+        },
+        {
+          "z": -934,
+          "lootSeed": 2057702770181812586,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": 158,
+          "y": -49
+        }
+      ],
+      "seed": -9223372036854775808,
+      "chunkX": 14,
+      "apples": 5,
+      "chunkZ": -64
+    },
+    {
+      "chests": [
+        {
+          "z": 206,
+          "lootSeed": 6176341095398913948,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1245,
+          "y": -47
+        },
+        {
+          "z": 144,
+          "lootSeed": 5938530587073981240,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1310,
+          "y": -47
+        },
+        {
+          "z": 278,
+          "lootSeed": 3064676279941529234,
+          "verificationRequired": false,
+          "apples": 2,
+          "x": -1249,
+          "y": -44
+        },
+        {
+          "z": 205,
+          "lootSeed": 7101711816548298759,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1233,
+          "y": -44
+        },
+        {
+          "z": 277,
+          "lootSeed": 7083907057296847885,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1207,
+          "y": -48
+        },
+        {
+          "z": 214,
+          "lootSeed": 4525517193257970019,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1245,
+          "y": -47
+        },
+        {
+          "z": 216,
+          "lootSeed": -1711404377737095850,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1338,
+          "y": -49
+        },
+        {
+          "z": 121,
+          "lootSeed": -4266190101838241273,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1310,
+          "y": -50
+        },
+        {
+          "z": 244,
+          "lootSeed": -2516301672457172190,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1395,
+          "y": -50
+        },
+        {
+          "z": 242,
+          "lootSeed": 6951856694810321593,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1234,
+          "y": -50
+        },
+        {
+          "z": 314,
+          "lootSeed": -2388278858195577479,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1365,
+          "y": -49
+        },
+        {
+          "z": 248,
+          "lootSeed": -2019817687910339193,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1389,
+          "y": -44
+        },
+        {
+          "z": 241,
+          "lootSeed": -1503244633223690862,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1357,
+          "y": -50
+        },
+        {
+          "z": 277,
+          "lootSeed": -7773679880471491034,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1321,
+          "y": -48
+        },
+        {
+          "z": 136,
+          "lootSeed": 4968604873124575615,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1310,
+          "y": -47
+        },
+        {
+          "z": 200,
+          "lootSeed": 9112328359033757482,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1312,
+          "y": -48
+        },
+        {
+          "z": 204,
+          "lootSeed": 554463395672437995,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1375,
+          "y": -44
+        },
+        {
+          "z": 216,
+          "lootSeed": -4830806159493005574,
+          "verificationRequired": false,
+          "apples": 0,
+          "x": -1356,
+          "y": -49
+        }
+      ],
+      "seed": -9223372036854775808,
+      "chunkX": -81,
+      "apples": 2,
+      "chunkZ": 14
+    }
+  ],
+  "errors": [],
+  "method": "Vanilla 1.21.11 server classes, real FEATURES chunks and LootTable.supplyInventory; isolated workspace saves, no network listener."
+}

@@ -1,0 +1,52 @@
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+tmp
+gradle-local.properties
+logs
+log
+
+# Downloaded official runtimes and local compatibility fixtures (not redistributable artifacts)
+mushroom-qa/
+prediction26-server.jar
+version-manifest.json
+
+# Local dependencies, credentials and release outputs
+libs/*.jar
+.env
+.env.*
+*.pem
+*.key
+user.dat
+config/
+dist/

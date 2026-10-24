@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "dev.tanghulu.addon.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BlockUtilsMixin",
+    "ClientPlayerEntity",
+    "ClientPlayerInteractionManagerMixin",
+    "CountPlacementModifierAccessor",
+    "DefaultSettingsWidgetFactoryMixin",
+    "GameMessageS2CPacketMixin",
+    "HeightRangePlacementModifierAccessor",
+    "IClientWorld",
+    "LivingEntityRendererInvoker",
+    "TanghuluMixin",
+    "ThreeCNametagsMixin",
+    "MineProcessMixin",
+    "RarityFilterPlacementModifierAccessor",
+    "WorldRendererAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "LivingEntityAccessor"
+  ]
+}

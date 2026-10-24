@@ -1,0 +1,26 @@
+[
+  {
+    "name": "litematica-1.21.11-0.25.0.jar",
+    "sha1": "e40f816c47d377d0fe5dde01addf32c5b8708b03",
+    "sha256": "e68533a9cefd7cef464b69aa29c74e86393a5a040be57723650965685dafdaf7",
+    "url": "https://cdn.modrinth.com/data/bEpr0Arc/versions/DoYx2QST/litematica-fabric-1.21.11-0.25.0.jar"
+  },
+  {
+    "name": "malilib-fabric-1.21.11-0.27.0.jar",
+    "sha1": "55ef50e5e329c081b6b7f3786935fb1583968181",
+    "sha256": "f154cd30169335dcd6ce1774f4036d6843475058aaa1340d34256e9bc15db5ee",
+    "url": "https://cdn.modrinth.com/data/GcWjdA9I/versions/LkQKaBeJ/malilib-fabric-1.21.11-0.27.0.jar"
+  },
+  {
+    "name": "meteor-client-1.21.11-86.jar",
+    "sha1": "4a0b046c1f2095c9c422cb2fae4118bfe49f96b8",
+    "sha256": "93390cfdb1030e47f116357ba421c90a9b1ca4832b6551c2dec1ade5eeb42e71",
+    "url": "https://maven.meteordev.org/snapshots/meteordevelopment/meteor-client/1.21.11-SNAPSHOT/meteor-client-1.21.11-20260810.140237-86.jar"
+  },
+  {
+    "name": "minihud-fabric-1.21.11-0.38.0.jar",
+    "sha1": "c86c77aae5a451eae040c1ad4beeada0f8b9731d",
+    "sha256": "4da816e34ac519eb4d63a89c2da5ee2da86bc5361ad4b3224277440120e7b006",
+    "url": "https://cdn.modrinth.com/data/UMxybHE8/versions/fgEK4RyE/minihud-fabric-1.21.11-0.38.0.jar"
+  }
+]

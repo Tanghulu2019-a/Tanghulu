@@ -1,0 +1,10 @@
+Recovered from tanghulu-1.21.8-8.7.0.jar already present on this machine.
+Source JAR SHA256: a96d6b0d0266b35443380417bc05215a52ba5f8eac2ce594b2650144b6d402a4
+Embedded Maven coordinates: dev.duti.acheong:cubiomes:1.22.5
+Each extracted entry was checked byte for byte against the source JAR.
+No addon classes included. Extracted Java packages: cubitect and org.fusesource.hawtjni.
+Repacked dependency archive SHA256 values:
+29c9d909806791e929a463512a8b451079546de25d6d7796ca0df443a0fa9643  cubiomes-1.22.5-linux64.jar
+efb4602f235373092d050a670f2467921d5ec568a5329cafc99afc0e0963878d  cubiomes-1.22.5-osx.jar
+258c1b7dbf01d9af57f29ba8e2e5423bb0161cdd9004e14194d4fc2b878d6566  cubiomes-1.22.5-windows64.jar
+e0e37427f2f2b88f4b2100c7b08efe02d307299a699a968fe54d40a2f03bffb9  cubiomes-1.22.5.jar

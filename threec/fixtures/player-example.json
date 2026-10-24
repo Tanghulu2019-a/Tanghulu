@@ -1,0 +1,8 @@
+{
+  "code": 200,
+  "data": {
+    "name": "ExamplePlayer",
+    "duration": 90061,
+    "month_duration": 1234
+  }
+}

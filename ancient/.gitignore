@@ -1,0 +1,7 @@
+.gradle/
+.gradle-user-home/
+.downloads/
+build/
+dist/
+run/
+libs/*.jar

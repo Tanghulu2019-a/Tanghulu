@@ -1,0 +1,203 @@
+plugins {
+    id 'fabric-loom' version '1.15.5'
+    id 'com.gradleup.shadow' version '9.2.2' apply false
+}
+
+group = 'dev.tanghulu'
+version = '1.0.0'
+base { archivesName = 'Tanghulu' }
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.meteordev.org/releases' }
+    maven { url = 'https://maven.meteordev.org/snapshots' }
+    maven { url = 'https://api.modrinth.com/maven' }
+    maven { url = 'https://maven.seedfinding.com' }
+}
+
+configurations { extraLibs }
+configurations.implementation.extendsFrom(configurations.extraLibs)
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.11'
+    mappings 'net.fabricmc:yarn:1.21.11+build.3:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.18.2'
+    modImplementation files('libs/meteor-client-1.21.11-86.jar')
+    implementation project(path: ':ancient', configuration: 'namedElements')
+    implementation 'meteordevelopment:orbit:0.2.4'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    modCompileOnly 'meteordevelopment:baritone:1.21.11-SNAPSHOT'
+    modCompileOnly 'maven.modrinth:xaeros-minimap:fabric-1.21.11-26.4.2'
+    modCompileOnly 'maven.modrinth:xaeros-world-map:fabric-1.21.11-1.44.2'
+    modCompileOnly files('libs/litematica-1.21.11-0.25.0.jar',
+                         'libs/malilib-fabric-1.21.11-0.27.0.jar',
+                         'libs/minihud-fabric-1.21.11-0.38.0.jar')
+    ['mc_biome:1.171.1', 'mc_core:1.210.0', 'mc_feature:1.171.10',
+     'mc_math:1.171.0', 'mc_noise:1.171.1', 'mc_seed:1.171.2',
+     'mc_terrain:1.171.1'].each {
+        extraLibs("com.seedfinding:${it}") { transitive = false }
+    }
+}
+
+java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
+tasks.withType(JavaCompile).configureEach { options.release = 21; options.encoding = 'UTF-8' }
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') { expand version: project.version }
+    from('LICENSE') { into 'META-INF/licenses/tanghulu' }
+    from('NOTICE.md') { into 'META-INF/licenses/tanghulu' }
+}
+
+def prediction26 = tasks.register('compilePrediction26', Exec) {
+    inputs.dir('prediction26/src')
+    inputs.file('prediction26/build-helper.py')
+    outputs.file(layout.buildDirectory.file('prediction26/prediction26.jar'))
+    commandLine 'python', 'prediction26/build-helper.py'
+}
+tasks.named('processResources') {
+    dependsOn prediction26
+    from(layout.buildDirectory.file('prediction26/prediction26.jar')) { into 'tanghulu/prediction' }
+}
+
+def mushroomWorker = tasks.register('compileMushroomWorker', JavaCompile) {
+    source = fileTree('mushroom/src') { include '**/*.java' }
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('mushroom/classes')
+    options.release = 21
+}
+def mushroomJar = tasks.register('mushroomWorkerJar', Jar) {
+    dependsOn mushroomWorker
+    from mushroomWorker.flatMap { it.destinationDirectory }
+    destinationDirectory = layout.buildDirectory.dir('mushroom')
+    archiveFileName = 'worker.jar'
+}
+tasks.named('processResources') {
+    dependsOn mushroomJar
+    from(mushroomJar.flatMap { it.archiveFile }) { into 'tanghulu/mushroom' }
+}
+
+evaluationDependsOn(':ancient')
+def ancientShadow = project(':ancient').tasks.named('shadowJar')
+jar {
+    dependsOn ancientShadow
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from({ zipTree(ancientShadow.get().archiveFile.get().asFile) }) {
+        exclude 'fabric.mod.json', 'META-INF/MANIFEST.MF'
+    }
+    from({ configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) } }) {
+        exclude 'META-INF/MANIFEST.MF', 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
+    }
+}
+
+tasks.named('remapJar') {
+    inputs.file('build-support/compress-jar.py')
+    doLast {
+        def compression = providers.exec {
+            commandLine 'python', 'build-support/compress-jar.py', archiveFile.get().asFile.absolutePath
+        }
+        logger.lifecycle(compression.standardOutput.asText.get().trim())
+    }
+}
+
+tasks.named('check') { dependsOn ':ancient:unitChecks' }
+
+sourceSets {
+    seedQa {
+        java.srcDir 'prediction26/client-qa'
+        java.srcDir 'mushroom/client-qa'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+}
+tasks.register('seedCompatibilityChecks', JavaExec) {
+    dependsOn tasks.named('seedQaClasses')
+    classpath = sourceSets.seedQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.prediction26.ClientAudit'
+    systemProperty 'prediction26.testCache', layout.buildDirectory.dir('prediction26/client-test').get().asFile.absolutePath
+    doFirst {
+        copy {
+            from layout.buildDirectory.file('prediction26/server.jar')
+            into layout.buildDirectory.dir('prediction26/client-test/tanghulu-prediction/26.3')
+        }
+    }
+}
+tasks.named('check') { dependsOn 'seedCompatibilityChecks' }
+
+tasks.register('mushroomClientChecks', JavaExec) {
+    dependsOn tasks.named('seedQaClasses')
+    classpath = sourceSets.seedQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.mushroom.ClientMushroomAudit'
+    systemProperty 'prediction26.testCache', layout.buildDirectory.dir('mushroom/client-test').get().asFile.absolutePath
+    args projectDir.absolutePath
+    if(project.hasProperty("qaCache")) args project.property("qaCache")
+}
+
+// Keep the standalone scanner regression checks in the normal build.
+tasks.register("mushroomScannerChecks", JavaExec) {
+    dependsOn "compileMushroomAudit"
+    classpath = files(layout.buildDirectory.dir("mushroom/audit"), mushroomWorker.flatMap { it.destinationDirectory })
+    mainClass = "dev.tanghulu.mushroom.IslandScannerAudit"
+}
+tasks.register("compileMushroomAudit", JavaCompile) {
+    dependsOn mushroomWorker
+    source = files("mushroom/qa/IslandScannerAudit.java")
+    classpath = files(mushroomWorker.flatMap { it.destinationDirectory })
+    destinationDirectory = layout.buildDirectory.dir("mushroom/audit")
+    options.release = 21
+}
+tasks.named("check") { dependsOn "mushroomScannerChecks" }
+
+tasks.register('waypointCleanerChecks', Exec) {
+    commandLine 'python', 'build-support/verify-waypoint-cleaner.py'
+}
+tasks.named('check') { dependsOn 'waypointCleanerChecks' }
+
+tasks.register('systemChatChecks', JavaExec) {
+    dependsOn tasks.named('seedQaClasses')
+    classpath = sourceSets.seedQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.network.SystemChatAuditLauncher'
+    args projectDir.absolutePath
+}
+tasks.named('check') { dependsOn 'systemChatChecks' }
+
+sourceSets {
+    threeCQa {
+        java.srcDir 'threec/qa'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+tasks.register('threeCChecks', JavaExec) {
+    dependsOn tasks.named('threeCQaClasses')
+    classpath = sourceSets.threeCQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.threec.ThreeCChecks'
+    args projectDir.absolutePath
+}
+tasks.named('check') { dependsOn 'threeCChecks' }
+// Opt-in network smoke test; normal builds stay offline and deterministic.
+tasks.register('threeCLiveCheck', JavaExec) {
+    dependsOn tasks.named('threeCQaClasses')
+    classpath = sourceSets.threeCQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.threec.ThreeCLiveCheck'
+    doFirst {
+        if (!project.hasProperty('playerName')) throw new GradleException('Use -PplayerName=<name>')
+        args project.property('playerName')
+    }
+}
+
+sourceSets {
+    skeletonQa {
+        java.srcDir 'skeleton/qa'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
+tasks.register('playerSkeletonChecks', JavaExec) {
+    dependsOn tasks.named('skeletonQaClasses')
+    classpath = sourceSets.skeletonQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+}
+
+tasks.named('check') { dependsOn 'playerSkeletonChecks' }

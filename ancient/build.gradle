@@ -1,0 +1,108 @@
+buildscript { configurations.classpath { exclude group: 'net.fabricmc', module: 'mercury' } }
+
+plugins {
+    id 'fabric-loom'
+    id 'com.gradleup.shadow'
+}
+
+group = 'dev.tanghulu'
+version = rootProject.version
+base { archivesName = 'ancient-apple-hunter' }
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.seedfinding.com' }
+    maven { url = 'https://maven.meteordev.org/releases' }
+    maven { url = 'https://chocolateminecraft.com/maven' }
+}
+
+configurations { prediction }
+configurations.implementation.extendsFrom(configurations.prediction)
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.11'
+    mappings 'net.fabricmc:yarn:1.21.11+build.3:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.18.2'
+    modImplementation files(rootProject.file('libs/meteor-client-1.21.11-86.jar'))
+    implementation 'meteordevelopment:orbit:0.2.4'
+    ['mc_math:1.171.0', 'mc_seed:1.171.1', 'mc_core:1.210.0',
+     'mc_noise:1.171.1', 'mc_reversal:1.171.1', 'mc_biome:1.171.1',
+     'mc_terrain:1.171.1', 'mc_feature:1.171.9'].each {
+        prediction("com.seedfinding:${it}") { transitive = false }
+    }
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
+tasks.withType(JavaCompile).configureEach { options.release = 21; options.encoding = 'UTF-8' }
+processResources { inputs.property 'version', project.version; filesMatching('fabric.mod.json') { expand version: project.version } }
+processResources {
+    from('LICENSE') { into 'META-INF/licenses/ancient-apple-hunter' }
+    from('licenses') { into 'META-INF/licenses/ancient-apple-hunter/third-party' }
+    def predictionFiles = fileTree('src/main/java') { include 'dev/tanghulu/ancientapple/prediction/**'; include 'kludwisz/**' }
+    inputs.files(predictionFiles)
+    doLast {
+        def digest = java.security.MessageDigest.getInstance('SHA-256')
+        predictionFiles.files.sort { a,b -> project.relativePath(a) <=> project.relativePath(b) }.each { f ->
+            digest.update(project.relativePath(f).replace('\\','/').getBytes('UTF-8')); digest.update(f.bytes)
+        }
+        def hash = digest.digest().encodeHex().toString()
+        ['prediction-validation.json','loot26-validation.json'].each { name ->
+            def certificate = new File(destinationDir, name)
+            if(certificate.exists()) {
+                def data = new groovy.json.JsonSlurper().parse(certificate, 'UTF-8')
+                if(data.sourceHash != hash) { data.passed = false; data.note = 'Prediction sources changed; rerun the relevant vanilla oracle.' }
+                certificate.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(data)), 'UTF-8')
+            }
+        }
+    }
+}
+shadowJar {
+    configurations = [project.configurations.prediction]
+    archiveClassifier = 'dev-shadow'
+    relocate 'com.seedfinding', 'dev.tanghulu.ancientapple.vendor.seedfinding'
+    relocate 'kludwisz', 'dev.tanghulu.ancientapple.vendor.kludwisz'
+}
+remapJar { dependsOn shadowJar; inputFile = shadowJar.archiveFile }
+test { useJUnitPlatform() }
+
+sourceSets {
+    qa {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath + sourceSets.test.runtimeClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    }
+}
+tasks.register('unitChecks', JavaExec) {
+    dependsOn tasks.named('qaClasses'), tasks.named('testClasses')
+    classpath = sourceSets.qa.runtimeClasspath
+    mainClass = 'dev.tanghulu.ancientapple.qa.UnitTestMain'
+}
+// JUnit's Gradle worker argfile is broken on this Windows/JDK locale with a Chinese
+// project path. Run the same JUnit Platform engine directly (no worker argfile).
+tasks.named('test') { enabled = false; dependsOn tasks.named('unitChecks') }
+
+// Historical navigation models live in src/test; QA can still use them through
+// test.runtimeClasspath, while they stay out of the production JAR.
+sourceSets.qa.java { include 'dev/tanghulu/ancientapple/qa/*.java' }
+
+tasks.register('validateLootProfiles', JavaExec) {
+    dependsOn tasks.named('qaClasses')
+    classpath = sourceSets.qa.runtimeClasspath
+    mainClass = 'dev.tanghulu.ancientapple.qa.ProfileOracleLauncher'
+    maxHeapSize = '3G'
+    workingDir = layout.buildDirectory.dir('profile-oracle').get().asFile
+    doFirst { workingDir.mkdirs() }
+    args project.projectDir.absolutePath
+}
+
+tasks.register('validatePrediction', JavaExec) {
+    dependsOn tasks.named('qaClasses')
+    classpath = sourceSets.qa.runtimeClasspath
+    mainClass = 'dev.tanghulu.ancientapple.qa.OracleLauncher'
+    maxHeapSize = '5G'
+    workingDir = layout.buildDirectory.dir('prediction-oracle').get().asFile
+    doFirst { workingDir.mkdirs() }
+    args project.projectDir.absolutePath
+}

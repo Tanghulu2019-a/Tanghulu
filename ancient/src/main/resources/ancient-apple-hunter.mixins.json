@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.tanghulu.ancientapple.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ContainerSyncMixin",
+    "ManualInteractionMixin",
+    "ManualCursorSyncMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
