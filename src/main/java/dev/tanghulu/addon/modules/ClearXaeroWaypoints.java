@@ -28,6 +28,9 @@ public final class ClearXaeroWaypoints extends BaseModule {
                 var module = Modules.get().get(type);
                 if (module != null && module.isActive()) module.toggle();
             }
+            for (var module : Modules.get().getAll()) {
+                if (module instanceof dev.tanghulu.addon.util.StashSearchRecords.Cache && module.isActive()) module.toggle();
+            }
             int meteorCount = 0;
             try {
                 var meteor = Waypoints.get();
@@ -44,7 +47,7 @@ public final class ClearXaeroWaypoints extends BaseModule {
             if (FabricLoader.getInstance().isModLoaded("xaerominimap")) {
                 try {
                     var result = XaeroWaypointCleaner.clearCurrentServer();
-                    info("已清除 %d 个 Xaero 航点（全部维度、分组、死亡点及第三方来源）。", result.count());
+                    info("已清除 %d 个 Xaero 航点（全部维度、分组、死亡点及第三方来源），仓库搜索记录及缓存已清空。", result.count());
                 } catch (Exception | LinkageError e) {
                     LoggerFactory.getLogger(ClearXaeroWaypoints.class).warn("Xaero waypoint clearing failed", e);
                     error("Xaero 清除未完成：%s。已尝试恢复 Xaero 原航点；Meteor 清除结果不受影响。", e.getMessage());

@@ -85,6 +85,10 @@ public class CleanerAudit {
         for(int i=0;i<2;i++) { var s=new WaypointSet();s.points.add(new Waypoint(name+i));w.sets.add(s); }
         return w;
     }
+    static class Cache implements dev.tanghulu.addon.util.StashSearchRecords.Cache {
+        int records=3;
+        public void clearSavedStashCache() { records=0; }
+    }
     public static void main(String[] args) throws Exception {
         Path dir=Files.createTempDirectory(Path.of(args[0]),"scenario-");
         net.minecraft.client.MinecraftClient.INSTANCE.runDirectory=dir.toFile();
@@ -93,29 +97,61 @@ public class CleanerAudit {
         var overworld=world(dir,"overworld",root); var nether=world(dir,"nether",root);
         var unrelated=world(dir,"other-server",new MinimapWorld.Container());
         session.manager.origin=overworld;
-        session.io.saveWorld(unrelated);
+        meteordevelopment.meteorclient.MeteorClient.FOLDER=dir.resolve("meteor-client").toFile();
+        Path stashDir=dir.resolve("meteor-client/better-stash-finder/current-server");
+        Path otherDir=dir.resolve("meteor-client/better-stash-finder/other-server");
+        Files.createDirectories(stashDir); Files.createDirectories(otherDir);
+        Path json=stashDir.resolve("stashes.json"), csv=stashDir.resolve("stashes.csv");
+        String originalJson="[{stash:123}]", originalCsv="X,Z\\n123,456";
+        Files.writeString(json,originalJson); Files.writeString(csv,originalCsv);
+        Files.writeString(otherDir.resolve("stashes.json"),"other server records");
+        Files.writeString(stashDir.resolve("keep.txt"),"unrelated file");
+        var cache=new Cache();
+        meteordevelopment.meteorclient.systems.modules.Modules.get().modules.add(cache);
         session.io.failClear=true;
         try { XaeroWaypointCleaner.clearCurrentServer(); throw new AssertionError("expected save failure"); }
         catch(java.io.IOException expected) {}
         check(overworld.sets.get(0).points.size()==1 && nether.sets.get(1).points.size()==1,"rollback lost points");
         check(Files.readString(overworld.file).contains("overworld0"),"disk rollback failed");
+        check(Files.readString(json).equals(originalJson) && Files.readString(csv).equals(originalCsv),"stash disk rollback failed");
+        check(cache.records==3,"stash cache lost on failure");
         var result=XaeroWaypointCleaner.clearCurrentServer();
+        check(result.stashRecordsCleared(),"stash clearing not reported");
+        check(!Files.exists(json) && !Files.exists(csv) && cache.records==0,"stash records remain");
+        check(Files.readString(otherDir.resolve("stashes.json")).equals("other server records"),"other server records modified");
+        check(Files.readString(stashDir.resolve("keep.txt")).equals("unrelated file"),"unrelated stash file modified");
         check(result.count()==4,"did not clear every dimension and set");
         check(overworld.sets.stream().allMatch(s->s.isEmpty()) && nether.sets.stream().allMatch(s->s.isEmpty()),"points remain");
         check(overworld.sets.size()==2,"removed groups");
         check(Files.readString(overworld.file).isEmpty() && Files.readString(nether.file).isEmpty(),"not persisted");
         try(var files=Files.walk(dir)) {
-            check(files.filter(Files::isRegularFile).count()==3,"unexpected backup or extra files");
+            check(files.filter(Files::isRegularFile).count()==4,"unexpected backup or extra files");
         }
         check(!Files.exists(dir.resolve("tanghulu/waypoint-backups")),"created backup directory");
         check(unrelated.sets.get(0).points.size()==1,"modified another server");
-        check(Files.readString(unrelated.file).contains("other-server0"),"modified another server on disk");
         check(session.wp.changed>0,"no UI refresh");
         check(XaeroWaypointCleaner.clearCurrentServer().count()==0,"repeat clear not empty");
+        // Even when Xaero has no points, saved results and disabled-module cache must clear.
+        Files.writeString(json,originalJson); Files.writeString(csv,originalCsv); cache.records=2;
+        result=XaeroWaypointCleaner.clearCurrentServer();
+        check(result.count()==0 && result.stashRecordsCleared(),"skipped stash-only clearing");
+        check(!Files.exists(json) && !Files.exists(csv) && cache.records==0,"stash-only clearing failed");
+        // Optional search module absent: files must still clear without loading it.
+        meteordevelopment.meteorclient.systems.modules.Modules.get().modules.clear();
+        Files.writeString(csv,originalCsv);
+        check(XaeroWaypointCleaner.clearCurrentServer().stashRecordsCleared() && !Files.exists(csv),"CSV-only cleanup without module failed");
+        check(!XaeroWaypointCleaner.clearCurrentServer().stashRecordsCleared(),"empty state reported saved records");
+        // Reading an invalid record path must fail before touching map points.
+        overworld.sets.get(0).points.add(new Waypoint("keep on read failure"));
+        Files.createDirectory(json);
+        try { XaeroWaypointCleaner.clearCurrentServer(); throw new AssertionError("expected stash read failure"); }
+        catch(java.io.IOException expected) {}
+        check(overworld.sets.get(0).points.size()==1,"modified points before stash snapshot succeeded");
+        Files.delete(json);
         BuiltInHudModules.MINIMAP.session=null;
         try { XaeroWaypointCleaner.clearCurrentServer();throw new AssertionError("expected missing session failure"); }
         catch(java.io.IOException expected) {}
-        System.out.println("Waypoint cleaner: no backup files, save rollback, all dimensions/groups, persistence, isolation, repeat and missing session PASS");
+        System.out.println("Waypoint cleaner: no backup files, save rollback, all dimensions/groups, persistence, isolation, stash files/cache/rollback, stash-only clearing, optional-module absence, repeat and missing session PASS");
     }
 }'''
 
@@ -128,5 +164,6 @@ classes = work / 'classes'
 classes.mkdir(parents=True, exist_ok=True)
 subprocess.run([str(java / 'javac'), '--release', '21', '-encoding', 'UTF-8', '-d', str(classes),
                 *map(str, (work / 'src').rglob('*.java')),
-                str(root / 'src/main/java/dev/tanghulu/addon/util/XaeroWaypointCleaner.java')], check=True)
+                str(root / 'src/main/java/dev/tanghulu/addon/util/XaeroWaypointCleaner.java'),
+                str(root / 'src/main/java/dev/tanghulu/addon/util/StashSearchRecords.java')], check=True)
 subprocess.run([str(java / 'java'), '-cp', str(classes), 'CleanerAudit', str(work)], check=True)

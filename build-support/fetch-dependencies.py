@@ -26,7 +26,7 @@ def main():
             continue
         if args.verify_only:
             raise SystemExit('Missing or mismatched dependency: '+dep['name'])
-        request = urllib.request.Request(dep['url'], headers={'User-Agent': 'Tanghulu-build/1.0.1'})
+        request = urllib.request.Request(dep['url'], headers={'User-Agent': 'Tanghulu-build/1.0.2'})
         temp = None
         try:
             with tempfile.NamedTemporaryFile(dir=args.destination, suffix='.download', delete=False) as out:

@@ -22,5 +22,11 @@
     "sha1": "c86c77aae5a451eae040c1ad4beeada0f8b9731d",
     "sha256": "4da816e34ac519eb4d63a89c2da5ee2da86bc5361ad4b3224277440120e7b006",
     "url": "https://cdn.modrinth.com/data/UMxybHE8/versions/fgEK4RyE/minihud-fabric-1.21.11-0.38.0.jar"
+  },
+  {
+    "name": "XaeroPlus-2.35.1-fabric-1.21.11.jar",
+    "sha1": "3c2e2d18b339984ad456f6d4f07a02024fb85b08",
+    "sha256": "c884b6085bdc1c82545b44a39f6f2c29e15576f59724a36546bf0fca94d6df70",
+    "url": "https://cdn.modrinth.com/data/EnPUzSTg/versions/qWiXmUun/XaeroPlus-2.35.1%2Bfabric-1.21.11-WM1.44.2-MM26.4.2.jar"
   }
 ]

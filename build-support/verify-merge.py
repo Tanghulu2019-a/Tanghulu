@@ -1,4 +1,4 @@
-"""Audit the standalone release JAR after removing the unlicensed integration.
+"""Audit the merged 1.0.2 release JAR.
 """
 from pathlib import Path
 import argparse
@@ -12,7 +12,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
 args = parser.parse_args()
-JAR = ROOT / 'build/libs/Tanghulu-1.0.1.jar'
+JAR = ROOT / 'build/libs/Tanghulu-1.0.2.jar'
 report = {'passed': False, 'minecraft': '1.21.11', 'inGameTested': False}
 with zipfile.ZipFile(JAR) as jar:
     names = set(jar.namelist())
@@ -32,15 +32,16 @@ with zipfile.ZipFile(JAR) as jar:
             for mixin in data.get(section, []):
                 assert (data['package']+'.'+mixin).replace('.', '/')+'.class' in names
                 mixin_count += 1
-    assert mixin_count == 22, mixin_count
+    assert mixin_count == 23, mixin_count
     for name in names:
         assert 'miku' not in name.lower(), name
         if name.endswith('.class'):
             assert struct.unpack_from('>H',jar.read(name),6)[0] <= 65, name
             if name.startswith('dev/tanghulu/addon/'):
                 assert b'miku' not in jar.read(name).lower(), name
-    assert not any(n.startswith(('dev/tanghulu/stash/', 'com/stash/')) for n in names)
-    assert 'tanghulu-stash.mixins.json' not in names
+    assert 'dev/tanghulu/stash/modules/BetterStashFinder.class' in names
+    assert not any(n.startswith('com/stash/') for n in names)
+    assert 'tanghulu-stash.mixins.json' in names
     assert 'assets/tanghulu/icon.png' in names
     assert not any(n.startswith(('cubitect/', 'org/fusesource/hawtjni/', 'META-INF/native/')) for n in names)
     digest = hashlib.sha256()
@@ -60,8 +61,8 @@ with zipfile.ZipFile(JAR) as jar:
     assert not any(n.startswith(('org/junit/', 'dev/tanghulu/ancientapple/qa/')) for n in names)
     active = re.compile(r'^\s*(?:modules|Modules\.get\(\))\.add\(new (\w+)\(\)\);', re.M)
     actual = active.findall((ROOT/'src/main/java/dev/tanghulu/addon/TanghuluApp.java').read_text('utf-8'))
-    assert len(actual) == len(set(actual)) == 28 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
-    assert {'Beyblade', 'Confetti', 'SignTextEsp', 'SafeFire', 'NewChunks'} <= set(actual)
+    assert len(actual) == len(set(actual)) == 23 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
+    assert {'Confetti', 'SignTextEsp', 'NewChunks'} <= set(actual)
     for module in actual:
         assert 'dev/tanghulu/addon/modules/' + module + '.class' in names
     report.update(mixins=mixin_count, lootProfiles=len(profiles), predictionSourceHash=digest.hexdigest(),

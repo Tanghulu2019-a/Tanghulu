@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.tanghulu'
-version = '1.0.1'
+version = '1.0.2'
 base { archivesName = 'Tanghulu' }
 
 repositories {
@@ -17,6 +17,19 @@ repositories {
 
 configurations { extraLibs }
 configurations.implementation.extendsFrom(configurations.extraLibs)
+
+// Map the optional XaeroPlus API for compilation without changing its runtime JAR
+// or upgrading Tanghulu's existing Loom/Gradle toolchain.
+def xaeroPlusCompileJar = tasks.register('prepareXaeroPlusCompileJar', net.fabricmc.loom.task.RemapJarTask) {
+    inputFile = file('libs/XaeroPlus-2.35.1-fabric-1.21.11.jar')
+    destinationDirectory = layout.buildDirectory.dir('compile-dependencies')
+    archiveFileName = 'XaeroPlus-2.35.1-named.jar'
+    sourceNamespace = 'intermediary'
+    targetNamespace = 'named'
+    addNestedDependencies = false
+    useMixinAP = false
+    classpath.setFrom(files())
+}
 
 dependencies {
     minecraft 'com.mojang:minecraft:1.21.11'
@@ -33,6 +46,7 @@ dependencies {
     modCompileOnly files('libs/litematica-1.21.11-0.25.0.jar',
                          'libs/malilib-fabric-1.21.11-0.27.0.jar',
                          'libs/minihud-fabric-1.21.11-0.38.0.jar')
+    compileOnly files(xaeroPlusCompileJar.flatMap { it.archiveFile }).builtBy(xaeroPlusCompileJar)
     ['mc_biome:1.171.1', 'mc_core:1.210.0', 'mc_feature:1.171.10',
      'mc_math:1.171.0', 'mc_noise:1.171.1', 'mc_seed:1.171.2',
      'mc_terrain:1.171.1'].each {
@@ -207,3 +221,36 @@ tasks.register('release101Checks', Exec) {
     commandLine 'python', 'build-support/verify-101.py'
 }
 tasks.named('check') { dependsOn 'release101Checks' }
+
+tasks.register('compileBaritoneAssistantAudit', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/stash/navigation/OneClickTravel.java',
+                   'navigation/qa/OneClickTravelChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('navigation/audit')
+    options.release = 21
+}
+
+tasks.register('baritoneAssistantChecks', JavaExec) {
+    dependsOn 'compileBaritoneAssistantAudit'
+    classpath = files(layout.buildDirectory.dir('navigation/audit'))
+    mainClass = 'dev.tanghulu.stash.navigation.OneClickTravelChecks'
+}
+
+tasks.named('check') { dependsOn 'baritoneAssistantChecks' }
+
+sourceSets {
+    stashQa {
+        java.srcDir 'navigation/qa'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath + sourceSets.skeletonQa.output
+    }
+}
+tasks.register('stashRecordsChecks', JavaExec) {
+    dependsOn 'stashQaClasses', 'skeletonQaClasses'
+    classpath = sourceSets.stashQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.StashRecordsChecks'
+}
+tasks.named('check') { dependsOn 'stashRecordsChecks' }
+
+

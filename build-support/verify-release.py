@@ -12,6 +12,7 @@ EXCLUDED = {'.git', '.gradle', 'build', 'dist', '__pycache__', 'run', 'config',
             'logs', 'log', '.idea', '.vscode', '.settings', '.cache', 'out', 'classes'}
 # Hashes of removed identifiers; private identifiers are not embedded in public tools.
 REMOVED_IDENTIFIER_HASHES = {
+    '027601b58892cb0bc47851d12eca9ecd4e02e872bbb6f3179cc96544fc5f6f76',
     '46ad28d84def332ab9efdf7c86edc6191bf563bc24b22ef1668fa7f1b1b1cffa',
     'ef1942dc8d1fdd11805bc28de1281a38771a7ab072ba6680b231af07d1cc96e1',
     'ff3f8000a82ab8b8f87323965c042046b23673a604f42136d1ecaf28976b5092',
@@ -19,7 +20,6 @@ REMOVED_IDENTIFIER_HASHES = {
     '8cc55465d3bc62a2e6e90b47a20b893a43f77c4afc51e332154cf1a9741c94de',
     '964da4685622617f8f9faa6d3c67bb71f579b3af3535b45a00db5684fad0bed7',
     'e37f8c9bf694d63e895ecf953883b1f23c4d51e86e2580a984170a85b2bd3273',
-    '461b29a99eac914507bd1b089bbaec98ec153a18bd3df9db0fd4e35240a6d84d',
     '9dacc0996d162a8eac5c5b635fedc2927a6c83d48b21bbee896682f79502d76a',
 }
 PATTERNS = [
@@ -31,6 +31,16 @@ PATTERNS = [
 REMOVED_CLASSES = [
     'dev/tanghulu/addon/ConfigManager.class',
     'dev/tanghulu/addon/util/MeituanTimeFetcher.class',
+    'dev/tanghulu/addon/modules/Beyblade.class',
+    'dev/tanghulu/addon/modules/SeedMine.class',
+    'dev/tanghulu/addon/modules/SafeFire.class',
+    'dev/tanghulu/addon/modules/NoJumpDelay.class',
+    'dev/tanghulu/addon/modules/TreeAura.class',
+    'dev/tanghulu/stash/modules/AFKVanillaFly.class',
+    'dev/tanghulu/stash/modules/GotoPosition.class',
+    'dev/tanghulu/addon/mixin/MineProcessMixin.class',
+    'dev/tanghulu/addon/mixinface/MagicMix.class',
+    'dev/tanghulu/addon/util/Ore.class',
 ]
 
 def inspect_bytes(data, label):
@@ -57,15 +67,17 @@ def inspect_archive(data, label, main_jar=False):
         if main_jar:
             assert names.count('fabric.mod.json') == 1
             meta = json.loads(archive.read('fabric.mod.json'))
-            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.1'
-            assert meta['authors'] == ['Tanghulu']
-            assert meta['contributors'] == ['Cqb13', 'Mikumiku']
+            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.2'
+            assert meta['authors'] == ['Tanghulu2019']
+            assert meta['contributors'] == ['Cqb13', 'Mikumiku', 'Jefff']
             assert meta['depends']['minecraft'] == '1.21.11'
             assert meta['depends']['meteor-client'] == '1.21.11-86'
             assert meta['license'] == 'GPL-3.0-only'
             assert not any(n in names for n in REMOVED_CLASSES)
-            assert not any(n.startswith(('dev/tanghulu/addon/auth/security/', 'dev/tanghulu/stash/', 'com/stash/')) for n in names)
-            assert 'tanghulu-stash.mixins.json' not in names
+            for removed in REMOVED_CLASSES:
+                assert not any(n.startswith(removed.removesuffix('.class') + '$') for n in names)
+            assert not any(n.startswith(('dev/tanghulu/addon/auth/security/', 'com/stash/')) for n in names)
+            assert 'tanghulu-stash.mixins.json' in names
             assert 'dev/tanghulu/addon/util/WaypointUtils.class' not in names
             assert not any(n.startswith(('baritone/', 'meteordevelopment/meteorclient/')) for n in names)
             assert 'META-INF/licenses/tanghulu/LICENSE' in names
@@ -82,7 +94,7 @@ def source_paths():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.1.jar')
+    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.2.jar')
     parser.add_argument('--source', type=Path)
     args = parser.parse_args()
     paths = list(source_paths())

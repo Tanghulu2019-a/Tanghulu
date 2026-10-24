@@ -15,6 +15,7 @@ public final class TanghuluAddon extends MeteorAddon {
             getPackage(), dev.tanghulu.addon.util.ChatUtils::getPrefix);
         new AncientAppleAddon().onInitialize();
         TanghuluApp.init();
+        dev.tanghulu.stash.Addon.initialize();
     }
 
     @Override public void onRegisterCategories() {

@@ -6,18 +6,15 @@
     "BlockUtilsMixin",
     "ClientPlayerEntity",
     "ClientPlayerInteractionManagerMixin",
-    "CountPlacementModifierAccessor",
     "DefaultSettingsWidgetFactoryMixin",
     "GameMessageS2CPacketMixin",
-    "HeightRangePlacementModifierAccessor",
     "IClientWorld",
     "LivingEntityRendererInvoker",
     "TanghuluMixin",
     "ThreeCNametagsMixin",
-    "MineProcessMixin",
-    "RarityFilterPlacementModifierAccessor",
     "WorldRendererAccessor",
-    "TotemParticleMixin"
+    "TotemParticleMixin",
+    "ModuleTitleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

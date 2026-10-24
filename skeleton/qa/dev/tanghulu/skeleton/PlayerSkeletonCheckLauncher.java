@@ -36,7 +36,7 @@ public final class PlayerSkeletonCheckLauncher {
             }
         }) {
             Thread.currentThread().setContextClassLoader(isolated);
-            isolated.loadClass("dev.tanghulu.skeleton.PlayerSkeletonChecks")
+            isolated.loadClass(System.getProperty("tanghulu.qa.main", "dev.tanghulu.skeleton.PlayerSkeletonChecks"))
                 .getMethod("main", String[].class).invoke(null, (Object) args);
         }
     }

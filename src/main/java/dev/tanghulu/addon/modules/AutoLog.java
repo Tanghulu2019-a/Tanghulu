@@ -11,7 +11,6 @@ import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.misc.AutoReconnect;
 import meteordevelopment.meteorclient.utils.Utils;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
@@ -68,7 +67,7 @@ public class AutoLog extends BaseModule {
 
     private final Setting<Boolean> onlyWhenPlayersNearby = sgGeneral.add(new BoolSetting.Builder()
         .name("仅当有玩家时断开")
-        .description("仅限制血量、非好友和实体检测；图腾、耐久、Y轴、坐标和自定义物品检测始终独立生效。")
+        .description("仅限制血量、非好友和实体检测；图腾和自定义物品检测始终独立生效。")
         .defaultValue(true)
         .build()
     );
@@ -90,38 +89,7 @@ public class AutoLog extends BaseModule {
         .build()
     );
 
-    private final SettingGroup sgSafety = settings.createGroup("耐久与位置检测");
     private final SettingGroup sgItems = settings.createGroup("自定义物品数量检测");
-    private final Setting<Boolean> durabilityCheck = sgSafety.add(new BoolSetting.Builder()
-        .name("耐久检测").description("已穿戴装备、主手或副手任一可损坏物品剩余耐久达到阈值时断开，不受附近玩家限制。")
-        .defaultValue(false).build());
-    private final Setting<Integer> durabilityPercent = sgSafety.add(new IntSetting.Builder()
-        .name("最低剩余耐久百分比").description("剩余耐久小于或等于此百分比触发；忽略空槽和无耐久物品。")
-        .defaultValue(10).range(0,100).sliderRange(0,100).visible(durabilityCheck::get).build());
-    private final Setting<Boolean> yCheck = sgSafety.add(new BoolSetting.Builder()
-        .name("Y轴检测").description("Y 坐标超出设定安全区间时断开，不受附近玩家限制；上下限填反时自动交换。")
-        .defaultValue(false).build());
-    private final Setting<Double> minY = sgSafety.add(new DoubleSetting.Builder()
-        .name("安全Y下限").description("低于此高度时断开。")
-        .defaultValue(-64).sliderRange(-64,320).visible(yCheck::get).build());
-    private final Setting<Double> maxY = sgSafety.add(new DoubleSetting.Builder()
-        .name("安全Y上限").description("高于此高度时断开。")
-        .defaultValue(320).sliderRange(-64,320).visible(yCheck::get).build());
-    private final Setting<Boolean> coordinateCheck = sgSafety.add(new BoolSetting.Builder()
-        .name("坐标检测").description("在当前所在维度按 X/Z 距离触发断开，不受附近玩家限制。")
-        .defaultValue(false).build());
-    private final Setting<Double> targetX = sgSafety.add(new DoubleSetting.Builder()
-        .name("目标X").description("检测中心的 X 坐标。")
-        .defaultValue(0).sliderRange(-10000,10000).visible(coordinateCheck::get).build());
-    private final Setting<Double> targetZ = sgSafety.add(new DoubleSetting.Builder()
-        .name("目标Z").description("检测中心的 Z 坐标。")
-        .defaultValue(0).sliderRange(-10000,10000).visible(coordinateCheck::get).build());
-    private final Setting<Double> coordinateRadius = sgSafety.add(new DoubleSetting.Builder()
-        .name("坐标半径").description("距中心的水平距离，单位为格。")
-        .defaultValue(5).min(0).sliderRange(0,1000).visible(coordinateCheck::get).build());
-    private final Setting<Boolean> outsideCoordinates = sgSafety.add(new BoolSetting.Builder()
-        .name("离开范围时断开").description("开启：超出半径触发；关闭：进入半径（包含边界）触发。")
-        .defaultValue(false).visible(coordinateCheck::get).build());
     private final Setting<Boolean> itemCheck = sgItems.add(new BoolSetting.Builder()
         .name("物品数量检测").description("逐种统计背包、快捷栏和副手中的选中物品；任一种满足阈值时断开，不受附近玩家限制。")
         .defaultValue(false).build());
@@ -339,22 +307,6 @@ public class AutoLog extends BaseModule {
     }
 
     private String checkPersonalSafety() {
-        if (durabilityCheck.get()) {
-            for (EquipmentSlot slot : new EquipmentSlot[] { EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND,
-                EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET }) {
-                ItemStack stack = mc.player.getEquippedStack(slot);
-                if (!stack.isEmpty() && stack.isDamageable()
-                    && LogSafety.lowDurability(stack.getMaxDamage(), stack.getDamage(), durabilityPercent.get())) {
-                    return "装备耐久不足：" + stack.getName().getString() + "，剩余 "
-                        + (stack.getMaxDamage() - stack.getDamage()) + "/" + stack.getMaxDamage() + "。";
-                }
-            }
-        }
-        if (yCheck.get() && LogSafety.outsideY(mc.player.getY(), minY.get(), maxY.get()))
-            return "Y轴超出安全范围，当前 Y=" + mc.player.getY() + "。";
-        if (coordinateCheck.get() && LogSafety.coordinates(mc.player.getX(), mc.player.getZ(),
-            targetX.get(), targetZ.get(), coordinateRadius.get(), outsideCoordinates.get()))
-            return "坐标检测触发，目标 X=" + targetX.get() + " Z=" + targetZ.get() + "，半径 " + coordinateRadius.get() + "。";
         if (itemCheck.get()) {
             for (Item item : monitoredItems.get()) {
                 int count = countMonitoredItem(item);

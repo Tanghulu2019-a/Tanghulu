@@ -5,11 +5,12 @@
   "name": "Tanghulu",
   "description": "糖葫芦无敌缝合插件 | GitHub: https://github.com/Tanghulu2019-a/Tanghulu",
   "authors": [
-    "Tanghulu"
+    "Tanghulu2019"
   ],
   "contributors": [
     "Cqb13",
-    "Mikumiku"
+    "Mikumiku",
+    "Jefff"
   ],
   "icon": "assets/tanghulu/icon.png",
   "environment": "client",
@@ -24,7 +25,8 @@
   "mixins": [
     "tanghulu.mixins.json",
     "ancient-apple-hunter.mixins.json",
-    "ancient-apple-hunter.xaero.mixins.json"
+    "ancient-apple-hunter.xaero.mixins.json",
+    "tanghulu-stash.mixins.json"
   ],
   "custom": {
     "meteor-client:color": "225,25,25"
@@ -42,7 +44,8 @@
     "malilib": "*",
     "xaerominimap": ">=26.4.2",
     "xaeroworldmap": ">=1.44.2",
-    "minihud": "*"
+    "minihud": "*",
+    "xaeroplus": ">=2.35.1"
   },
   "contact": {
     "homepage": "https://github.com/Tanghulu2019-a/Tanghulu",

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.tanghulu.stash.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "LivingEntityMixin",
+    "EntityMixin",
+    "KeyBindingMixin",
+    "SettingTitleAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

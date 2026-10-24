@@ -15,7 +15,7 @@ import java.util.Map;
 public final class XaeroWaypointCleaner {
     private XaeroWaypointCleaner() {}
 
-    public record Result(int count) {}
+    public record Result(int count, boolean stashRecordsCleared) {}
 
     public static Result clearCurrentServer() throws IOException {
         var session = BuiltInHudModules.MINIMAP.getCurrentSession();
@@ -37,14 +37,17 @@ public final class XaeroWaypointCleaner {
             }
             if (!sets.isEmpty()) snapshots.put(world, sets);
         }
+        var stashRecords = StashSearchRecords.snapshotCurrentWorld();
 
         // Snapshots exist only for this invocation's error recovery, never on disk.
         try {
+            stashRecords.clearFiles();
             for (var entry : snapshots.entrySet()) {
                 for (var set : entry.getValue().keySet()) set.clear();
                 session.getWorldManagerIO().saveWorld(entry.getKey());
             }
         } catch (IOException | RuntimeException failure) {
+            stashRecords.restoreFiles(failure);
             // Restore all live sets first, then attempt every disk rollback independently.
             for (var sets : snapshots.values()) {
                 for (var entry : sets.entrySet()) {
@@ -60,6 +63,7 @@ public final class XaeroWaypointCleaner {
         } finally {
             session.getWaypointSession().setSetChangedTime(System.currentTimeMillis());
         }
-        return new Result(count);
+        stashRecords.clearCache();
+        return new Result(count, stashRecords.hasSavedFiles());
     }
 }

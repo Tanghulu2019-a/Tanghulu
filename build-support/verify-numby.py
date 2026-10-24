@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--gradle-home', type=Path, default=Path(os.environ.get('GRADLE_USER_HOME', Path.home()/'.gradle')))
 args = parser.parse_args()
-jar_path = ROOT/'build/libs/Tanghulu-1.0.1.jar'
-modules = ['Beyblade', 'Confetti', 'SignTextEsp', 'SafeFire', 'NewChunks']
+jar_path = ROOT/'build/libs/Tanghulu-1.0.2.jar'
+modules = ['Confetti', 'SignTextEsp', 'NewChunks']
 labels = {}
 app = (ROOT/'src/main/java/dev/tanghulu/addon/TanghuluApp.java').read_text('utf-8')
 for module in modules:

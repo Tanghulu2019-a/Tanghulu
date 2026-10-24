@@ -13,7 +13,6 @@ import meteordevelopment.meteorclient.renderer.text.FontInfo;
 import meteordevelopment.meteorclient.systems.config.Config;
 import meteordevelopment.meteorclient.systems.hud.Hud;
 import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
 
 @Slf4j
 public class TanghuluApp {
@@ -27,7 +26,6 @@ public class TanghuluApp {
 
         TickTimerManager.INSTANCE.getTickTime();
         registerModules();
-        ChatUtils.warning("Tanghulu插件群：1013297171");
         Commands.add(new CommandTanghulu());
 
         Hud.get().register(HudTanghulu.INFO);
@@ -38,18 +36,14 @@ public class TanghuluApp {
     private static void registerModules() {
         Modules modules = Modules.get();
         modules.add(new ClearXaeroWaypoints());
-        modules.add(new Beyblade());
         modules.add(new Confetti());
         modules.add(new SignTextEsp());
-        modules.add(new SafeFire());
         modules.add(new NewChunks());
         modules.add(new PlayerAlert());
         modules.add(new PlayerSkeleton());
         modules.add(new ThreeCNewbieCheck());
         modules.add(new AutoTrashModule());
         modules.add(new AutoMiner());
-        modules.add(new TreeAura());
-        modules.add(new SeedMine());
         modules.add(new OnekeyFireWork());
         modules.add(new StructureFinder());
         modules.add(new MushroomFinder());
@@ -60,7 +54,6 @@ public class TanghuluApp {
         modules.add(new RoadBuilder());
         modules.add(new FarmHelper());
         modules.add(new AutoXP());
-        modules.add(new NoJumpDelay());
         modules.add(new Scaffold());
         modules.add(new AutoSlab());
         modules.add(new KillAuraTanghulu());
