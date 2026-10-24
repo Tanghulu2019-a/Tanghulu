@@ -3,10 +3,13 @@
   "id": "tanghulu",
   "version": "${version}",
   "name": "Tanghulu",
-  "description": "糖葫芦无敌缝合插件",
+  "description": "糖葫芦无敌缝合插件 | GitHub: https://github.com/Tanghulu2019-a/Tanghulu",
   "authors": [
-    "Tanghulu",
-    "mikumiku"
+    "Tanghulu"
+  ],
+  "contributors": [
+    "Cqb13",
+    "Mikumiku"
   ],
   "icon": "assets/tanghulu/icon.png",
   "environment": "client",
@@ -40,5 +43,10 @@
     "xaerominimap": ">=26.4.2",
     "xaeroworldmap": ">=1.44.2",
     "minihud": "*"
+  },
+  "contact": {
+    "homepage": "https://github.com/Tanghulu2019-a/Tanghulu",
+    "sources": "https://github.com/Tanghulu2019-a/Tanghulu",
+    "issues": "https://github.com/Tanghulu2019-a/Tanghulu/issues"
   }
 }

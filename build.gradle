@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.tanghulu'
-version = '1.0.0'
+version = '1.0.1'
 base { archivesName = 'Tanghulu' }
 
 repositories {
@@ -47,6 +47,7 @@ processResources {
     filesMatching('fabric.mod.json') { expand version: project.version }
     from('LICENSE') { into 'META-INF/licenses/tanghulu' }
     from('NOTICE.md') { into 'META-INF/licenses/tanghulu' }
+    from('licenses') { into 'META-INF/licenses/tanghulu' }
 }
 
 def prediction26 = tasks.register('compilePrediction26', Exec) {
@@ -201,3 +202,8 @@ tasks.register('playerSkeletonChecks', JavaExec) {
 }
 
 tasks.named('check') { dependsOn 'playerSkeletonChecks' }
+
+tasks.register('release101Checks', Exec) {
+    commandLine 'python', 'build-support/verify-101.py'
+}
+tasks.named('check') { dependsOn 'release101Checks' }

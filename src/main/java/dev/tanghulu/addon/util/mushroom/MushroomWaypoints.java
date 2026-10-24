@@ -46,7 +46,7 @@ public final class MushroomWaypoints {
         for(var waypoint:world.getCurrentWaypointSet().getWaypoints())
             if(waypoint.getX()==x && waypoint.getZ()==z && oldName.equals(waypoint.getName()))waypoint.setName(newName);
     }
-    private static MinimapWorld dimensionWorld(MinimapSession session,MinimapWorld origin,RegistryKey<World> dimension) throws IOException {
+    public static MinimapWorld dimensionWorld(MinimapSession session,MinimapWorld origin,RegistryKey<World> dimension) throws IOException {
         if(dimension.equals(origin.getDimId()))return origin;
         var manager=session.getWorldManager();
         var path=origin.getContainer().getRoot().getPath().resolve(session.getDimensionHelper().getDimensionDirectoryName(dimension));

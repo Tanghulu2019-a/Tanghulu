@@ -57,8 +57,9 @@ def inspect_archive(data, label, main_jar=False):
         if main_jar:
             assert names.count('fabric.mod.json') == 1
             meta = json.loads(archive.read('fabric.mod.json'))
-            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.0'
-            assert meta['authors'] == ['Tanghulu', 'mikumiku']
+            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.1'
+            assert meta['authors'] == ['Tanghulu']
+            assert meta['contributors'] == ['Cqb13', 'Mikumiku']
             assert meta['depends']['minecraft'] == '1.21.11'
             assert meta['depends']['meteor-client'] == '1.21.11-86'
             assert meta['license'] == 'GPL-3.0-only'
@@ -81,7 +82,7 @@ def source_paths():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.0.jar')
+    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.1.jar')
     parser.add_argument('--source', type=Path)
     args = parser.parse_args()
     paths = list(source_paths())

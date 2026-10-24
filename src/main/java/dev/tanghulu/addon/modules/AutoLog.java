@@ -1,6 +1,7 @@
 package dev.tanghulu.addon.modules;
 
 import dev.tanghulu.addon.BaseModule;
+import dev.tanghulu.addon.util.LogSafety;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import meteordevelopment.meteorclient.MeteorClient;
@@ -10,7 +11,9 @@ import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.misc.AutoReconnect;
 import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.entity.DamageUtils;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.Entity;
@@ -42,23 +45,9 @@ public class AutoLog extends BaseModule {
         .build()
     );
 
-    private final Setting<Boolean> smart = sgGeneral.add(new BoolSetting.Builder()
-        .name("智能预测")
-        .description("检测到即将受到足够伤害使生命值低于设定阈值时断开连接。")
-        .defaultValue(true)
-        .build()
-    );
-
     private final Setting<Boolean> onlyTrusted = sgGeneral.add(new BoolSetting.Builder()
         .name("仅信任玩家")
         .description("当不在好友列表中的玩家出现在渲染距离内时断开连接。")
-        .defaultValue(false)
-        .build()
-    );
-
-    private final Setting<Boolean> instantDeath = sgGeneral.add(new BoolSetting.Builder()
-        .name("防32K武器")
-        .description("当附近玩家能够瞬间杀死你时断开连接。")
         .defaultValue(false)
         .build()
     );
@@ -79,7 +68,7 @@ public class AutoLog extends BaseModule {
 
     private final Setting<Boolean> onlyWhenPlayersNearby = sgGeneral.add(new BoolSetting.Builder()
         .name("仅当有玩家时断开")
-        .description("只有当附近30格内有非好友玩家时，其他断开连接功能才会生效。")
+        .description("仅限制血量、非好友和实体检测；图腾、耐久、Y轴、坐标和自定义物品检测始终独立生效。")
         .defaultValue(true)
         .build()
     );
@@ -100,6 +89,51 @@ public class AutoLog extends BaseModule {
         .visible(() -> totemCheck.get())
         .build()
     );
+
+    private final SettingGroup sgSafety = settings.createGroup("耐久与位置检测");
+    private final SettingGroup sgItems = settings.createGroup("自定义物品数量检测");
+    private final Setting<Boolean> durabilityCheck = sgSafety.add(new BoolSetting.Builder()
+        .name("耐久检测").description("已穿戴装备、主手或副手任一可损坏物品剩余耐久达到阈值时断开，不受附近玩家限制。")
+        .defaultValue(false).build());
+    private final Setting<Integer> durabilityPercent = sgSafety.add(new IntSetting.Builder()
+        .name("最低剩余耐久百分比").description("剩余耐久小于或等于此百分比触发；忽略空槽和无耐久物品。")
+        .defaultValue(10).range(0,100).sliderRange(0,100).visible(durabilityCheck::get).build());
+    private final Setting<Boolean> yCheck = sgSafety.add(new BoolSetting.Builder()
+        .name("Y轴检测").description("Y 坐标超出设定安全区间时断开，不受附近玩家限制；上下限填反时自动交换。")
+        .defaultValue(false).build());
+    private final Setting<Double> minY = sgSafety.add(new DoubleSetting.Builder()
+        .name("安全Y下限").description("低于此高度时断开。")
+        .defaultValue(-64).sliderRange(-64,320).visible(yCheck::get).build());
+    private final Setting<Double> maxY = sgSafety.add(new DoubleSetting.Builder()
+        .name("安全Y上限").description("高于此高度时断开。")
+        .defaultValue(320).sliderRange(-64,320).visible(yCheck::get).build());
+    private final Setting<Boolean> coordinateCheck = sgSafety.add(new BoolSetting.Builder()
+        .name("坐标检测").description("在当前所在维度按 X/Z 距离触发断开，不受附近玩家限制。")
+        .defaultValue(false).build());
+    private final Setting<Double> targetX = sgSafety.add(new DoubleSetting.Builder()
+        .name("目标X").description("检测中心的 X 坐标。")
+        .defaultValue(0).sliderRange(-10000,10000).visible(coordinateCheck::get).build());
+    private final Setting<Double> targetZ = sgSafety.add(new DoubleSetting.Builder()
+        .name("目标Z").description("检测中心的 Z 坐标。")
+        .defaultValue(0).sliderRange(-10000,10000).visible(coordinateCheck::get).build());
+    private final Setting<Double> coordinateRadius = sgSafety.add(new DoubleSetting.Builder()
+        .name("坐标半径").description("距中心的水平距离，单位为格。")
+        .defaultValue(5).min(0).sliderRange(0,1000).visible(coordinateCheck::get).build());
+    private final Setting<Boolean> outsideCoordinates = sgSafety.add(new BoolSetting.Builder()
+        .name("离开范围时断开").description("开启：超出半径触发；关闭：进入半径（包含边界）触发。")
+        .defaultValue(false).visible(coordinateCheck::get).build());
+    private final Setting<Boolean> itemCheck = sgItems.add(new BoolSetting.Builder()
+        .name("物品数量检测").description("逐种统计背包、快捷栏和副手中的选中物品；任一种满足阈值时断开，不受附近玩家限制。")
+        .defaultValue(false).build());
+    private final Setting<List<Item>> monitoredItems = sgItems.add(new ItemListSetting.Builder()
+        .name("检测物品列表").description("可自定义多种物品；空列表不触发，每种物品独立使用下方阈值。")
+        .defaultValue(Items.FIREWORK_ROCKET).visible(itemCheck::get).build());
+    private final Setting<Integer> itemThreshold = sgItems.add(new IntSetting.Builder()
+        .name("物品数量阈值").description("按单个物品数量统计，低于模式和高于模式均包含等于。")
+        .defaultValue(16).min(0).sliderRange(0,2304).visible(itemCheck::get).build());
+    private final Setting<Boolean> itemAtLeast = sgItems.add(new BoolSetting.Builder()
+        .name("数量达到上限时断开").description("开启：数量大于或等于阈值触发；关闭：数量小于或等于阈值触发。")
+        .defaultValue(false).visible(itemCheck::get).build());
 
     // Entities
 
@@ -189,7 +223,7 @@ public class AutoLog extends BaseModule {
      */
     private boolean hasNonFriendPlayersNearby() {
         for (PlayerEntity player : mc.world.getPlayers()) {
-            if (player.getUuid() != mc.player.getUuid()) {
+            if (!player.getUuid().equals(mc.player.getUuid())) {
                 if (PlayerUtils.isWithin(player, 30) && !Friends.get().isFriend(player)) {
                     return true;
                 }
@@ -207,9 +241,18 @@ public class AutoLog extends BaseModule {
 
     @EventHandler
     private void onTick(TickEvent.Post event) {
+        if (mc.player == null || mc.world == null) return;
         float playerHealth = mc.player.getHealth();
         if (playerHealth <= 0) {
             this.toggle();
+            return;
+        }
+
+        // Personal safety checks always run, including when alone.
+        String safetyReason = checkPersonalSafety();
+        if (safetyReason != null) {
+            disconnect(safetyReason);
+            if (toggleOff.get() && isActive()) toggle();
             return;
         }
 
@@ -237,29 +280,17 @@ public class AutoLog extends BaseModule {
             return;
         }
 
-        if (smart.get() && playerHealth + mc.player.getAbsorptionAmount() - PlayerUtils.possibleHealthReductions() < health.get()) {
-            disconnect("生命值即将低于 " + health.get() + "。");
-            if (toggleOff.get()) this.toggle();
-            return;
-        }
-
-        if (!onlyTrusted.get() && !instantDeath.get() && entities.get().isEmpty())
+        if (!onlyTrusted.get() && entities.get().isEmpty())
             return; // only check all entities if needed
 
         for (Entity entity : mc.world.getEntities()) {
-            if (entity instanceof PlayerEntity player && player.getUuid() != mc.player.getUuid()) {
+            if (entity instanceof PlayerEntity player && !player.getUuid().equals(mc.player.getUuid())) {
                 if (onlyTrusted.get() && player != mc.player && !Friends.get().isFriend(player)) {
                     disconnect(Text.literal("不受信任的玩家 '" + Formatting.RED + player.getName().getString() + Formatting.WHITE + "' 出现在渲染距离内。"));
                     if (toggleOff.get()) this.toggle();
                     return;
                 }
 
-                if (instantDeath.get() && PlayerUtils.isWithin(entity, 8) && DamageUtils.getAttackDamage(player, mc.player)
-                    > playerHealth + mc.player.getAbsorptionAmount()) {
-                    disconnect("检测到32K武器威胁。");
-                    if (toggleOff.get()) this.toggle();
-                    return;
-                }
             }
         }
 
@@ -295,6 +326,45 @@ public class AutoLog extends BaseModule {
         }
     }
 
+    private int countMonitoredItem(Item item) {
+        int count = 0;
+        // Main inventory includes the hotbar. Count offhand once; worn armor is excluded.
+        for (int slot = 0; slot < 36; slot++) {
+            ItemStack stack = mc.player.getInventory().getStack(slot);
+            if (stack.isOf(item)) count += stack.getCount();
+        }
+        ItemStack offhand = mc.player.getOffHandStack();
+        if (offhand.isOf(item)) count += offhand.getCount();
+        return count;
+    }
+
+    private String checkPersonalSafety() {
+        if (durabilityCheck.get()) {
+            for (EquipmentSlot slot : new EquipmentSlot[] { EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND,
+                EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET }) {
+                ItemStack stack = mc.player.getEquippedStack(slot);
+                if (!stack.isEmpty() && stack.isDamageable()
+                    && LogSafety.lowDurability(stack.getMaxDamage(), stack.getDamage(), durabilityPercent.get())) {
+                    return "装备耐久不足：" + stack.getName().getString() + "，剩余 "
+                        + (stack.getMaxDamage() - stack.getDamage()) + "/" + stack.getMaxDamage() + "。";
+                }
+            }
+        }
+        if (yCheck.get() && LogSafety.outsideY(mc.player.getY(), minY.get(), maxY.get()))
+            return "Y轴超出安全范围，当前 Y=" + mc.player.getY() + "。";
+        if (coordinateCheck.get() && LogSafety.coordinates(mc.player.getX(), mc.player.getZ(),
+            targetX.get(), targetZ.get(), coordinateRadius.get(), outsideCoordinates.get()))
+            return "坐标检测触发，目标 X=" + targetX.get() + " Z=" + targetZ.get() + "，半径 " + coordinateRadius.get() + "。";
+        if (itemCheck.get()) {
+            for (Item item : monitoredItems.get()) {
+                int count = countMonitoredItem(item);
+                if (LogSafety.itemCount(count, itemThreshold.get(), itemAtLeast.get()))
+                    return "物品数量触发：" + item.getName().getString() + "，当前 " + count + "，阈值 " + itemThreshold.get() + "。";
+            }
+        }
+        return null;
+    }
+
     private void disconnect(String reason) {
         disconnect(Text.literal(reason));
     }
@@ -302,9 +372,6 @@ public class AutoLog extends BaseModule {
     private void disconnect(Text reason) {
         MutableText disconnectText = Text.literal("[自动登出] ");
         disconnectText.append(reason);
-
-        // 生成详细的日志信息
-        MutableText detailedLog = generateDetailedLog(reason);
 
         // 如果启用聊天显示日志
         if (logToChat.get()) {
@@ -380,7 +447,7 @@ public class AutoLog extends BaseModule {
         if (mc.world == null || mc.player == null) return playerInfoList;
 
         for (PlayerEntity player : mc.world.getPlayers()) {
-            if (player.getUuid() != mc.player.getUuid()) {
+            if (!player.getUuid().equals(mc.player.getUuid())) {
                 double distance = Math.sqrt(mc.player.squaredDistanceTo(player));
                 String playerInfo = player.getName().getString() +
                     " (距离: " + String.format("%.1f", distance) + "格, " +

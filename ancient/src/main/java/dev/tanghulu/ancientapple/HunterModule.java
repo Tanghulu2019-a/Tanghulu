@@ -55,7 +55,6 @@ public final class HunterModule extends Module {
     private String lastFailureTrace="";
     private SearchArea surveyArea;
     public HunterModule() { super(AncientAppleAddon.CATEGORY,"古城附魔金定位","古城附魔金苹果箱预测与定位，手动搜取记录黑名单。"); runInMainMenu=true; }
-    @Override public void onActivate() { message("使用 .aah seed <种子>，然后 .aah scan 定位；请自行移动、开箱和拿取。黑名单可从模块按钮或 .aah blacklist 打开。"); }
     @Override public void onDeactivate() { contextChanged(); }
     private void contextChanged() {
         // Setting callbacks may fire while the module is being constructed/deserialized.

@@ -15,7 +15,7 @@ verify = module_from_spec(spec)
 spec.loader.exec_module(verify)
 
 def main():
-    jar = ROOT/'build/libs/Tanghulu-1.0.0.jar'
+    jar = ROOT/'build/libs/Tanghulu-1.0.1.jar'
     subprocess.run([sys.executable, str(ROOT/'build-support/verify-no-stash.py')], check=True)
     subprocess.run([sys.executable, str(ROOT/'build-support/verify-release.py')], check=True)
     # Merge validation also checks the complete 100-test Ancient suite report.
@@ -24,7 +24,7 @@ def main():
     assert report['passed'] and report['jarSha256'] == hashlib.sha256(jar.read_bytes()).hexdigest()
     output = ROOT/'dist'
     output.mkdir(exist_ok=True)
-    source = output/'Tanghulu-1.0.0-source.zip'
+    source = output/'Tanghulu-1.0.1-source.zip'
     with zipfile.ZipFile(source, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in verify.source_paths():
             name = 'Tanghulu/'+path.relative_to(ROOT).as_posix()

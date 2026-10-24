@@ -19,7 +19,7 @@ public class CommandTanghulu extends Command {
     @Override
     public void build(LiteralArgumentBuilder<CommandSource> builder) {
         builder.executes(context -> {
-            info("hi");
+            info("Tanghulu-%s | GitHub: %s", dev.tanghulu.addon.VersionConstants.TANGHULU_VERSION, dev.tanghulu.addon.VersionConstants.GITHUB_URL);
             return SINGLE_SUCCESS;
         });
 

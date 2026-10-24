@@ -1,17 +1,30 @@
-# Tanghulu-1.0.0
+# Tanghulu-1.0.1
 
 面向 Minecraft 1.21.11 的 Fabric / Meteor Client 插件，包含种子工具、古城定位、蘑菇岛定位等功能，使用统一的 Tanghulu 分类。
+
+## 1.0.1 更新
+
+- 末地鞘翅定位联动 Xaero 小地图，自动保存全部搜索结果，重复搜索不会重复添加同名同坐标航点。航点为结构预测点，不保证鞘翅尚未被取走，也不标定安全落点高度。
+- 智能 Log 移除防 32K、智能预测；新增耐久、Y 轴、坐标和自定义物品数量检测，均默认关闭。
+- 耐久检测针对主副手和穿戴装备，剩余百分比小于等于阈值触发；Y 轴检测在安全上下限之外触发；坐标检测按当前维度的 X/Z 中心与半径，选择进入或离开触发。
+- 自定义物品可选多种，逐种统计背包、快捷栏和副手；任一种小于等于下限或大于等于上限即触发。新增个人安全检测不受“仅当有玩家时断开”限制。
+- 一键清除优先取消本插件的古城、蘑菇岛和鞘翅定位，再删除 Xaero（全部来源）与 Meteor 航点，清除后定位模块保持关闭，重新定位需手动开启。
+- 新区块探测介绍增加“测试版”；更名为“图腾粒子自定义”和“告示牌文字漂浮”。重命名模块的旧配置可能需要重新设置。
+- Fabric 模组信息和 Meteor 插件网站显示 [GitHub 仓库](https://github.com/Tanghulu2019-a/Tanghulu)。
 
 ## 安装与兼容性
 
 - Minecraft **1.21.11**，Meteor Client **1.21.11-86**，Fabric Loader **0.18.2+**，Java **21+**。
-- 将 `Tanghulu-1.0.0.jar` 放入 `mods`，移除旧版 Tanghulu，避免重复加载。
+- 将 `Tanghulu-1.0.1.jar` 放入 `mods`，移除旧版 Tanghulu，避免重复加载。
 - 相关模块需要另外安装匹配版本的 Meteor Baritone、Litematica / MaLiLib、Xaero Minimap / World Map / XaeroLib或 MiniHUD。
 - 26.x 世界预测辅助程序需要 Java 25；主模组字节码目标仍为 Java 21。首次获取官方运行资源需要联网。
 
 ## 功能与使用
 
 在 Meteor 菜单的 **Tanghulu** 分类中配置功能。支持种子挖矿、结构与鞘翅定位、古城战利品预测、蘑菇岛定位、玩家骨架显示、3C 玩家时长查询，航点清理和原有工具功能。
+
+新增 Numby 功能：**陀螺旋转、图腾粒子自定义、告示牌文字漂浮、防火行走、新区块探测**。
+模块名称、介绍与详细设置已汉化，使用说明见 [Numby 功能移植](NUMBY-FEATURES.md)。
 
 - [玩家骨架显示](PLAYER-SKELETON.md)、[蘑菇岛定位](MUSHROOM-LOCATOR.md)、[3C 玩家查询](3C-NEWBIE-CHECK.md)。
 - 古城命令使用 `.aah`，例如 `.aah seed <种子>`、`.aah loot <版本>`、`.aah scan`。
@@ -28,12 +41,13 @@ python build-support/fetch-dependencies.py
 python build-support/verify-merge.py
 python build-support/verify-no-stash.py
 python build-support/verify-release.py
+python build-support/verify-numby.py
 python build-support/package-release.py
 ```
 
 Linux / macOS 将构建命令替换为 `./gradlew --no-daemon build`。下载脚本从固定官方分发地址获取 4 个编译依赖，并校验 SHA-256；第三方模组 JAR 不包含在发布源码包内，也不打入最终插件。版本、下载地址及校验值见 `build-support/dependencies/downloads.json`。
 
-主构建产物为 `build/libs/Tanghulu-1.0.0.jar`；正式候选包与校验文件输出到 `dist/`。`ancient/` 是内部子项目，正常安装只使用主项目 JAR。
+主构建产物为 `build/libs/Tanghulu-1.0.1.jar`；正式候选包与校验文件输出到 `dist/`。`ancient/` 是内部子项目，正常安装只使用主项目 JAR。
 
 正常 `build` 包含古城的 100 项单元检查，以及种子兼容、蘑菇岛扫描、系统聊天、航点清理、3C 查询逻辑与骨架显示检查。联网查询测试须显式提供玩家名：
 
@@ -55,8 +69,8 @@ Linux / macOS 将构建命令替换为 `./gradlew --no-daemon build`。下载脚
 
 因未确认再分发许可，已移除 Stash 的 AFKVanillaFly、AutoLogPlus（Baritone 助手）、BetterStashFinder、ElytraFlyPlusPlus、GotoPosition、Pitch40Util、VanityESP，以及 Weather / EntityList HUD 和相关界面、飞行、仓库缓存钩子。
 
-鞘翅和结构定位保留搜索能力，结果在聊天中输出最近 20 个坐标及总数，不再写入旧航点工具。古城和蘑菇岛各自的地图功能保留。一键清除航点只处理当前世界的 Xaero 航点，不处理其他插件的仓库记录。旧配置无需删除，但已移除模块不会再加载。
+结构定位在聊天中输出最近 20 个坐标及总数。末地鞘翅定位默认将全部结果保存至当前服务器的末地 Xaero 航点，同时在聊天显示最近 20 个。古城和蘑菇岛各自的地图功能保留。一键清除航点优先停止本插件的三种定位模块，清除当前服务器/存档全部维度、分组及来源的 Xaero 与 Meteor 航点。独立存储的其他模组航点需要对应适配；持续生成航点的外部模组需关闭其生成功能。
 
 ## 许可证与来源
 
-项目沿用 **GPL-3.0-only**，见 [LICENSE](LICENSE)。作者署名为 Tanghulu；上游 Meteor Miku 作者 mikumiku 及第三方作者和许可证声明保留，见 [NOTICE.md](NOTICE.md) 与 `ancient/licenses/`。
+项目沿用 **GPL-3.0-only**，见 [LICENSE](LICENSE)。Tanghulu 为本模组作者及主要贡献者；Cqb13 和 Mikumiku 为部分功能的源码贡献者。上游源码中的作者署名及第三方许可证声明保留，见 [NOTICE.md](NOTICE.md) 与 `ancient/licenses/`。

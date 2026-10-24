@@ -42,7 +42,7 @@ public final class ThreeCPlayerService {
             + URLEncoder.encode(name, StandardCharsets.UTF_8));
         HttpRequest request = HttpRequest.newBuilder(uri).timeout(Duration.ofSeconds(15))
             .header("Accept", "application/json")
-            .header("User-Agent", "Tanghulu/1.0.0 (3CNewbieCheck)").GET().build();
+            .header("User-Agent", "Tanghulu/1.0.1 (3CNewbieCheck)").GET().build();
         HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
         if (response.statusCode() == 429) throw new IOException("查询过于频繁，请稍后再试");
         if (response.statusCode() != 200) throw new IOException("查询服务返回 HTTP " + response.statusCode() + "，请稍后重试");

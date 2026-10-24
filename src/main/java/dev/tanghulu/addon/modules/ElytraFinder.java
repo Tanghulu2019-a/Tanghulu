@@ -35,6 +35,12 @@ public class ElytraFinder extends BaseModule {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
     private final SettingGroup sgSeed = settings.createGroup("种子设置");
 
+    private final Setting<Boolean> xaeroWaypoints = sgGeneral.add(new BoolSetting.Builder()
+        .name("同步Xaero航点").description("将全部定位结果保存至当前服务器的末地 Xaero 航点；不需要 Xaero 世界地图。")
+        .defaultValue(true).build());
+    private net.minecraft.client.world.ClientWorld searchWorld;
+    private Object xaeroContext;
+
     // 通用设置
     private final Setting<Integer> searchRadius = sgGeneral.add(new IntSetting.Builder()
         .name("搜索半径")
@@ -116,13 +122,14 @@ public class ElytraFinder extends BaseModule {
     @Override
     public void onActivate() {
         super.onActivate();
-        startElytraSearch();
+        if (autoSearch.get()) startElytraSearch();
         info("末地鞘翅定位模块已启用");
     }
 
     @Override
     public void onDeactivate() {
         searchGeneration++;
+        isSearching = false;
         if (prediction26 != null) prediction26.cancel();
         if (searchTask != null && !searchTask.isDone()) {
             searchTask.cancel(true);
@@ -135,6 +142,7 @@ public class ElytraFinder extends BaseModule {
     @EventHandler
     private void onGameLeft(meteordevelopment.meteorclient.events.game.GameLeftEvent event) {
         searchGeneration++;
+        isSearching = false;
         if (prediction26 != null) prediction26.cancel();
         if (searchTask != null) searchTask.cancel(false);
         isSearching = false;
@@ -142,6 +150,12 @@ public class ElytraFinder extends BaseModule {
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {
+        if (isSearching && mc.world != searchWorld) {
+            searchGeneration++;
+            isSearching = false;
+            if (prediction26 != null) prediction26.cancel();
+            if (searchTask != null) searchTask.cancel(false);
+        }
         // 检查搜索任务状态
         if (searchTask != null && searchTask.isDone()) {
             isSearching = false;
@@ -202,6 +216,20 @@ public class ElytraFinder extends BaseModule {
             warning("建议在末地使用此功能以获得最准确的结果");
         }
 
+        searchWorld = mc.world;
+        xaeroContext = null;
+        if (xaeroWaypoints.get()) {
+            if (!net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("xaerominimap")) {
+                warning("未安装 Xaero 小地图，本次结果仅显示聊天坐标。");
+            } else {
+                try {
+                    xaeroContext = dev.tanghulu.addon.util.mushroom.MushroomWaypoints.context();
+                    if (xaeroContext == null) warning("Xaero 世界会话尚未就绪，本次结果仅显示聊天坐标。");
+                } catch (RuntimeException | LinkageError e) {
+                    warning("Xaero 接口不可用，本次结果仅显示聊天坐标。");
+                }
+            }
+        }
         isSearching = true;
         long generation = ++searchGeneration;
         int radius = searchRadius.get();
@@ -213,15 +241,17 @@ public class ElytraFinder extends BaseModule {
         searchTask = CompletableFuture.runAsync(() -> {
             try {
                 if (worldSeed.is26_3()) searchElytra26(worldSeed, playerPos, radius, generation);
-                else searchElytraLocations(worldSeed, playerPos);
+                else searchElytraLocations(worldSeed, playerPos, radius, generation);
             } catch (Exception e) {
                 if (worldSeed.is26_3()) {
-                    mc.execute(() -> { if (generation == searchGeneration && isActive()) error("26.3 鞘翅预测失败：" + e.getMessage()); });
+                    mc.execute(() -> { if (generation == searchGeneration && isActive() && mc.world == searchWorld) error("26.3 鞘翅预测失败：" + e.getMessage()); });
                     return;
                 }
-                error("搜索过程中发生错误: " + e.getMessage());
-                log.error("搜索过程中发生错误: ", e);  // 在开发环境中启用
-                isSearching = false;
+                mc.execute(() -> {
+                    if (generation == searchGeneration && isActive() && mc.world == searchWorld)
+                        error("搜索过程中发生错误: " + e.getMessage());
+                });
+                log.error("搜索过程中发生错误: ", e);
             }
         });
     }
@@ -240,11 +270,11 @@ public class ElytraFinder extends BaseModule {
                 BPos pos = new BPos(row.get(1).getAsInt(), row.get(2).getAsInt(), row.get(3).getAsInt());
                 locations.add(new ElytraLocation(pos, Math.hypot(pos.getX() - playerPos.getX(), pos.getZ() - playerPos.getZ())));
             }
-            mc.execute(() -> { if (generation == searchGeneration && isActive()) displayResults(locations, playerPos); });
+            mc.execute(() -> { if (generation == searchGeneration && isActive() && mc.world == searchWorld) displayResults(locations, playerPos); });
         } finally { if (prediction26 == backend) prediction26 = null; }
     }
 
-    private void searchElytraLocations(Seed worldSeed, BlockPos playerPos) {
+    private void searchElytraLocations(Seed worldSeed, BlockPos playerPos, int radius, long generation) {
         List<ElytraLocation> elytraLocations = new ArrayList<>();
 
         try {
@@ -264,7 +294,6 @@ public class ElytraFinder extends BaseModule {
             EndCity endCity = new EndCity(version);
             EndCityGenerator endCityGenerator = new EndCityGenerator(version);
             ChunkRand rand = new ChunkRand();
-            int radius = searchRadius.get();
 
             // 安全检查搜索半径
             if (radius > 500) {
@@ -309,7 +338,7 @@ public class ElytraFinder extends BaseModule {
             for (int regionX = minRegionX; regionX <= maxRegionX; regionX++) {
                 for (int regionZ = minRegionZ; regionZ <= maxRegionZ; regionZ++) {
 
-                    if (!isSearching) return; // 检查是否被取消
+                    if (!isSearching || generation != searchGeneration) return; // 检查是否被取消
 
                     try {
                         CPos pos = endCity.getInRegion(seed, regionX, regionZ, rand);
@@ -362,8 +391,7 @@ public class ElytraFinder extends BaseModule {
         }
 
         // 显示结果
-        displayResults(elytraLocations, playerPos);
-        isSearching = false;
+        mc.execute(() -> { if (generation == searchGeneration && isActive() && mc.world == searchWorld) displayResults(elytraLocations, playerPos); });
     }
 
     private void displayResults(List<ElytraLocation> locations, BlockPos playerPos) {
@@ -375,6 +403,16 @@ public class ElytraFinder extends BaseModule {
         // 按距离排序
         locations.sort((a, b) -> Double.compare(a.distance, b.distance));
 
+        if (xaeroWaypoints.get() && xaeroContext != null) {
+            try {
+                var points = locations.stream().map(location -> new BlockPos(location.position.getX(), location.position.getY(), location.position.getZ())).toList();
+                dev.tanghulu.addon.util.ElytraWaypoints.saveAll(xaeroContext, points);
+                info("已同步 %d 个末地鞘翅航点到 Xaero 小地图。位置为结构定位点，不保证鞘翅尚未被取走。", points.size());
+            } catch (Exception | LinkageError e) {
+                error("Xaero 航点保存失败：%s；坐标仍显示在聊天中。", e.getMessage());
+                log.warn("Elytra waypoint save failed", e);
+            }
+        }
         int shown = 0;
         for (int index = 0; index < Math.min(locations.size(), 20); index++) {
             var location = locations.get(index);

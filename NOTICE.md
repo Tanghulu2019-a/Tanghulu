@@ -1,5 +1,10 @@
 # Tanghulu source and license notices
 
+Tanghulu is the author and primary contributor of this mod.
+Cqb13 (cqb13) and Mikumiku (mikumiku) are authors of upstream source used
+for some features; this does not imply direct participation or endorsement.
+Upstream file-level credits and license notices are retained.
+
 Tanghulu includes modified code from Meteor Miku by mikumiku:
 https://github.com/mikumiku7/meteor-miku
 
@@ -38,3 +43,19 @@ is retained for reference; Cubiomes is not included in the current runtime or
 public source package. External mod JARs used for compilation are fetched
 separately from pinned official distribution URLs with SHA-256 verification;
 see build-support/dependencies/downloads.json.
+
+Numby Hack v2.6.24 (cqb13), supplied mc1.21.11 source archive, GPL-3.0:
+https://github.com/cqb13/Numby-hack
+Release reference verified on 2026-10-24: mc1.21.11-v2.6.24,
+commit 063a8ed8383cd621bda0e7e47a09065fa4bf291e:
+https://github.com/cqb13/Numby-hack/tree/063a8ed8383cd621bda0e7e47a09065fa4bf291e
+The bundled Numby license is byte-identical to LICENSE at that revision
+(Git blob 6c6b49e94f05a5f393b6b250df775a3089639c22).
+Integrated Beyblade (README: Bayblade), Confetti, SignTextEsp, SafeFire,
+NewChunks and TotemParticleMixin on 2026-10-24. Changes include Tanghulu
+registration, Chinese module names/settings/descriptions/enum labels, rotation
+corrections, and client-thread chunk parsing with world-scoped cache cleanup.
+Upstream file credits retained: FloRida from venomhack; Confetti from Tanuki;
+SignTextEsp by cqb13; SafeFire from Tanuki, originally by walaryne;
+NewChunks from BleachHack by BleachDrinker420, modified by cqb13,
+with packet-loading credit to Trouser-Streak. See licenses/Numby-Hack-GPL-3.0.txt.

@@ -39,7 +39,7 @@ def main():
     assert len(manifest) == 4 and not any('xaeroplus' in d['name'].lower() for d in manifest)
     build = (ROOT/'build.gradle').read_text('utf-8')
     assert 'baritoneAssistantChecks' not in build and 'xaeroPlusCompileJar' not in build
-    jar = ROOT/'build/libs/Tanghulu-1.0.0.jar'
+    jar = ROOT/'build/libs/Tanghulu-1.0.1.jar'
     archive(jar.read_bytes(), jar.name)
     print(json.dumps({'passed': True, 'scannedSources': count, 'removedModuleCount': 7,
                       'removedHudCount': 2, 'inGameTested': False}))

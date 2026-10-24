@@ -16,7 +16,8 @@
     "ThreeCNametagsMixin",
     "MineProcessMixin",
     "RarityFilterPlacementModifierAccessor",
-    "WorldRendererAccessor"
+    "WorldRendererAccessor",
+    "TotemParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

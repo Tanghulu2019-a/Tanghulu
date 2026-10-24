@@ -18,7 +18,7 @@
 
 适用于 **Minecraft 1.21.11 / Meteor Client 1.21.11-86 / Java 21+**，保留原工程的依赖组合。
 
-退出游戏，用交付的 `Tanghulu-1.0.0.jar` 替换 `mods` 中旧版 Tanghulu JAR。只保留一个 Tanghulu，避免重复加载。进入游戏后在 Tanghulu 分类开启「玩家骨架显示」。
+退出游戏，用交付的 `Tanghulu-1.0.1.jar` 替换 `mods` 中旧版 Tanghulu JAR。只保留一个 Tanghulu，避免重复加载。进入游戏后在 Tanghulu 分类开启「玩家骨架显示」。
 
 ## 构建和验证
 
@@ -33,4 +33,4 @@
 
 尚未启动游戏验证画面。进入游戏后建议用其他玩家检查走路、潜行和持弓动作，并开启「显示自己」在第三人称检查自己的骨架。游泳、飞行、骑乘和睡眠复用了原版变换，但仍需实机确认视觉效果；其他模组替换玩家模型时也需实机确认。
 
-根项目的 `build/libs/Tanghulu-1.0.0.jar` 是可安装产物；不要单独安装 `ancient` 子项目的 JAR。
+根项目的 `build/libs/Tanghulu-1.0.1.jar` 是可安装产物；不要单独安装 `ancient` 子项目的 JAR。

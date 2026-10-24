@@ -21,5 +21,7 @@ public final class TanghuluAddon extends MeteorAddon {
         TanghuluApp.onRegisterCategories();
     }
 
+    @Override public String getWebsite() { return "https://github.com/Tanghulu2019-a/Tanghulu"; }
+
     @Override public String getPackage() { return "dev.tanghulu"; }
 }

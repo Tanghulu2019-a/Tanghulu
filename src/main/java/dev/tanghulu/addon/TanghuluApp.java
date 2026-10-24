@@ -37,6 +37,12 @@ public class TanghuluApp {
 
     private static void registerModules() {
         Modules modules = Modules.get();
+        modules.add(new ClearXaeroWaypoints());
+        modules.add(new Beyblade());
+        modules.add(new Confetti());
+        modules.add(new SignTextEsp());
+        modules.add(new SafeFire());
+        modules.add(new NewChunks());
         modules.add(new PlayerAlert());
         modules.add(new PlayerSkeleton());
         modules.add(new ThreeCNewbieCheck());
@@ -52,7 +58,6 @@ public class TanghuluApp {
         modules.add(new AutoLog());
         modules.add(new ElytraUnbreak());
         modules.add(new RoadBuilder());
-        modules.add(new ClearXaeroWaypoints());
         modules.add(new FarmHelper());
         modules.add(new AutoXP());
         modules.add(new NoJumpDelay());
