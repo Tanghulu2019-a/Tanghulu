@@ -1,7 +1,8 @@
 # Tanghulu source and license notices
 
 Tanghulu2019 is the author and primary contributor of this mod.
-Cqb13 (cqb13) and Mikumiku (mikumiku) contributed source code for some features.
+Source code for some features comes from Cqb13 (cqb13), Mikumiku (mikumiku),
+and Jefff (miles352), author of meteor-stashhunting-addon.
 Upstream file-level credits and license notices are retained.
 
 Tanghulu includes modified code from Meteor Miku by mikumiku:
@@ -19,11 +20,13 @@ changes. Ancient Apple Hunter attribution: Tanghulu. Existing file-level
 credits and third-party license notices are retained.
 
 Restored on 2026-10-24 from the user-supplied Tanghulu 1.0.0 source into
-1.0.1, following the user's statement that authorization for the relevant
-Stash code was obtained from its author. This records the supplied provenance;
-no additional upstream license terms are invented here.
-Upstream: https://github.com/miles352/meteor-stashhunting-addon/releases/tag/0.16.7
-Stash author: jefff. AFKVanillaFly and VanityESP credit xqyet.
+1.0.1. Tanghulu2019 reports having contacted Jefff directly via Discord and
+obtained authorization for the relevant Stash code used in Tanghulu. This
+records the maintainer-reported authorization without expanding its scope or
+adding license terms.
+Upstream repository: https://github.com/miles352/meteor-stashhunting-addon
+Upstream release: https://github.com/miles352/meteor-stashhunting-addon/releases/tag/0.16.7
+Stash author: Jefff (miles352). AFKVanillaFly and VanityESP credit xqyet.
 Seven modules, two HUDs, localization, optional flight hooks and stash record
 clearing are restored. Duplicate AutoLog safety checks reuse the existing
 1.0.1 implementation. XaeroPlus is an optional compile-only dependency and is
