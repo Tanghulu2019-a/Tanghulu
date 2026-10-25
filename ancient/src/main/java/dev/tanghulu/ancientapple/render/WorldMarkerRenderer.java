@@ -2,7 +2,7 @@ package dev.tanghulu.ancientapple.render;
 
 import dev.tanghulu.ancientapple.core.ChestTarget;
 import dev.tanghulu.ancientapple.core.MarkerSelection;
-import dev.tanghulu.ancientapple.integration.XaeroBridge;
+import dev.tanghulu.ancientapple.core.LootSelection;
 import meteordevelopment.meteorclient.events.render.Render2DEvent;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
@@ -31,15 +31,15 @@ public final class WorldMarkerRenderer {
     private final ItemStack apple = Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack();
 
     public void renderIcons(Render2DEvent event, Collection<ChestTarget> targets,
-                            boolean showCompleted, boolean throughWalls, int distance) {
+                            boolean showCompleted, boolean throughWalls, int distance, LootSelection selection) {
         if (!ready()) return;
         var context = event.drawContext;
-        for (ChestTarget target : select(targets, showCompleted, throughWalls, distance)) {
+        for (ChestTarget target : select(targets, showCompleted, throughWalls, distance, selection)) {
             Vector3d projected = new Vector3d(target.x + .5, target.y + 1.35, target.z + .5);
             if (!NametagUtils.to2D(projected, 1.0)) continue;
             NametagUtils.begin(projected, context);
-            context.drawItem(apple, -8, -20);
-            String text = XaeroBridge.MARKER_NAME;
+            context.drawItem(selection.bookIcon(target) ? Items.ENCHANTED_BOOK.getDefaultStack() : apple, -8, -20);
+            String text = selection.label(target);
             int color = target.status == ChestTarget.Status.CONFIRMED ? 0xffa0ffb0 : 0xffffe6a3;
             context.drawTextWithShadow(mc.textRenderer, text, -mc.textRenderer.getWidth(text) / 2, 0, color);
             NametagUtils.end(context);
@@ -47,10 +47,10 @@ public final class WorldMarkerRenderer {
     }
 
     public void renderBeams(Render3DEvent event, Collection<ChestTarget> targets,
-                            boolean showCompleted, boolean throughWalls, int distance) {
+                            boolean showCompleted, boolean throughWalls, int distance, LootSelection selection) {
         if (!ready()) return;
         var renderer = throughWalls ? event.renderer : event.depthRenderer;
-        for (ChestTarget target : select(targets, showCompleted, throughWalls, distance)) {
+        for (ChestTarget target : select(targets, showCompleted, throughWalls, distance, selection)) {
             renderer.box(target.x + .38, target.y + 1, target.z + .38,
                 target.x + .62, mc.world.getTopYInclusive() + 1, target.z + .62,
                 BEAM_SIDE, BEAM_EDGE, ShapeMode.Both, 0);
@@ -58,10 +58,10 @@ public final class WorldMarkerRenderer {
     }
 
     private List<ChestTarget> select(Collection<ChestTarget> targets, boolean showCompleted,
-                                      boolean throughWalls, int distance) {
+                                      boolean throughWalls, int distance, LootSelection selection) {
         return MarkerSelection.nearest(targets, showCompleted,
             mc.player.getX(), mc.player.getY(), mc.player.getZ(), distance, MAX_MARKERS,
-            target -> throughWalls || visible(target));
+            target -> selection.matches(target) && (throughWalls || visible(target)));
     }
 
     private boolean visible(ChestTarget target) {

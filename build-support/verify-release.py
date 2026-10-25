@@ -8,11 +8,10 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-EXCLUDED = {'.git', '.gradle', 'build', 'dist', '__pycache__', 'run', 'config',
+EXCLUDED = {'.git', '.gradle', '.gradle-user', '.gradle-proxy', 'build', 'dist', '__pycache__', 'run', 'config',
             'logs', 'log', '.idea', '.vscode', '.settings', '.cache', 'out', 'classes'}
 # Hashes of removed identifiers; private identifiers are not embedded in public tools.
 REMOVED_IDENTIFIER_HASHES = {
-    '027601b58892cb0bc47851d12eca9ecd4e02e872bbb6f3179cc96544fc5f6f76',
     '46ad28d84def332ab9efdf7c86edc6191bf563bc24b22ef1668fa7f1b1b1cffa',
     'ef1942dc8d1fdd11805bc28de1281a38771a7ab072ba6680b231af07d1cc96e1',
     'ff3f8000a82ab8b8f87323965c042046b23673a604f42136d1ecaf28976b5092',
@@ -29,6 +28,9 @@ PATTERNS = [
     re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
 ]
 REMOVED_CLASSES = [
+    'dev/tanghulu/addon/modules/AutoWalk.class',
+    'dev/tanghulu/addon/modules/NewChunks.class',
+    'dev/tanghulu/addon/modules/OnekeyFireWork.class',
     'dev/tanghulu/addon/ConfigManager.class',
     'dev/tanghulu/addon/util/MeituanTimeFetcher.class',
     'dev/tanghulu/addon/modules/Beyblade.class',
@@ -67,7 +69,7 @@ def inspect_archive(data, label, main_jar=False):
         if main_jar:
             assert names.count('fabric.mod.json') == 1
             meta = json.loads(archive.read('fabric.mod.json'))
-            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.2'
+            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.4'
             assert meta['authors'] == ['Tanghulu2019']
             assert meta['contributors'] == ['Cqb13', 'Mikumiku', 'Jefff']
             assert meta['depends']['minecraft'] == '1.21.11'
@@ -94,7 +96,7 @@ def source_paths():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.2.jar')
+    parser.add_argument('--jar', type=Path, default=ROOT/'build/libs/Tanghulu-1.0.4.jar')
     parser.add_argument('--source', type=Path)
     args = parser.parse_args()
     paths = list(source_paths())

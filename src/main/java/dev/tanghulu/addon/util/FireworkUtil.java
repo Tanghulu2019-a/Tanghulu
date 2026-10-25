@@ -1,66 +1,17 @@
-package dev.tanghulu.addon.modules;
+package dev.tanghulu.addon.util;
 
 import dev.tanghulu.addon.BaseModule;
-import dev.tanghulu.addon.util.BagUtil;
-import dev.tanghulu.addon.util.TanghuluUtil;
-import dev.tanghulu.addon.util.Via;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.settings.IntSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
-import meteordevelopment.orbit.EventHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.util.Hand;
 
-public class OnekeyFireWork extends BaseModule {
-    private int delay;
-    private int slotBefore;
-    private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final Setting<Integer> closeDelay = sgGeneral.add(
-        new IntSetting.Builder()
-            .name("关闭延迟")
-            .description("使用烟花后关闭界面的延迟（游戏刻）")
-            .defaultValue(4)
-            .sliderRange(1, 40)
-            .build()
-    );
-
-    public OnekeyFireWork() {
-        super(BaseModule.CATEGORY_TANGHULU_COMBAT,
-            "快捷烟花",
-            "快捷键一键放烟花"
-        );
-
-        this.delay = 0;
-        this.slotBefore = mc.player == null ? 0 : Via.getSelectedSlot();
-
-    }
-
-    @Override
-    public void onActivate() {
-        this.fire();
-//        BagUtil.quickUse(Items.FIREWORK_ROCKET);
-
-        this.delay = this.closeDelay.get();
-        this.slotBefore = mc.player == null ? 0 : Via.getSelectedSlot();
-    }
-
-    @EventHandler
-    private void onTick(TickEvent.Post event) {
-        if (this.delay == 0) {
-            InvUtils.swap(this.slotBefore, false);
-            this.toggle();
-        } else {
-            this.delay--;
-        }
-    }
-
-
-    public void fire() {
+public final class FireworkUtil {
+    private FireworkUtil() {}
+    private static final net.minecraft.client.MinecraftClient mc = net.minecraft.client.MinecraftClient.getInstance();
+    public static void fire() {
 
         try {
             if (!mc.player.isOnGround()) {
@@ -93,7 +44,7 @@ public class OnekeyFireWork extends BaseModule {
         }
     }
 
-    private void firework() {
+    private static void firework() {
         BaseModule.sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id, mc.player.getYaw(), mc.player.getPitch()));
     }
 }

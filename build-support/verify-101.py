@@ -12,7 +12,7 @@ stub('net.minecraft.util.math', 'BlockPos', '''
 public record BlockPos(int x,int y,int z) {
     public int getX(){return x;} public int getY(){return y;} public int getZ(){return z;}
 }''')
-stub('net.minecraft.world', 'World', 'public class World { public static final World END = new World(); }')
+stub('net.minecraft.world', 'World', 'public class World { public static final World END = new World(), OVERWORLD = new World(), NETHER = new World(); }')
 stub('xaero.common.minimap.waypoints', 'Waypoint', '''
 public class Waypoint {
     private final int x,z; private final String name;
@@ -53,8 +53,12 @@ public class BuiltInHudModules {
 stub('dev.tanghulu.addon.util.mushroom','MushroomWaypoints','''
 public class MushroomWaypoints {
     public static final xaero.hud.minimap.world.MinimapWorld END = new xaero.hud.minimap.world.MinimapWorld();
+    public static final xaero.hud.minimap.world.MinimapWorld OVERWORLD = new xaero.hud.minimap.world.MinimapWorld();
+    public static final xaero.hud.minimap.world.MinimapWorld NETHER = new xaero.hud.minimap.world.MinimapWorld();
     public static xaero.hud.minimap.world.MinimapWorld dimensionWorld(
         xaero.hud.minimap.BuiltInHudModules.Session s,xaero.hud.minimap.world.MinimapWorld origin,net.minecraft.world.World dimension) {
+        if(dimension==net.minecraft.world.World.OVERWORLD)return OVERWORLD;
+        if(dimension==net.minecraft.world.World.NETHER)return NETHER;
         if(dimension!=net.minecraft.world.World.END)throw new AssertionError("wrong dimension");
         return END;
     }
@@ -62,6 +66,7 @@ public class MushroomWaypoints {
 stub('dev.tanghulu.qa','Release101Checks','''
 import dev.tanghulu.addon.util.LogSafety;
 import dev.tanghulu.addon.util.ElytraWaypoints;
+import dev.tanghulu.addon.util.StructureWaypoints;
 import dev.tanghulu.addon.util.mushroom.MushroomWaypoints;
 import xaero.hud.minimap.BuiltInHudModules;
 import xaero.hud.minimap.world.MinimapWorld;
@@ -113,7 +118,28 @@ public class Release101Checks {
         BuiltInHudModules.MINIMAP.session=null;
         try { ElytraWaypoints.saveAll(previous,points); throw new AssertionError("missing session accepted"); }
         catch(java.io.IOException expected){checks++;}
-        System.out.println("Release 1.0.1 checks passed: "+checks);
+        check(StructureWaypoints.capture()==null,"capture without session");
+        BuiltInHudModules.MINIMAP.session=s;
+        var context=StructureWaypoints.capture();
+        var structures=new java.util.ArrayList<StructureWaypoints.Point>();
+        for(int i=0;i<25;i++)structures.add(new StructureWaypoints.Point(-100-i,64,-200,"village","overworld"));
+        structures.add(new StructureWaypoints.Point(-100,0,-200,"fortress","the_nether"));
+        structures.add(new StructureWaypoints.Point(-100,0,-200,"end city","the_end"));
+        structures.add(structures.getFirst());
+        StructureWaypoints.saveAll(context,structures);
+        check(MushroomWaypoints.OVERWORLD.set.points.size()==25,"save beyond chat limit and deduplicate batch");
+        check(MushroomWaypoints.NETHER.set.points.size()==1,"nether isolated");
+        check(end.set.points.size()==28,"end result preserves existing markers");
+        check(MushroomWaypoints.OVERWORLD.set.points.stream().noneMatch(w->w.temporary||w.yIncluded),"permanent horizontal markers");
+        StructureWaypoints.saveAll(context,structures);
+        check(MushroomWaypoints.OVERWORLD.set.points.size()==25 && end.set.points.size()==28,"rescan deduplication");
+        s.manager.origin=new MinimapWorld();
+        try { StructureWaypoints.saveAll(context,structures); throw new AssertionError("structure stale session accepted"); }
+        catch(java.io.IOException expected){checks++;}
+        BuiltInHudModules.MINIMAP.session=null;
+        try { StructureWaypoints.saveAll(context,structures); throw new AssertionError("structure missing session accepted"); }
+        catch(java.io.IOException expected){checks++;}
+        System.out.println("Navigation and safety checks passed: "+checks);
     }
 }''')
 paths=[]
@@ -122,7 +148,7 @@ for name, content in sources.items():
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(content,encoding='utf-8')
     paths.append(str(path))
-for name in ['LogSafety','ElytraWaypoints']:
+for name in ['LogSafety','ElytraWaypoints','StructureWaypoints']:
     paths.append(str(ROOT/f'src/main/java/dev/tanghulu/addon/util/{name}.java'))
 classes=work/'classes';classes.mkdir(parents=True,exist_ok=True)
 subprocess.run(['javac','--release','21','-encoding','UTF-8','-d',str(classes),*paths],check=True)

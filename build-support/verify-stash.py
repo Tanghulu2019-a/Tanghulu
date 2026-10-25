@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--gradle-home',type=Path,default=Path(os.environ.get('GRADLE_USER_HOME',Path.home()/'.gradle')))
 args=parser.parse_args()
-JAR=ROOT/'build/libs/Tanghulu-1.0.2.jar'
+JAR=ROOT/'build/libs/Tanghulu-1.0.4.jar'
 STASH='dev/tanghulu/stash/'
 report={'passed':False,'inGameTested':False}
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -19,7 +19,7 @@ with zipfile.ZipFile(JAR) as jar:
     names=set(jar.namelist())
     assert len(names)==len(jar.namelist()) and jar.testzip() is None
     meta=json.loads(jar.read('fabric.mod.json'))
-    assert meta['version']=='1.0.2'
+    assert meta['version']=='1.0.4'
     assert meta['entrypoints']['meteor']==['dev.tanghulu.addon.ok.TanghuluAddon']
     modules={'AutoLogPlus','BetterStashFinder','ElytraFlyPlusPlus','Pitch40Util','VanityESP'}
     for name in modules:assert STASH+'modules/'+name+'.class' in names,name

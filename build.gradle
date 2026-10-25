@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.tanghulu'
-version = '1.0.2'
+version = '1.0.4'
 base { archivesName = 'Tanghulu' }
 
 repositories {
@@ -252,5 +252,13 @@ tasks.register('stashRecordsChecks', JavaExec) {
     systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.StashRecordsChecks'
 }
 tasks.named('check') { dependsOn 'stashRecordsChecks' }
+
+tasks.register('ancientLootChecks', JavaExec) {
+    dependsOn 'stashQaClasses', 'skeletonQaClasses'
+    classpath = sourceSets.stashQa.runtimeClasspath + project(':ancient').sourceSets.main.output
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.AncientLootChecks'
+}
+tasks.named('check') { dependsOn 'ancientLootChecks' }
 
 

@@ -1,8 +1,7 @@
 # Tanghulu source and license notices
 
 Tanghulu2019 is the author and primary contributor of this mod.
-Some features derive from source by Cqb13 (cqb13), Mikumiku (mikumiku),
-and jefff; source credits do not imply direct collaboration or endorsement.
+Cqb13 (cqb13) and Mikumiku (mikumiku) contributed source code for some features.
 Upstream file-level credits and license notices are retained.
 
 Tanghulu includes modified code from Meteor Miku by mikumiku:
@@ -19,28 +18,16 @@ were integrated on 2026-10-18 with namespace, entrypoint and compatibility
 changes. Ancient Apple Hunter attribution: Tanghulu. Existing file-level
 credits and third-party license notices are retained.
 
-Stash integration for Tanghulu 1.0.2, modified on 2026-10-25:
-Upstream project: meteor-stashhunting-addon / jeff mod by miles352 (jefff).
-Release reference: https://github.com/miles352/meteor-stashhunting-addon/releases/tag/0.16.7
-Tag resolved during this review to c88c63c268705b1f23ac1085cefa70b6f24be906.
-This is a provenance reference, not a claim of a byte-identical upstream import.
-The supplied source was adapted from the maintainer's local distribution.
-Five modules and two HUDs are included; VanityESP credits xqyet.
-The upstream README also credits xqyet for AFKVanillaFly, which is excluded.
-Retain all existing file-level credits and the upstream README in docs/stash-upstream.
-
-No LICENSE file was present in the inspected upstream 0.16.7 source tree.
-On 2026-10-25 the Tanghulu maintainer expressly confirmed obtaining permission
-covering modification, public source redistribution and distribution with this
-GPL-3.0-only project, including third-party portions of the imported code.
-This records the maintainer's authorization statement; it is not an upstream
-public license, independent verification of a private grant, or endorsement.
-
-Modifications: dev.tanghulu namespace, Chinese UI and settings, optional
-dependency registration, isolated flight hooks, Baritone travel lifecycle,
-stash CSV/JSON handling and current-world cleanup. Durability and coordinate
-safety checks move from AutoLog to AutoLogPlus in 1.0.2, disabled by default.
-XaeroPlus is compile-only and is not bundled. Existing privacy cleanup remains.
+Restored on 2026-10-24 from the user-supplied Tanghulu 1.0.0 source into
+1.0.1, following the user's statement that authorization for the relevant
+Stash code was obtained from its author. This records the supplied provenance;
+no additional upstream license terms are invented here.
+Upstream: https://github.com/miles352/meteor-stashhunting-addon/releases/tag/0.16.7
+Stash author: jefff. AFKVanillaFly and VanityESP credit xqyet.
+Seven modules, two HUDs, localization, optional flight hooks and stash record
+clearing are restored. Duplicate AutoLog safety checks reuse the existing
+1.0.1 implementation. XaeroPlus is an optional compile-only dependency and is
+not bundled in the addon. Existing 1.0.1 features and privacy cleanup remain.
 
 The retained project is distributed under GPL-3.0-only; see LICENSE. No claim
 of sole authorship over upstream code is made. Complete corresponding project

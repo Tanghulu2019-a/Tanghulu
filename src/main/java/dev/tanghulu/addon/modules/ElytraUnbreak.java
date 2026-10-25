@@ -1,13 +1,13 @@
 package dev.tanghulu.addon.modules;
 
 import dev.tanghulu.addon.BaseModule;
+import dev.tanghulu.addon.util.FireworkUtil;
 import dev.tanghulu.addon.util.Via;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.BoolSetting;
 import meteordevelopment.meteorclient.settings.IntSetting;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.EquipmentSlot;
@@ -123,8 +123,8 @@ public class ElytraUnbreak extends BaseModule {
         }
 
         // 自动发射烟花
-        if (autoRocket.get()) {
-            Modules.get().get(OnekeyFireWork.class).toggle();
+        if (autoRocket.get() && globalTickCounter % 2 == 0) {
+            FireworkUtil.fire();
         }
     }
 

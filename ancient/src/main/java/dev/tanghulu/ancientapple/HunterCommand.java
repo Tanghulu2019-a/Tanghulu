@@ -9,7 +9,7 @@ import net.minecraft.command.CommandSource;
 
 public final class HunterCommand extends Command {
     private final HunterModule module;
-    public HunterCommand(HunterModule module) { super("aah","古城附魔金苹果箱定位。","古城箱"); this.module=module; }
+    public HunterCommand(HunterModule module) { super("aah","古城战利品定位：附魔金苹果与迅捷潜行 III 附魔书。","古城箱"); this.module=module; }
     @Override public void build(LiteralArgumentBuilder<CommandSource> builder) {
         builder.executes(c -> { info("seed <种子> | loot <版本：1.21.1～26.3> | scan | cancel | diagnose | blacklist（管理窗口）| blacklist on/off/list [页码]/clear"); return SINGLE_SUCCESS; });
         builder.then(literal("seed").then(argument("seed",LongArgumentType.longArg()).executes(c -> { module.seed.set(Long.toString(LongArgumentType.getLong(c,"seed"))); if(!module.isActive())module.enable(); return SINGLE_SUCCESS; })));

@@ -5,8 +5,8 @@ Run after build; pass --gradle-home for a nondefault Gradle cache.
 from pathlib import Path
 import argparse, json, os, re, shutil, subprocess, zipfile
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = '1.0.2'
-JAR = ROOT / 'build/libs/Tanghulu-1.0.2.jar'
+VERSION = '1.0.4'
+JAR = ROOT / 'build/libs/Tanghulu-1.0.4.jar'
 parser=argparse.ArgumentParser()
 parser.add_argument('--gradle-home',type=Path,default=Path(os.environ.get('GRADLE_USER_HOME',Path.home()/'.gradle')))
 args=parser.parse_args()

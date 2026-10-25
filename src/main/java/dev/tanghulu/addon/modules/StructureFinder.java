@@ -1,6 +1,8 @@
 package dev.tanghulu.addon.modules;
 
 import dev.tanghulu.addon.BaseModule;
+import dev.tanghulu.addon.util.StructureWaypoints;
+import net.fabricmc.loader.api.FabricLoader;
 import dev.tanghulu.addon.util.seeds.Seed;
 import dev.tanghulu.addon.util.seeds.SeedVersion;
 import dev.tanghulu.addon.util.seeds.Prediction26;
@@ -57,6 +59,11 @@ public class StructureFinder extends BaseModule {
         .defaultValue(true)
         .build()
     );
+
+    private final Setting<Boolean> xaeroWaypoints = sgGeneral.add(new BoolSetting.Builder()
+        .name("同步Xaero航点").description("将全部结果按维度保存到 Xaero 小地图，重复搜索自动去重。")
+        .defaultValue(true).build());
+    private Object xaeroContext;
 
     // 种子设置
     private final Setting<String> seedInput = sgSeed.add(new StringSetting.Builder()
@@ -223,7 +230,7 @@ public class StructureFinder extends BaseModule {
     private CompletableFuture<Void> searchTask = null;
 
     public StructureFinder() {
-        super(BaseModule.CATEGORY, "结构搜索", "自动搜索各种结构位置，并在聊天中输出坐标。");
+        super(BaseModule.CATEGORY, "结构搜索", "自动搜索各种结构位置，输出坐标并同步 Xaero 小地图航点。");
     }
 
     @Override
@@ -318,6 +325,12 @@ public class StructureFinder extends BaseModule {
             warning("建议在主世界使用此功能以获得最准确的结果");
         }
 
+        xaeroContext = null;
+        if (xaeroWaypoints.get() && FabricLoader.getInstance().isModLoaded("xaerominimap")) {
+            try { xaeroContext = StructureWaypoints.capture(); }
+            catch (RuntimeException | LinkageError e) { warning("Xaero 接口不可用，仅输出聊天坐标。"); }
+        }
+        if (xaeroWaypoints.get() && xaeroContext == null) warning("Xaero 未安装或会话尚未就绪，仅输出聊天坐标。");
         isSearching = true;
         long generation = ++searchGeneration;
         int radius = searchRadius.get();
@@ -330,7 +343,7 @@ public class StructureFinder extends BaseModule {
         searchTask = CompletableFuture.runAsync(() -> {
             try {
                 if (worldSeed.is26_3()) searchStructures26(worldSeed, playerPos, radius, generation, selected);
-                else searchStructureLocations(worldSeed, playerPos);
+                else searchStructureLocations(worldSeed, playerPos, generation);
             } catch (Exception e) {
                 if (worldSeed.is26_3()) {
                     mc.execute(() -> { if (generation == searchGeneration && isActive()) error("26.3 结构预测失败：" + e.getMessage()); });
@@ -382,14 +395,14 @@ public class StructureFinder extends BaseModule {
                 for (var element : response.getAsJsonArray("structures")) {
                     var row = element.getAsJsonArray();
                     BPos pos = new BPos(row.get(1).getAsInt(), row.get(2).getAsInt(), row.get(3).getAsInt());
-                    locations.add(new StructureLocation(pos, Math.hypot(pos.getX() - playerPos.getX(), pos.getZ() - playerPos.getZ()), selected.get(row.get(0).getAsString())));
+                    locations.add(new StructureLocation(pos, Math.hypot(pos.getX() - playerPos.getX(), pos.getZ() - playerPos.getZ()), selected.get(row.get(0).getAsString()), dimension));
                 }
             }
             mc.execute(() -> { if (generation == searchGeneration && isActive()) displayResults(locations, playerPos); });
         } finally { if (prediction26 == backend) prediction26 = null; }
     }
 
-    private void searchStructureLocations(Seed worldSeed, BlockPos playerPos) {
+    private void searchStructureLocations(Seed worldSeed, BlockPos playerPos, long generation) {
         List<StructureLocation> structureLocations = new ArrayList<>();
 
         try {
@@ -501,7 +514,7 @@ public class StructureFinder extends BaseModule {
         }
 
         // 显示结果
-        displayResults(structureLocations, playerPos);
+        mc.execute(() -> { if (generation == searchGeneration && isActive()) displayResults(structureLocations, playerPos); });
         isSearching = false;
     }
 
@@ -708,6 +721,15 @@ public class StructureFinder extends BaseModule {
         // 按距离排序
         locations.sort((a, b) -> Double.compare(a.distance, b.distance));
 
+        if (xaeroWaypoints.get() && xaeroContext != null) {
+            try {
+                StructureWaypoints.saveAll(xaeroContext, locations.stream().map(l ->
+                    new StructureWaypoints.Point(l.position.getX(), l.position.getY(), l.position.getZ(), l.structureType, l.dimension)).toList());
+                info("已同步全部 %d 个结构航点到 Xaero 小地图。", locations.size());
+            } catch (Exception | LinkageError e) {
+                error("Xaero 航点保存未完成：%s；聊天坐标仍可使用。", e.getMessage());
+            }
+        }
         int shown = 0;
         for (int index = 0; index < Math.min(locations.size(), 20); index++) {
             var location = locations.get(index);
@@ -723,8 +745,18 @@ public class StructureFinder extends BaseModule {
         final BPos position;
         final double distance;
         final String structureType;
+        final String dimension;
 
         StructureLocation(BPos position, double distance, String structureType) {
+            this(position, distance, structureType, switch (structureType) {
+                case "下界要塞", "堡垒遗迹", "下界化石" -> "the_nether";
+                case "末地城" -> "the_end";
+                default -> "overworld";
+            });
+        }
+
+        StructureLocation(BPos position, double distance, String structureType, String dimension) {
+            this.dimension = dimension;
             this.position = position;
             this.distance = distance;
             this.structureType = structureType;

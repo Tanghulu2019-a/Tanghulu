@@ -9,6 +9,7 @@ public final class ChestSurvey {
     public static void prepare(ChestTarget target,boolean enabled) {
         // Ignore the old setting even when migrating a cache or called by an older integration.
         target.surveyRequired=false;
+        target.refreshLoot();
         if(target.isBlacklisted())target.markCollected();
     }
 

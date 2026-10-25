@@ -31,6 +31,7 @@ public final class HunterModule extends Module {
     private final SettingGroup general=settings.getDefaultGroup(), display=settings.createGroup("标记");
     public final Setting<String> seed=general.add(new StringSetting.Builder().name("世界种子").description("输入完整有符号 64 位世界种子。多人游戏请选择服务器实际使用的战利品版本。").defaultValue("-7346913998703726680").onChanged(s -> contextChanged()).build());
     private final Setting<String> seedNote=general.add(new dev.tanghulu.ancientapple.gui.NoteSetting("种子备注","多人游戏请选择服务器版本。"));
+    private final Setting<LootSelection> lootSelection=general.add(new EnumSetting.Builder<LootSelection>().name("定位物品").description("选择附魔金苹果、迅捷潜行3或全部；切换后立即筛选现有结果，无需重新搜索。").defaultValue(LootSelection.All).onChanged(v -> selectionChanged()).build());
     public final Setting<LootVersion> lootVersion=general.add(new EnumSetting.Builder<LootVersion>().name("服务器战利品版本").description("选择服务器实际运行的正式版本，支持 1.21.1 至 26.3；与客户端版本独立。").defaultValue(LootVersion.MC_26_1).onChanged(v -> contextChanged()).build());
     private final Setting<Integer> radius=general.add(new IntSetting.Builder().name("搜索半径").description("本轮固定搜索范围，最多 131072 格。大范围定位耗时和内存占用随面积增长，可随时取消。").defaultValue(10000).min(384).sliderRange(384,32768).max(131072).build());
     public final Setting<Boolean> blacklistEnabled=general.add(new BoolSetting.Builder().name("启用黑名单").description("隐藏已搜取箱子；关闭后允许重新定位，保留历史记录。").defaultValue(true).onChanged(v -> blacklistChanged()).visible(() -> false).build());
@@ -54,7 +55,7 @@ public final class HunterModule extends Module {
     private String lastFailure="";
     private String lastFailureTrace="";
     private SearchArea surveyArea;
-    public HunterModule() { super(AncientAppleAddon.CATEGORY,"古城附魔金定位","古城附魔金苹果箱预测与定位，手动搜取记录黑名单。"); runInMainMenu=true; }
+    public HunterModule() { super(AncientAppleAddon.CATEGORY,"古城战利品定位","古城附魔金苹果与迅捷潜行 III 附魔书预测与定位，手动搜取记录黑名单。"); runInMainMenu=true; }
     @Override public void onDeactivate() { contextChanged(); }
     private void contextChanged() {
         // Setting callbacks may fire while the module is being constructed/deserialized.
@@ -173,7 +174,7 @@ public final class HunterModule extends Module {
             FabricLoader.getInstance().getConfigDir().resolve("ancient-apple-hunter/terrain/"+WorldStore.ALGORITHM+"/"+seed.get().trim()),
             result -> mc.execute(() -> acceptPrediction(request,requestedContext,requestedArea,result)),
             error -> mc.execute(() -> { if(request==epoch)recordFailure(error); }));
-        message("开始定位古城附魔金苹果箱，半径 "+radius.get()+" 格，服务器战利品模型 "+lootVersion.get()+"。");
+        message("开始定位古城战利品箱（"+lootSelection.get()+"），半径 "+radius.get()+" 格，服务器战利品模型 "+lootVersion.get()+"。");
     }
     private void acceptPrediction(long request,String requestedContext,SearchArea area,List<ChestTarget> result) {
         if(request!=epoch || !requestedContext.equals(context) || !isActive())return;
@@ -185,7 +186,7 @@ public final class HunterModule extends Module {
         }
         surveyArea=area;
         saveAndSync();
-        long pending=result.stream().map(t -> targets.get(t.key())).filter(ChestTarget::eligible).count();
+        long pending=result.stream().map(t -> targets.get(t.key())).filter(lootSelection.get()::matches).filter(ChestTarget::eligible).count();
         long hidden=result.stream().map(t -> targets.get(t.key())).filter(ChestTarget::isBlacklisted).count();
         message("定位完成："+pending+" 只待查看箱子；已隐藏 "+hidden+" 只黑名单箱子。请自行前往。");
     }
@@ -247,7 +248,8 @@ public final class HunterModule extends Module {
         } catch(Exception e) { warning("诊断导出失败：%s",e.getMessage()); }
     }
     private void save() { if(store!=null)try { store.write(targets.values(),calibration); } catch(Exception e) { warning("缓存保存失败：%s",e.getMessage()); } }
-    private void syncWaypoints() { if(xaeroEnabled.get())xaero.sync(targets.values(),completed.get()); }
+    private void selectionChanged() { if(xaero!=null && isActive())syncWaypoints(); }
+    private void syncWaypoints() { if(xaeroEnabled.get())xaero.sync(targets.values(),completed.get(),lootSelection.get()); }
     private void saveAndSync() { save(); syncWaypoints(); }
     private void message(String text) { info("%s",text); }
     @Override public String getInfoString() { return prediction.running?"定位 "+prediction.progress.completed()+"/"+prediction.progress.total():"仅定位"; }
@@ -261,11 +263,11 @@ public final class HunterModule extends Module {
     private void button(WTable table,GuiTheme theme,String text,Runnable action) { WButton b=table.add(theme.button(text)).widget(); b.action=action; }
     @EventHandler private void render(Render2DEvent event) {
         if(mc.world==null || mc.player==null || mc.world.getRegistryKey()!=World.OVERWORLD)return;
-        markers.renderIcons(event,targets.values(),completed.get(),throughWalls.get(),renderDistance.get());
+        markers.renderIcons(event,targets.values(),completed.get(),throughWalls.get(),renderDistance.get(),lootSelection.get());
         var context=event.drawContext;
         if(prediction.running) { var p=prediction.progress; context.drawTextWithShadow(mc.textRenderer,"古城箱预测 "+p.completed()+"/"+p.total()+" · 已补算 "+prediction.terrainChests+" 箱",8,8,0xffffd060); }
     }
     @EventHandler private void renderBeams(Render3DEvent event) {
-        if(beams.get())markers.renderBeams(event,targets.values(),completed.get(),throughWalls.get(),beamDistance.get());
+        if(beams.get())markers.renderBeams(event,targets.values(),completed.get(),throughWalls.get(),beamDistance.get(),lootSelection.get());
     }
 }

@@ -24,7 +24,7 @@ public final class ClearXaeroWaypoints extends BaseModule {
                 return;
             }
             // Invalidate asynchronous searches before deleting. A queued result may not restore points.
-            for (var type : java.util.List.of(ElytraFinder.class, MushroomFinder.class, HunterModule.class)) {
+            for (var type : java.util.List.of(StructureFinder.class, ElytraFinder.class, MushroomFinder.class, HunterModule.class)) {
                 var module = Modules.get().get(type);
                 if (module != null && module.isActive()) module.toggle();
             }

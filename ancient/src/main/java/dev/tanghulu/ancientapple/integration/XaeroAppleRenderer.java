@@ -20,7 +20,7 @@ public final class XaeroAppleRenderer {
             var matrices=(MatrixStack)graphics.getClass().getMethod("pose").invoke(graphics);
             var buffers=(VertexConsumerProvider.Immediate)graphics.getClass().getMethod("getBufferSource").invoke(graphics);
             if(opacity<=0)return true;
-            var state=appleState();
+            var state=itemState(waypoint);
             matrices.push();
             try {
                 drawItem(matrices,buffers,state,x+.5f,y+.5f,16);
@@ -36,7 +36,7 @@ public final class XaeroAppleRenderer {
             float size=settings.getClass().getField("worldmapWaypointsScale").getFloat(settings)*scale;
             var matrices=(MatrixStack)graphics.getClass().getMethod("pose").invoke(graphics);
             var buffers=(VertexConsumerProvider.Immediate)graphics.getClass().getMethod("getBufferSource").invoke(graphics);
-            var client=MinecraftClient.getInstance(); var state=appleState();
+            var client=MinecraftClient.getInstance(); var state=itemState(waypoint);
             matrices.push();
             try {
                 matrices.translate(x,y,0); matrices.scale(size,size,1);
@@ -49,17 +49,24 @@ public final class XaeroAppleRenderer {
                     try {
                         matrices.scale(1.2f,1.2f,1);
                         graphics.getClass().getMethod("drawCenteredString",net.minecraft.client.font.TextRenderer.class,String.class,int.class,int.class,int.class)
-                            .invoke(graphics,client.textRenderer,XaeroBridge.MARKER_NAME,0,-39,0xffffe6a3);
+                            .invoke(graphics,client.textRenderer,waypoint.getClass().getMethod("getName").invoke(waypoint),0,-39,0xffffe6a3);
                     } finally { matrices.pop(); }
                 }
             } finally { matrices.pop(); }
             return true;
         } catch(ReflectiveOperationException|LinkageError|RuntimeException e) { report(e); return false; }
     }
-    private static ItemRenderState appleState() {
+    private static ItemStack markerStack(Object waypoint) {
+        try {
+            String name=(String)waypoint.getClass().getMethod("getName").invoke(waypoint);
+            if(name.startsWith("迅捷潜行"))return Items.ENCHANTED_BOOK.getDefaultStack();
+        } catch(ReflectiveOperationException ignored) { }
+        return Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack();
+    }
+    private static ItemRenderState itemState(Object waypoint) {
         var client=MinecraftClient.getInstance();
         var state=new ItemRenderState();
-        client.getItemModelManager().clearAndUpdate(state,Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack(),
+        client.getItemModelManager().clearAndUpdate(state,markerStack(waypoint),
             ItemDisplayContext.GUI,client.world,client.player,0);
         return state;
     }
@@ -83,7 +90,7 @@ public final class XaeroAppleRenderer {
     }
     public static boolean drawGui(DrawContext context,Object waypoint,int x,int y,int opacity) {
         if(!XaeroBridge.isOwnedWaypoint(waypoint))return false;
-        if(opacity>0)context.drawItem(Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack(),x-8,y-8);
+        if(opacity>0)context.drawItem(markerStack(waypoint),x-8,y-8);
         return true;
     }
     /** Render the resolved vanilla model, including native glint, into Xaero's buffers. */

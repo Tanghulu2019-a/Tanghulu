@@ -11,7 +11,7 @@ public final class MarkerSelection {
 
     public static boolean shouldMark(ChestTarget target, boolean showCompleted) {
         return !target.openedWithApples && !target.isBlacklisted() && target.hasPrediction()
-            && (target.apples > 0 || target.verificationRequired || target.serverObserved)
+            && (target.apples > 0 || target.swiftSneakBooks > 0 || target.verificationRequired || target.serverObserved)
             && (showCompleted || target.eligible());
     }
 

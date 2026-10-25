@@ -50,3 +50,7 @@ libs/*.jar
 user.dat
 config/
 dist/
+
+# Python build caches
+__pycache__/
+*.pyc

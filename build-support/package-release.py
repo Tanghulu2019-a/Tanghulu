@@ -15,20 +15,20 @@ verify = module_from_spec(spec)
 spec.loader.exec_module(verify)
 
 def main():
-    jar = ROOT/'build/libs/Tanghulu-1.0.2.jar'
+    jar = ROOT/'build/libs/Tanghulu-1.0.4.jar'
     subprocess.run([sys.executable, str(ROOT/'build-support/verify-stash.py')], check=True)
     subprocess.run([sys.executable, str(ROOT/'build-support/verify-release.py')], check=True)
-    # Merge validation also checks the complete 100-test Ancient suite report.
+    # Merge validation also checks the complete 107-test Ancient suite report.
     report_path = ROOT/'build/reports/merge-validation.json'
     report = json.loads(report_path.read_text('utf-8'))
     assert report['passed'] and report['jarSha256'] == hashlib.sha256(jar.read_bytes()).hexdigest()
     output = ROOT/'dist'
     output.mkdir(exist_ok=True)
-    source = output/'Tanghulu-1.0.2-source.zip'
+    source = output/'Tanghulu-1.0.4-source.zip'
     with zipfile.ZipFile(source, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in verify.source_paths():
             name = 'Tanghulu/'+path.relative_to(ROOT).as_posix()
-            info = zipfile.ZipInfo(name, date_time=(2026, 10, 24, 0, 0, 0))
+            info = zipfile.ZipInfo(name, date_time=(2026, 10, 25, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = (0o100755 if path.name == 'gradlew' else 0o100644) << 16
             archive.writestr(info, path.read_bytes())

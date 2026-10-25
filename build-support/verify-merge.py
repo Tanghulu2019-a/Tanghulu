@@ -1,4 +1,4 @@
-"""Audit the merged 1.0.2 release JAR.
+"""Audit the merged 1.0.4 release JAR.
 """
 from pathlib import Path
 import argparse
@@ -12,7 +12,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
 args = parser.parse_args()
-JAR = ROOT / 'build/libs/Tanghulu-1.0.2.jar'
+JAR = ROOT / 'build/libs/Tanghulu-1.0.4.jar'
 report = {'passed': False, 'minecraft': '1.21.11', 'inGameTested': False}
 with zipfile.ZipFile(JAR) as jar:
     names = set(jar.namelist())
@@ -61,15 +61,15 @@ with zipfile.ZipFile(JAR) as jar:
     assert not any(n.startswith(('org/junit/', 'dev/tanghulu/ancientapple/qa/')) for n in names)
     active = re.compile(r'^\s*(?:modules|Modules\.get\(\))\.add\(new (\w+)\(\)\);', re.M)
     actual = active.findall((ROOT/'src/main/java/dev/tanghulu/addon/TanghuluApp.java').read_text('utf-8'))
-    assert len(actual) == len(set(actual)) == 23 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
-    assert {'Confetti', 'SignTextEsp', 'NewChunks'} <= set(actual)
+    assert len(actual) == len(set(actual)) == 20 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
+    assert {'Confetti', 'SignTextEsp'} <= set(actual)
     for module in actual:
         assert 'dev/tanghulu/addon/modules/' + module + '.class' in names
     report.update(mixins=mixin_count, lootProfiles=len(profiles), predictionSourceHash=digest.hexdigest(),
-                  registeredModules=29)
+                  registeredModules=26)
 
 report['unitChecks'] = json.loads((ROOT/'ancient/build/reports/unit-checks.json').read_text('utf-8'))
-assert report['unitChecks']['passed'] and report['unitChecks']['succeeded']==100
+assert report['unitChecks']['passed'] and report['unitChecks']['succeeded']==107
 report.update(passed=True, jarSha256=hashlib.sha256(JAR.read_bytes()).hexdigest())
 output = ROOT/'build/reports/merge-validation.json'
 output.parent.mkdir(parents=True, exist_ok=True)

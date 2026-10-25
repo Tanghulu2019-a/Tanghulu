@@ -2,6 +2,7 @@ package dev.tanghulu.ancientapple.integration;
 
 import dev.tanghulu.ancientapple.core.ChestTarget;
 import dev.tanghulu.ancientapple.core.MarkerSelection;
+import dev.tanghulu.ancientapple.core.LootSelection;
 import net.fabricmc.loader.api.FabricLoader;
 import java.lang.reflect.*;
 import java.util.Collection;
@@ -12,7 +13,7 @@ import net.minecraft.util.Identifier;
 public final class XaeroBridge {
     public static final String MARKER_NAME="附魔金苹果";
     public static final String MARKER_SYMBOL="◆";
-    private static final String GROUP="古城附魔金苹果箱";
+    private static final String GROUP="古城战利品箱";
     private Object ownedWorld,ownedSet;
     private String previousSet;
     private static final Identifier ORIGIN=Identifier.of("ancient-apple-hunter","chests");
@@ -27,7 +28,7 @@ public final class XaeroBridge {
         try { Object world=currentWorld(); return world==null?"":call(world,"getFullPath").toString(); }
         catch(ReflectiveOperationException|LinkageError e) { return ""; }
     }
-    public void sync(Collection<ChestTarget> targets,boolean showCompleted) {
+    public void sync(Collection<ChestTarget> targets,boolean showCompleted,LootSelection selection) {
         if(!FabricLoader.getInstance().isModLoaded("xaerominimap")) { status="未安装 Xaero，使用世界内标记"; return; }
         try {
             Object world=currentWorld(); if(world==null) { status="等待 Xaero 世界会话"; return; }
@@ -42,8 +43,8 @@ public final class XaeroBridge {
             Class<?> type=Class.forName("xaero.common.minimap.waypoints.Waypoint");
             Constructor<?> constructor=type.getConstructor(int.class,int.class,int.class,String.class,String.class,int.class);
             for(ChestTarget target:targets) {
-                if(!shouldMark(target,showCompleted))continue;
-                Object waypoint=constructor.newInstance(target.x,target.y,target.z,MARKER_NAME,MARKER_SYMBOL,6);
+                if(!selection.matches(target) || !shouldMark(target,showCompleted))continue;
+                Object waypoint=constructor.newInstance(target.x,target.y,target.z,selection.label(target),MARKER_SYMBOL,6);
                 call(waypoint,"setTemporary",new Class<?>[]{boolean.class},true);
                 call(waypoint,"setYIncluded",new Class<?>[]{boolean.class},true);
                 call(waypoint,"setThirdPartyOrigin",new Class<?>[]{Identifier.class},ORIGIN);

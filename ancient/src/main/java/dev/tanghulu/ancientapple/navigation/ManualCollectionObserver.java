@@ -116,7 +116,7 @@ public final class ManualCollectionObserver {
         target.x=pos.getX(); target.y=pos.getY(); target.z=pos.getZ();
         return target;
     }
-    private int apples(ItemStack stack) { return stack.isOf(Items.ENCHANTED_GOLDEN_APPLE)?stack.getCount():0; }
+    private int apples(ItemStack stack) { return dev.tanghulu.ancientapple.core.TargetLoot.count(stack); }
     private int chestApples(GenericContainerScreenHandler handler) {
         int count=0; for(int i=0;i<handler.getRows()*9;i++)count+=apples(handler.getSlot(i).getStack()); return count;
     }
