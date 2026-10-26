@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "tanghulu_compat_smoke",
+  "version": "1.0.0",
+  "name": "Tanghulu compatibility test only",
+  "environment": "client",
+  "entrypoints": { "preLaunch": ["dev.tanghulu.compat.smoke.SmokePreLaunch"] }
+}

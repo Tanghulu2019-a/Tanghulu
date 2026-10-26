@@ -43,6 +43,7 @@ public class TanghuluApp {
         modules.add(new PlayerAlert());
         modules.add(new PlayerSkeleton());
         modules.add(new ThreeCNewbieCheck());
+        modules.add(new NotebotFix());
         modules.add(new AutoTrashModule());
         modules.add(new AutoMiner());
         modules.add(new StructureFinder());

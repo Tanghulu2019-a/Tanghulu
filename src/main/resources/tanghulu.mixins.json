@@ -14,7 +14,8 @@
     "ThreeCNametagsMixin",
     "WorldRendererAccessor",
     "TotemParticleMixin",
-    "ModuleTitleMixin"
+    "ModuleTitleMixin",
+    "NotebotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

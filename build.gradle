@@ -4,8 +4,9 @@ plugins {
 }
 
 group = 'dev.tanghulu'
-version = '1.0.4'
-base { archivesName = 'Tanghulu' }
+version = '1.0.5'
+apply from: 'compatibility.gradle'
+base { archivesName = "Tanghulu-mc${mcVersion}" }
 
 repositories {
     mavenCentral()
@@ -21,7 +22,7 @@ configurations.implementation.extendsFrom(configurations.extraLibs)
 // Map the optional XaeroPlus API for compilation without changing its runtime JAR
 // or upgrading Tanghulu's existing Loom/Gradle toolchain.
 def xaeroPlusCompileJar = tasks.register('prepareXaeroPlusCompileJar', net.fabricmc.loom.task.RemapJarTask) {
-    inputFile = file('libs/XaeroPlus-2.35.1-fabric-1.21.11.jar')
+    inputFile = compatDeps != null ? mapJar('xaeroplus') : file('libs/XaeroPlus-2.35.1-fabric-1.21.11.jar')
     destinationDirectory = layout.buildDirectory.dir('compile-dependencies')
     archiveFileName = 'XaeroPlus-2.35.1-named.jar'
     sourceNamespace = 'intermediary'
@@ -32,20 +33,21 @@ def xaeroPlusCompileJar = tasks.register('prepareXaeroPlusCompileJar', net.fabri
 }
 
 dependencies {
-    minecraft 'com.mojang:minecraft:1.21.11'
-    mappings 'net.fabricmc:yarn:1.21.11+build.3:v2'
+    minecraft "com.mojang:minecraft:${mcVersion}"
+    mappings "net.fabricmc:yarn:${yarnVersion}:v2"
     modImplementation 'net.fabricmc:fabric-loader:0.18.2'
-    modImplementation files('libs/meteor-client-1.21.11-86.jar')
-    implementation project(path: ':ancient', configuration: 'namedElements')
+    modImplementation files(meteorJar)
+    implementation project(path: ':ancient', configuration: 'compatLibrary')
     implementation 'meteordevelopment:orbit:0.2.4'
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
-    modCompileOnly 'meteordevelopment:baritone:1.21.11-SNAPSHOT'
-    modCompileOnly 'maven.modrinth:xaeros-minimap:fabric-1.21.11-26.4.2'
-    modCompileOnly 'maven.modrinth:xaeros-world-map:fabric-1.21.11-1.44.2'
-    modCompileOnly files('libs/litematica-1.21.11-0.25.0.jar',
-                         'libs/malilib-fabric-1.21.11-0.27.0.jar',
-                         'libs/minihud-fabric-1.21.11-0.38.0.jar')
+    modCompileOnly "meteordevelopment:baritone:${mcVersion}-SNAPSHOT"
+    if (compatDeps != null) {
+        modCompileOnly files(mapJar('xaeros-minimap'), mapJar('xaeros-world-map'))
+    } else {
+        modCompileOnly 'maven.modrinth:xaeros-minimap:fabric-1.21.11-26.4.2'
+        modCompileOnly 'maven.modrinth:xaeros-world-map:fabric-1.21.11-1.44.2'
+    }
     compileOnly files(xaeroPlusCompileJar.flatMap { it.archiveFile }).builtBy(xaeroPlusCompileJar)
     ['mc_biome:1.171.1', 'mc_core:1.210.0', 'mc_feature:1.171.10',
      'mc_math:1.171.0', 'mc_noise:1.171.1', 'mc_seed:1.171.2',
@@ -57,8 +59,8 @@ dependencies {
 java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
 tasks.withType(JavaCompile).configureEach { options.release = 21; options.encoding = 'UTF-8' }
 processResources {
-    inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') { expand version: project.version }
+    inputs.properties compatProperties
+    filesMatching('fabric.mod.json') { expand compatProperties }
     from('LICENSE') { into 'META-INF/licenses/tanghulu' }
     from('NOTICE.md') { into 'META-INF/licenses/tanghulu' }
     from('licenses') { into 'META-INF/licenses/tanghulu' }
@@ -260,5 +262,127 @@ tasks.register('ancientLootChecks', JavaExec) {
     systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.AncientLootChecks'
 }
 tasks.named('check') { dependsOn 'ancientLootChecks' }
+
+tasks.register('compileNotebotAudit', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/addon/util/notebot/TuneConfirmation.java',
+                   'src/main/java/dev/tanghulu/addon/util/notebot/PlaybackCursor.java',
+                   'src/main/java/dev/tanghulu/addon/util/notebot/TuneRetryPolicy.java',
+                   'notebot/qa/TuneConfirmationChecks.java', 'notebot/qa/PlaybackCursorChecks.java',
+                   'notebot/qa/TuneRetryChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('notebot/audit')
+    options.release = 21
+}
+
+tasks.register('notebotChecks', JavaExec) {
+    dependsOn 'compileNotebotAudit'
+    classpath = files(layout.buildDirectory.dir('notebot/audit'))
+    mainClass = 'dev.tanghulu.notebot.TuneConfirmationChecks'
+}
+
+tasks.named('check') { dependsOn 'notebotChecks' }
+
+sourceSets.skeletonQa.java.srcDir 'notebot/client-qa'
+tasks.register('notebotInteractionChecks', JavaExec) {
+    dependsOn 'skeletonQaClasses'
+    classpath = sourceSets.skeletonQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.notebot.NotebotInteractionChecks'
+}
+tasks.named('check') { dependsOn 'notebotInteractionChecks' }
+
+tasks.register('notebotPlaybackChecks', JavaExec) {
+    dependsOn 'compileNotebotAudit'
+    classpath = files(layout.buildDirectory.dir('notebot/audit'))
+    mainClass = 'dev.tanghulu.notebot.PlaybackCursorChecks'
+}
+tasks.named('check') { dependsOn 'notebotPlaybackChecks' }
+
+tasks.register('notebotRetryChecks', JavaExec) {
+    dependsOn 'compileNotebotAudit'
+    classpath = files(layout.buildDirectory.dir('notebot/audit'))
+    mainClass = 'dev.tanghulu.notebot.TuneRetryChecks'
+}
+tasks.named('check') { dependsOn 'notebotRetryChecks' }
+
+tasks.register('notebotFeatureChecks', JavaExec) {
+    dependsOn 'skeletonQaClasses'
+    classpath = sourceSets.skeletonQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.notebot.NotebotFeatureChecks'
+}
+tasks.named('check') { dependsOn 'notebotFeatureChecks' }
+
+sourceSets {
+    compatQa {
+        java.srcDir 'compat/qa'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath + project(':ancient').sourceSets.main.output
+    }
+}
+tasks.register('mixinApiChecks', JavaExec) {
+    dependsOn 'compatQaClasses', ':ancient:classes'
+    classpath = sourceSets.compatQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.compat.MixinApiChecks'
+    args layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath,
+        project(':ancient').layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath
+}
+tasks.named('check') { dependsOn 'mixinApiChecks' }
+tasks.withType(JavaExec).configureEach { systemProperty 'tanghulu.qa.minecraft', mcVersion }
+tasks.register('terrainCompatibilityChecks', JavaExec) {
+    dependsOn 'compatQaClasses', 'skeletonQaClasses'
+    classpath = sourceSets.compatQa.runtimeClasspath + sourceSets.skeletonQa.output
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.compat.TerrainCompatibilityChecks'
+    args layout.buildDirectory.dir("terrain-compat/${mcVersion}").get().asFile.absolutePath
+    maxHeapSize = '3G'
+}
+
+sourceSets {
+    compatSmoke {
+        java.srcDir 'compat/smoke'
+        resources.srcDir 'compat/smoke-resources'
+        compileClasspath += sourceSets.main.compileClasspath
+    }
+}
+def smokeJar = tasks.register('compatSmokeJar', Jar) {
+    dependsOn 'compatSmokeClasses'
+    from sourceSets.compatSmoke.output
+    destinationDirectory = layout.buildDirectory.dir("compat-smoke/${mcVersion}/mods")
+    archiveFileName = 'tanghulu-compat-smoke-test-only.jar'
+}
+loom {
+    runs {
+        compatSmoke {
+            client()
+            runDir "build/compat-smoke/${mcVersion}"
+            vmArg '-Djava.awt.headless=true'
+            vmArg "-Dtanghulu.smoke.minecraft=${mcVersion}"
+            vmArg "-Dtanghulu.smoke.classes=${layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath}${File.pathSeparator}${project(':ancient').layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath}"
+        }
+    }
+}
+tasks.named('runCompatSmoke') { dependsOn smokeJar, 'classes', ':ancient:classes' }
+
+def productionMappings = configurations.detachedConfiguration(dependencies.create("net.fabricmc:intermediary:${mcVersion}:v2"))
+tasks.register('runPackagedSmoke', JavaExec) {
+    dependsOn 'remapJar', smokeJar
+    def artifact = tasks.named('remapJar', net.fabricmc.loom.task.RemapJarTask).flatMap { it.archiveFile }
+    def vanilla = new File(gradle.gradleUserHomeDir, "caches/fabric-loom/${mcVersion}/minecraft-client.jar")
+    classpath = configurations.runtimeClasspath.filter { f ->
+        !f.name.contains('minecraft-') && !f.name.contains('meteor') && !f.name.startsWith('ancient-apple-hunter')
+    } + productionMappings + files(vanilla)
+    mainClass = 'net.fabricmc.loader.impl.launch.knot.KnotClient'
+    workingDir = layout.buildDirectory.dir("packaged-smoke/${mcVersion}").get().asFile
+    systemProperty 'fabric.development', 'false'
+    systemProperty 'fabric.gameJarPath', vanilla.absolutePath
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'tanghulu.smoke.minecraft', mcVersion
+    doFirst {
+        workingDir.mkdirs()
+        systemProperty 'fabric.addMods', [artifact.get().asFile, meteorJar, smokeJar.get().archiveFile.get().asFile].collect { it.absolutePath }.join(File.pathSeparator)
+        systemProperty 'tanghulu.smoke.classes', artifact.get().asFile.absolutePath
+    }
+}
 
 

@@ -16,14 +16,18 @@ repositories {
     maven { url = 'https://chocolateminecraft.com/maven' }
 }
 
-configurations { prediction }
+configurations {
+    prediction
+    // The parent addon is the only Fabric mod in a development run too.
+    compatLibrary { canBeConsumed = true; canBeResolved = false }
+}
 configurations.implementation.extendsFrom(configurations.prediction)
 
 dependencies {
-    minecraft 'com.mojang:minecraft:1.21.11'
-    mappings 'net.fabricmc:yarn:1.21.11+build.3:v2'
+    minecraft "com.mojang:minecraft:${rootProject.mcVersion}"
+    mappings "net.fabricmc:yarn:${rootProject.yarnVersion}:v2"
     modImplementation 'net.fabricmc:fabric-loader:0.18.2'
-    modImplementation files(rootProject.file('libs/meteor-client-1.21.11-86.jar'))
+    modImplementation files(rootProject.meteorJar)
     implementation 'meteordevelopment:orbit:0.2.4'
     ['mc_math:1.171.0', 'mc_seed:1.171.1', 'mc_core:1.210.0',
      'mc_noise:1.171.1', 'mc_reversal:1.171.1', 'mc_biome:1.171.1',
@@ -37,23 +41,33 @@ dependencies {
 
 java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
 tasks.withType(JavaCompile).configureEach { options.release = 21; options.encoding = 'UTF-8' }
-processResources { inputs.property 'version', project.version; filesMatching('fabric.mod.json') { expand version: project.version } }
+def devLibrary = tasks.register('devLibraryJar', Jar) {
+    from sourceSets.main.output
+    exclude 'fabric.mod.json'
+    archiveClassifier = 'dev-library'
+}
+artifacts { compatLibrary devLibrary }
+processResources { inputs.properties rootProject.compatProperties; filesMatching('fabric.mod.json') { expand rootProject.compatProperties } }
 processResources {
+    dependsOn tasks.named('prepareCompatibilitySources')
     from('LICENSE') { into 'META-INF/licenses/ancient-apple-hunter' }
     from('licenses') { into 'META-INF/licenses/ancient-apple-hunter/third-party' }
     def predictionFiles = fileTree('src/main/java') { include 'dev/tanghulu/ancientapple/prediction/**'; include 'kludwisz/**' }
     inputs.files(predictionFiles)
+    inputs.dir(layout.buildDirectory.dir('generated/compat/java/dev/tanghulu/ancientapple/prediction'))
     doLast {
         def digest = java.security.MessageDigest.getInstance('SHA-256')
         predictionFiles.files.sort { a,b -> project.relativePath(a) <=> project.relativePath(b) }.each { f ->
-            digest.update(project.relativePath(f).replace('\\','/').getBytes('UTF-8')); digest.update(f.bytes)
+            digest.update(project.relativePath(f).replace('\\','/').getBytes('UTF-8'))
+            def generated = layout.buildDirectory.file('generated/compat/java/' + file('src/main/java').toPath().relativize(f.toPath()).toString()).get().asFile
+            digest.update(generated.bytes)
         }
         def hash = digest.digest().encodeHex().toString()
         ['prediction-validation.json','loot26-validation.json'].each { name ->
             def certificate = new File(destinationDir, name)
             if(certificate.exists()) {
                 def data = new groovy.json.JsonSlurper().parse(certificate, 'UTF-8')
-                if(data.sourceHash != hash) { data.passed = false; data.note = 'Prediction sources changed; rerun the relevant vanilla oracle.' }
+                if(data.sourceHash != hash) { data.passed = false; data.note = 'Prediction sources or client ABI changed; historical oracle certificate does not validate this build.' }
                 certificate.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(data)), 'UTF-8')
             }
         }
@@ -73,6 +87,13 @@ sourceSets {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath + sourceSets.test.runtimeClasspath
         runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
     }
+    oracleQa {
+        java.srcDir 'src/qa/java'
+        java.include 'dev/tanghulu/ancientapple/qa/*.java'
+        java.exclude '**/UnitTestMain.java'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath + sourceSets.test.runtimeClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    }
 }
 tasks.register('unitChecks', JavaExec) {
     dependsOn tasks.named('qaClasses'), tasks.named('testClasses')
@@ -85,11 +106,11 @@ tasks.named('test') { enabled = false; dependsOn tasks.named('unitChecks') }
 
 // Historical navigation models live in src/test; QA can still use them through
 // test.runtimeClasspath, while they stay out of the production JAR.
-sourceSets.qa.java { include 'dev/tanghulu/ancientapple/qa/*.java' }
+sourceSets.qa.java { include 'dev/tanghulu/ancientapple/qa/UnitTestMain.java' }
 
 tasks.register('validateLootProfiles', JavaExec) {
-    dependsOn tasks.named('qaClasses')
-    classpath = sourceSets.qa.runtimeClasspath
+    dependsOn tasks.named('oracleQaClasses')
+    classpath = sourceSets.oracleQa.runtimeClasspath
     mainClass = 'dev.tanghulu.ancientapple.qa.ProfileOracleLauncher'
     maxHeapSize = '3G'
     workingDir = layout.buildDirectory.dir('profile-oracle').get().asFile
@@ -98,8 +119,8 @@ tasks.register('validateLootProfiles', JavaExec) {
 }
 
 tasks.register('validatePrediction', JavaExec) {
-    dependsOn tasks.named('qaClasses')
-    classpath = sourceSets.qa.runtimeClasspath
+    dependsOn tasks.named('oracleQaClasses')
+    classpath = sourceSets.oracleQa.runtimeClasspath
     mainClass = 'dev.tanghulu.ancientapple.qa.OracleLauncher'
     maxHeapSize = '5G'
     workingDir = layout.buildDirectory.dir('prediction-oracle').get().asFile

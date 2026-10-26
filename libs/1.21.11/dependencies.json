@@ -1,0 +1,28 @@
+{
+  "minecraft": "1.21.11",
+  "meteor": {
+    "file": "meteor.jar",
+    "version": "1.21.11-20260810.140237-86",
+    "url": "https://maven.meteordev.org/snapshots/meteordevelopment/meteor-client/1.21.11-SNAPSHOT/meteor-client-1.21.11-20260810.140237-86.jar",
+    "sha256": "93390cfdb1030e47f116357ba421c90a9b1ca4832b6551c2dec1ade5eeb42e71"
+  },
+  "xaeros-minimap": {
+    "file": "xaeros-minimap.jar",
+    "version": "fabric-1.21.11-26.4.2",
+    "url": "https://cdn.modrinth.com/data/1bokaNcj/versions/8MdqDp18/xaerominimap-fabric-1.21.11-26.4.2.jar",
+    "sha256": "1d3270e84ac10de101f0bb807371972bbc8eccea91fb9bfdebacd1ec9f36a467"
+  },
+  "xaeros-world-map": {
+    "file": "xaeros-world-map.jar",
+    "version": "fabric-1.21.11-1.44.2",
+    "url": "https://cdn.modrinth.com/data/NcUtCpym/versions/uuPYtgMh/xaeroworldmap-fabric-1.21.11-1.44.2.jar",
+    "sha256": "d32d72435d5474755b26b9a05f5a33b8194a8e48e89a1fc5402abe1dcacf60c6"
+  },
+  "xaeroplus": {
+    "file": "xaeroplus.jar",
+    "version": "2.35.1+fabric-1.21.11",
+    "url": "https://cdn.modrinth.com/data/EnPUzSTg/versions/qWiXmUun/XaeroPlus-2.35.1%2Bfabric-1.21.11-WM1.44.2-MM26.4.2.jar",
+    "sha256": "c884b6085bdc1c82545b44a39f6f2c29e15576f59724a36546bf0fca94d6df70"
+  },
+  "yarn": "1.21.11+build.3"
+}

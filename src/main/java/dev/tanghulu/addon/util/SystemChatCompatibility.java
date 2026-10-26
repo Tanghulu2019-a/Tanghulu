@@ -53,11 +53,13 @@ public final class SystemChatCompatibility {
     private static boolean removeInvalidItemHovers(NbtElement element, RegistryOps<NbtElement> ops) {
         boolean changed = false;
         if (element instanceof NbtCompound compound) {
-            if (compound.get("hover_event") instanceof NbtCompound hover
-                && hover.getString("action", "").equals("show_item")
-                && HoverEvent.CODEC.parse(ops, hover).error().isPresent()) {
-                compound.remove("hover_event");
-                changed = true;
+            for (String hoverKey : new String[] {"hover_event", "hoverEvent"}) {
+                if (compound.get(hoverKey) instanceof NbtCompound hover
+                    && hover.getString("action", "").equals("show_item")
+                    && HoverEvent.CODEC.parse(ops, hover).error().isPresent()) {
+                    compound.remove(hoverKey);
+                    changed = true;
+                }
             }
             // Only visit text children; item components and arbitrary custom NBT are not text.
             for (String key : new String[] {"extra", "with", "separator"}) {

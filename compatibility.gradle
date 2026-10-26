@@ -1,0 +1,30 @@
+// A separate artifact for each Minecraft ABI; never widen Minecraft's loader range.
+ext.mcVersion = providers.gradleProperty('mcVersion').getOrElse('1.21.11')
+def supported = ['1.21.4', '1.21.11']
+if (!supported.contains(mcVersion)) throw new GradleException("Unsupported mcVersion: ${mcVersion}")
+def lockFile = file("libs/${mcVersion}/dependencies.json")
+ext.compatDeps = lockFile.exists() ? new groovy.json.JsonSlurper().parse(lockFile) : null
+if (mcVersion != '1.21.11' && compatDeps == null) {
+    throw new GradleException("Run python build-support/fetch-compat-deps.py ${mcVersion} first")
+}
+ext.yarnVersion = compatDeps != null ? compatDeps.yarn : '1.21.11+build.3'
+ext.meteorJar = compatDeps != null ? file("libs/${mcVersion}/meteor.jar") : file('libs/meteor-client-1.21.11-86.jar')
+ext.mapJar = { String projectName -> file("libs/${mcVersion}/${projectName}.jar") }
+ext.compatProperties = [version: project.version, minecraft_version: mcVersion]
+
+allprojects { p ->
+    def prepare = p.tasks.register('prepareCompatibilitySources', Exec) {
+        inputs.dir(p.file('src/main/java'))
+        inputs.dir(rootProject.file('compat/src'))
+        inputs.file(rootProject.file('build-support/compat-sources.py'))
+        inputs.file(rootProject.file('build-support/legacy1214.py'))
+        inputs.property('minecraft', rootProject.mcVersion)
+        outputs.dir(p.layout.buildDirectory.dir('generated/compat/java'))
+        commandLine 'python', rootProject.file('build-support/compat-sources.py'), rootProject.mcVersion,
+            p.projectDir, p.layout.buildDirectory.dir('generated/compat/java').get().asFile
+    }
+    p.plugins.withId('java') {
+        p.sourceSets.main.java.setSrcDirs([prepare.map { p.layout.buildDirectory.dir('generated/compat/java').get().asFile }])
+        p.tasks.named('compileJava') { dependsOn prepare }
+    }
+}

@@ -33,9 +33,9 @@
   },
   "depends": {
     "java": ">=21",
-    "minecraft": "1.21.11",
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=0.18.2",
-    "meteor-client": "1.21.11-86"
+    "meteor-client": "*"
   },
   "license": "GPL-3.0-only",
   "suggests": {

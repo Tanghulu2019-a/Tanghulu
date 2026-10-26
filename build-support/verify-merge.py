@@ -32,7 +32,7 @@ with zipfile.ZipFile(JAR) as jar:
             for mixin in data.get(section, []):
                 assert (data['package']+'.'+mixin).replace('.', '/')+'.class' in names
                 mixin_count += 1
-    assert mixin_count == 23, mixin_count
+    assert mixin_count == 24, mixin_count
     for name in names:
         assert 'miku' not in name.lower(), name
         if name.endswith('.class'):
@@ -61,12 +61,13 @@ with zipfile.ZipFile(JAR) as jar:
     assert not any(n.startswith(('org/junit/', 'dev/tanghulu/ancientapple/qa/')) for n in names)
     active = re.compile(r'^\s*(?:modules|Modules\.get\(\))\.add\(new (\w+)\(\)\);', re.M)
     actual = active.findall((ROOT/'src/main/java/dev/tanghulu/addon/TanghuluApp.java').read_text('utf-8'))
-    assert len(actual) == len(set(actual)) == 20 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
+    assert len(actual) == len(set(actual)) == 21 and 'MushroomFinder' in actual and 'PlayerSkeleton' in actual
+    assert 'NotebotFix' in actual
     assert {'Confetti', 'SignTextEsp'} <= set(actual)
     for module in actual:
         assert 'dev/tanghulu/addon/modules/' + module + '.class' in names
     report.update(mixins=mixin_count, lootProfiles=len(profiles), predictionSourceHash=digest.hexdigest(),
-                  registeredModules=26)
+                  registeredModules=27)
 
 report['unitChecks'] = json.loads((ROOT/'ancient/build/reports/unit-checks.json').read_text('utf-8'))
 assert report['unitChecks']['passed'] and report['unitChecks']['succeeded']==107

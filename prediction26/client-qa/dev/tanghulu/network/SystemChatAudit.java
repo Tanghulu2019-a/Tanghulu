@@ -40,8 +40,9 @@ public final class SystemChatAudit {
         var vanilla = TextCodecs.UNLIMITED_REGISTRY_PACKET_CODEC;
         var compatible = SystemChatCompatibility.wrap(vanilla);
         Path root = Path.of(args[0]);
-        var fixture = StringNbtReader.readCompound(Files.readString(root.resolve("build-support/fixtures/system-chat-spear.snbt")));
-        var knownEnchantments = StringNbtReader.readCompound(fixture.toString().replace("\"minecraft:lunge\":3,", ""));
+        boolean legacy = System.getProperty("tanghulu.qa.minecraft", "1.21.11").equals("1.21.4");
+        var fixture = parse(Files.readString(root.resolve("build-support/fixtures/" + (legacy ? "system-chat-1.21.4.snbt" : "system-chat-spear.snbt"))));
+        var knownEnchantments = parse(fixture.toString().replace("\"minecraft:lunge\":3,", ""));
         check(read(vanilla, manager, knownEnchantments, false) != null, "Removing unavailable lunge must fix original fixture");
 
         try {
@@ -56,16 +57,17 @@ public final class SystemChatAudit {
         check(!encoded.contains("show_item"), "Broken item hover survived");
         check(encoded.contains("show_entity") && encoded.contains("suggest_command"), "Valid entity hover or click lost");
 
-        var valid = StringNbtReader.readCompound("{text:'Valid',hover_event:{action:'show_item',id:'minecraft:stone'}}");
+        var valid = parse(legacy ? "{text:'Valid',hoverEvent:{action:'show_item',contents:{id:'minecraft:stone'}}}"
+            : "{text:'Valid',hover_event:{action:'show_item',id:'minecraft:stone'}}");
         check(read(compatible, manager, valid, false).equals(read(vanilla, manager, valid, false)), "Valid item hover changed");
         var mixed = new NbtList();
         mixed.add(fixture.copy());
         mixed.add(valid.copy());
         String mixedEncoded = TextCodecs.CODEC.encodeStart(ops, read(compatible, manager, mixed, false)).getOrThrow().toString();
         check(mixedEncoded.contains("minecraft:stone"), "Valid item hover lost during fallback");
-        var plain = StringNbtReader.readCompound("{text:'正常消息',bold:1b}");
+        var plain = parse("{text:'正常消息',bold:1b}");
         check(read(compatible, manager, plain, true).equals(read(vanilla, manager, plain, true)), "Normal message changed");
-        var invalid = StringNbtReader.readCompound("{text:'broken',color:'not_a_color'}");
+        var invalid = parse("{text:'broken',color:'not_a_color'}");
         try {
             read(compatible, manager, invalid, false);
             throw new AssertionError("Unrelated errors must propagate");
@@ -81,6 +83,12 @@ public final class SystemChatAudit {
         Files.createDirectories(root.resolve("build/reports"));
         Files.writeString(root.resolve("build/reports/system-chat-audit.json"), "{\"passed\":true,\"checks\":" + checks + ",\"inGameTested\":false}");
         System.out.println("SYSTEM_CHAT_AUDIT passed checks=" + checks);
+    }
+
+    // QA runs against named jars; the parser entrypoint was renamed after 1.21.4.
+    private static NbtCompound parse(String input) throws Exception {
+        try { return (NbtCompound) StringNbtReader.class.getMethod("readCompound", String.class).invoke(null, input); }
+        catch (NoSuchMethodException legacy) { return (NbtCompound) StringNbtReader.class.getMethod("parse", String.class).invoke(null, input); }
     }
 
     private static Text read(PacketCodec<RegistryByteBuf, Text> codec, DynamicRegistryManager manager, NbtElement nbt, boolean overlay) {

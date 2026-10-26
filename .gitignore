@@ -43,6 +43,8 @@ version-manifest.json
 
 # Local dependencies, credentials and release outputs
 libs/*.jar
+libs/*/*.jar
+**/__pycache__/
 .env
 .env.*
 *.pem
@@ -50,7 +52,3 @@ libs/*.jar
 user.dat
 config/
 dist/
-
-# Python build caches
-__pycache__/
-*.pyc
