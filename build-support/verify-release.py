@@ -28,21 +28,16 @@ PATTERNS = [
     re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
 ]
 REMOVED_CLASSES = [
+    'dev/tanghulu/addon/modules/Beyblade.class',
     'dev/tanghulu/addon/modules/AutoWalk.class',
     'dev/tanghulu/addon/modules/NewChunks.class',
     'dev/tanghulu/addon/modules/OnekeyFireWork.class',
     'dev/tanghulu/addon/ConfigManager.class',
     'dev/tanghulu/addon/util/MeituanTimeFetcher.class',
-    'dev/tanghulu/addon/modules/Beyblade.class',
-    'dev/tanghulu/addon/modules/SeedMine.class',
     'dev/tanghulu/addon/modules/SafeFire.class',
-    'dev/tanghulu/addon/modules/NoJumpDelay.class',
     'dev/tanghulu/addon/modules/TreeAura.class',
     'dev/tanghulu/stash/modules/AFKVanillaFly.class',
     'dev/tanghulu/stash/modules/GotoPosition.class',
-    'dev/tanghulu/addon/mixin/MineProcessMixin.class',
-    'dev/tanghulu/addon/mixinface/MagicMix.class',
-    'dev/tanghulu/addon/util/Ore.class',
 ]
 
 def inspect_bytes(data, label):
@@ -69,10 +64,10 @@ def inspect_archive(data, label, main_jar=False):
         if main_jar:
             assert names.count('fabric.mod.json') == 1
             meta = json.loads(archive.read('fabric.mod.json'))
-            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.5'
+            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.6'
             assert meta['authors'] == ['Tanghulu2019']
             assert meta['contributors'] == ['Cqb13', 'Mikumiku', 'Jefff']
-            assert meta['depends']['minecraft'] in {'1.21.4', '1.21.11'}
+            assert meta['depends']['minecraft'] == '1.21.11'
             assert meta['depends']['meteor-client'] == '*'
             assert meta['license'] == 'GPL-3.0-only'
             assert not any(n in names for n in REMOVED_CLASSES)
@@ -96,12 +91,12 @@ def source_paths():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--mc-version', choices=['1.21.4', '1.21.11'], default='1.21.11')
+    parser.add_argument('--mc-version', choices=['1.21.11'], default='1.21.11')
     parser.add_argument('--jar', type=Path)
     parser.add_argument('--source', type=Path)
     args = parser.parse_args()
     if args.jar is None:
-        args.jar = ROOT / f'build/libs/Tanghulu-mc{args.mc_version}-1.0.5.jar'
+        args.jar = ROOT / f'build/libs/Tanghulu-mc{args.mc_version}-1.0.6.jar'
     paths = list(source_paths())
     for path in paths:
         rel = path.relative_to(ROOT).as_posix()

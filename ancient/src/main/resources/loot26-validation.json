@@ -1,12 +1,1 @@
-{
-  "passed": true,
-  "minecraft": "26.1",
-  "method": "Official Mojang 26.1 FEATURES chunk at user coordinate; LootTable.fill, complete item and component comparison against the addon, 1024 loot seeds; no network listener.",
-  "sampleLootSeed": -18307909876657279,
-  "sampleApples": 0,
-  "checked": 1024,
-  "appleChests": 91,
-  "errors": [],
-  "sourceHash": "71078511a3922a0fa202ffd1749e6dd98f47389ccf63ab7d9f69ff2213188011",
-  "fixturesHash": "908645cb35775b2acb1a0b977d7de2b75423f943eee806771db25c4407c78408"
-}
+{"passed":true,"minecraft":"26.1","method":"Official Mojang 26.1 FEATURES chunk at user coordinate; LootTable.fill, complete item and component comparison against the addon, 1024 loot seeds; no network listener.","sampleLootSeed":-18307909876657279,"sampleApples":0,"checked":1024,"appleChests":91,"errors":[],"sourceHash":"71078511a3922a0fa202ffd1749e6dd98f47389ccf63ab7d9f69ff2213188011","fixturesHash":"908645cb35775b2acb1a0b977d7de2b75423f943eee806771db25c4407c78408"}

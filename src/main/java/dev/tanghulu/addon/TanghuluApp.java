@@ -37,9 +37,12 @@ public class TanghuluApp {
 
     private static void registerModules() {
         Modules modules = Modules.get();
+        modules.add(new SeedMine());
+        modules.add(new NoJumpDelay());
         modules.add(new ClearXaeroWaypoints());
         modules.add(new Confetti());
         modules.add(new SignTextEsp());
+        modules.add(new InformationTextFilter());
         modules.add(new PlayerAlert());
         modules.add(new PlayerSkeleton());
         modules.add(new ThreeCNewbieCheck());

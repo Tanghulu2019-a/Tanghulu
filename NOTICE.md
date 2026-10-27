@@ -45,11 +45,11 @@ see build-support/dependencies/downloads.json.
 
 Numby Hack v2.6.24 (cqb13), supplied mc1.21.11 source archive, GPL-3.0:
 https://github.com/cqb13/Numby-hack
-Integrated Beyblade (README: Bayblade), Confetti, SignTextEsp, SafeFire,
+Integrated Confetti, SignTextEsp, SafeFire,
 NewChunks and TotemParticleMixin on 2026-10-24. Changes include Tanghulu
-registration, Chinese module names/settings/descriptions/enum labels, rotation
-corrections, and client-thread chunk parsing with world-scoped cache cleanup.
-Upstream file credits retained: FloRida from venomhack; Confetti from Tanuki;
+registration, Chinese module names/settings/descriptions/enum labels,
+and client-thread chunk parsing with world-scoped cache cleanup.
+Upstream file credits retained: Confetti from Tanuki;
 SignTextEsp by cqb13; SafeFire from Tanuki, originally by walaryne;
 NewChunks from BleachHack by BleachDrinker420, modified by cqb13,
 with packet-loading credit to Trouser-Streak. See licenses/Numby-Hack-GPL-3.0.txt.

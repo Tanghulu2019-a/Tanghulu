@@ -1,6 +1,6 @@
 # 音符机器人修复
 
-适用 Minecraft 1.21.4 / 1.21.11、对应版本的 Meteor、Fabric Loader 0.18.2+，运行 Java 21+。
+适用 Minecraft 1.21.11、对应版本的 Meteor、Fabric Loader 0.18.2+，运行 Java 21+。
 
 ## 安装
 

@@ -84,7 +84,8 @@ public final class MixinApiChecks {
                     String desc = args.length == 0 ? Type.getReturnType(m.desc).getDescriptor() : args[0].getDescriptor();
                     check(member(target, field, desc, true), mixin.name + " accessor " + field + desc);
                 }
-                if (!(a.desc.endsWith("/Inject;") || a.desc.endsWith("/Redirect;") || a.desc.endsWith("/ModifyExpressionValue;"))) continue;
+                if (!(a.desc.endsWith("/Inject;") || a.desc.endsWith("/Redirect;") || a.desc.endsWith("/ModifyExpressionValue;")
+                    || a.desc.endsWith("/ModifyVariable;"))) continue;
                 if ((Integer) value(a, "require", -1) == 0) continue;
                 for (String selector : (List<String>) value(a, "method", List.of())) {
                     List<MethodNode> selected = methods(target, selector);

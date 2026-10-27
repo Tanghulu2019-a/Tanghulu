@@ -31,6 +31,15 @@ public final class SmokePreLaunch implements PreLaunchEntrypoint {
             }
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             for (String target : targets) Class.forName(target, false, loader);
+            boolean baritone = Boolean.getBoolean("tanghulu.smoke.baritone");
+            if (baritone) {
+                Class<?> mine = Class.forName("baritone.process.MineProcess", false, loader);
+                var methods = Arrays.stream(mine.getDeclaredMethods()).map(java.lang.reflect.Method::getName).toList();
+                if (methods.stream().noneMatch(n -> n.contains("onRescan"))
+                    || methods.stream().noneMatch(n -> n.contains("onPruneStream"))) {
+                    throw new AssertionError("SeedMine Baritone mixins were not applied");
+                }
+            }
             int optionalApisAbsent = 0;
             for (String name : addonClasses) {
                 // No initialization: isolated prediction helpers use their own vanilla classloader.
@@ -45,9 +54,11 @@ public final class SmokePreLaunch implements PreLaunchEntrypoint {
                     optionalApisAbsent++;
                 }
             }
+            if (baritone) MiningRuntimeChecks.run();
+            TextFilterRuntimeChecks.run();
             String result = "FABRIC_COMPAT_SMOKE PASS minecraft=" + System.getProperty("tanghulu.smoke.minecraft")
                 + " mixinTargets=" + targets.size() + " addonClasses=" + addonClasses.size()
-                + " optionalApisAbsent=" + optionalApisAbsent;
+                + " optionalApisAbsent=" + optionalApisAbsent + " baritone=" + baritone;
             System.out.println(result);
             Files.writeString(Path.of("smoke-result.txt"), result + "\n");
             Runtime.getRuntime().halt(0);

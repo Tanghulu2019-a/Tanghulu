@@ -1,0 +1,56 @@
+// Optional development and packaged Fabric launch checks.
+sourceSets {
+    compatSmoke {
+        java.srcDir 'compat/smoke'
+        resources.srcDir 'compat/smoke-resources'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+}
+def smokeJar = tasks.register('compatSmokeJar', Jar) {
+    dependsOn 'compatSmokeClasses'
+    from sourceSets.compatSmoke.output
+    destinationDirectory = layout.buildDirectory.dir("compat-smoke/${mcVersion}/mods")
+    archiveFileName = 'tanghulu-compat-smoke-test-only.jar'
+}
+loom {
+    runs {
+        compatSmoke {
+            client()
+            runDir "build/compat-smoke/${mcVersion}"
+            vmArg '-Djava.awt.headless=true'
+            vmArg "-Dtanghulu.smoke.minecraft=${mcVersion}"
+            vmArg "-Dtanghulu.smoke.classes=${layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath}${File.pathSeparator}${project(':ancient').layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath}"
+        }
+    }
+}
+tasks.named('runCompatSmoke') { dependsOn smokeJar, 'classes', ':ancient:classes' }
+
+def productionMappings = configurations.detachedConfiguration(dependencies.create("net.fabricmc:intermediary:${mcVersion}:v2"))
+def packagedSmokeJar = tasks.named('remapCompatSmokeJar')
+
+tasks.register('runPackagedSmoke', JavaExec) {
+    dependsOn 'remapJar', packagedSmokeJar
+    def artifact = tasks.named('remapJar').flatMap { it.archiveFile }
+    def vanilla = new File(gradle.gradleUserHomeDir, "caches/fabric-loom/${mcVersion}/minecraft-client.jar")
+    classpath = configurations.runtimeClasspath.filter { f ->
+        !f.name.contains('minecraft-') && !f.name.contains('meteor') && !f.name.startsWith('ancient-apple-hunter')
+    } + productionMappings + files(vanilla)
+    mainClass = 'net.fabricmc.loader.impl.launch.knot.KnotClient'
+    workingDir = layout.buildDirectory.dir("packaged-smoke/${mcVersion}").get().asFile
+    systemProperty 'fabric.development', 'false'
+    systemProperty 'fabric.gameJarPath', vanilla.absolutePath
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'tanghulu.smoke.minecraft', mcVersion
+    systemProperty 'tanghulu.smoke.baritone', project.hasProperty('smokeBaritone')
+    doFirst {
+        workingDir.mkdirs()
+        def smokeMods = [artifact.get().asFile, meteorJar, packagedSmokeJar.get().archiveFile.get().asFile]
+        if (project.hasProperty('smokeBaritone')) {
+            smokeMods.addAll(configurations.detachedConfiguration(
+                dependencies.create("meteordevelopment:baritone:${mcVersion}-SNAPSHOT")
+            ).files)
+        }
+        systemProperty 'fabric.addMods', smokeMods.collect { it.absolutePath }.join(File.pathSeparator)
+        systemProperty 'tanghulu.smoke.classes', artifact.get().asFile.absolutePath
+    }
+}

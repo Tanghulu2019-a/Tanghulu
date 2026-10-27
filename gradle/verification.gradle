@@ -1,0 +1,172 @@
+// Regression source sets and checks. Production assembly lives in build.gradle.
+tasks.named('check') { dependsOn ':ancient:unitChecks' }
+
+def checked = { String name, Class type, Closure configuration ->
+    def provider = tasks.register(name, type, configuration)
+    tasks.named('check') { dependsOn provider }
+    provider
+}
+def javaCheck = { String name, Object prerequisites, Object auditClasspath, String auditMain ->
+    checked(name, JavaExec) {
+        dependsOn prerequisites
+        classpath = auditClasspath
+        mainClass = auditMain
+    }
+}
+
+[
+    seedQa: ['prediction26/client-qa', 'mushroom/client-qa'],
+    threeCQa: ['threec/qa'],
+    skeletonQa: ['skeleton/qa', 'notebot/client-qa'],
+    stashQa: ['navigation/qa'],
+    compatQa: ['compat/qa']
+].each { name, directories ->
+    sourceSets.create(name) {
+        directories.each { java.srcDir it }
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + (name == 'seedQa'
+            ? sourceSets.main.compileClasspath : sourceSets.main.runtimeClasspath)
+    }
+}
+sourceSets.stashQa.runtimeClasspath += sourceSets.skeletonQa.output
+sourceSets.compatQa.runtimeClasspath += project(':ancient').sourceSets.main.output
+tasks.withType(JavaExec).configureEach { systemProperty 'tanghulu.qa.minecraft', mcVersion }
+
+javaCheck('seedCompatibilityChecks', 'seedQaClasses', sourceSets.seedQa.runtimeClasspath,
+    'dev.tanghulu.prediction26.ClientAudit').configure {
+    systemProperty 'prediction26.testCache', layout.buildDirectory.dir('prediction26/client-test').get().asFile.absolutePath
+    doFirst {
+        copy {
+            from layout.buildDirectory.file('prediction26/server.jar')
+            into layout.buildDirectory.dir('prediction26/client-test/tanghulu-prediction/26.3')
+        }
+    }
+}
+
+// These two slower checks remain opt-in, as do the network and launch checks.
+tasks.register('mushroomClientChecks', JavaExec) {
+    dependsOn 'seedQaClasses'
+    classpath = sourceSets.seedQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.mushroom.ClientMushroomAudit'
+    systemProperty 'prediction26.testCache', layout.buildDirectory.dir('mushroom/client-test').get().asFile.absolutePath
+    args projectDir.absolutePath
+    if (project.hasProperty('qaCache')) args project.property('qaCache')
+}
+tasks.register('terrainCompatibilityChecks', JavaExec) {
+    dependsOn 'compatQaClasses', 'skeletonQaClasses'
+    classpath = sourceSets.compatQa.runtimeClasspath + sourceSets.skeletonQa.output
+    mainClass = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.compat.TerrainCompatibilityChecks'
+    args layout.buildDirectory.dir("terrain-compat/${mcVersion}").get().asFile.absolutePath
+    maxHeapSize = '3G'
+}
+tasks.register('threeCLiveCheck', JavaExec) {
+    dependsOn 'threeCQaClasses'
+    classpath = sourceSets.threeCQa.runtimeClasspath
+    mainClass = 'dev.tanghulu.threec.ThreeCLiveCheck'
+    doFirst {
+        if (!project.hasProperty('playerName')) throw new GradleException('Use -PplayerName=<name>')
+        args project.property('playerName')
+    }
+}
+
+def mushroomWorker = tasks.named('compileMushroomWorker', JavaCompile)
+tasks.register('compileMushroomAudit', JavaCompile) {
+    dependsOn mushroomWorker
+    source = files('mushroom/qa/IslandScannerAudit.java')
+    classpath = files(mushroomWorker.flatMap { it.destinationDirectory })
+    destinationDirectory = layout.buildDirectory.dir('mushroom/audit')
+    options.release = 21
+}
+javaCheck('mushroomScannerChecks', 'compileMushroomAudit',
+    files(layout.buildDirectory.dir('mushroom/audit'), mushroomWorker.flatMap { it.destinationDirectory }),
+    'dev.tanghulu.mushroom.IslandScannerAudit')
+
+[
+    waypointCleanerChecks: 'verify-waypoint-cleaner.py',
+    release101Checks: 'verify-101.py'
+].each { name, script ->
+    checked(name, Exec) { commandLine 'python', "build-support/${script}" }
+}
+javaCheck('systemChatChecks', 'seedQaClasses', sourceSets.seedQa.runtimeClasspath,
+    'dev.tanghulu.network.SystemChatAuditLauncher').configure { args projectDir.absolutePath }
+javaCheck('threeCChecks', 'threeCQaClasses', sourceSets.threeCQa.runtimeClasspath,
+    'dev.tanghulu.threec.ThreeCChecks').configure { args projectDir.absolutePath }
+
+def skeletonLauncher = 'dev.tanghulu.skeleton.PlayerSkeletonCheckLauncher'
+javaCheck('playerSkeletonChecks', 'skeletonQaClasses', sourceSets.skeletonQa.runtimeClasspath, skeletonLauncher)
+[
+    notebotInteractionChecks: 'dev.tanghulu.notebot.NotebotInteractionChecks',
+    notebotFeatureChecks: 'dev.tanghulu.notebot.NotebotFeatureChecks'
+].each { name, auditMain ->
+    javaCheck(name, 'skeletonQaClasses', sourceSets.skeletonQa.runtimeClasspath, skeletonLauncher).configure {
+        systemProperty 'tanghulu.qa.main', auditMain
+    }
+}
+javaCheck('stashRecordsChecks', ['stashQaClasses', 'skeletonQaClasses'], sourceSets.stashQa.runtimeClasspath,
+    skeletonLauncher).configure { systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.StashRecordsChecks' }
+javaCheck('ancientLootChecks', ['stashQaClasses', 'skeletonQaClasses'],
+    sourceSets.stashQa.runtimeClasspath + project(':ancient').sourceSets.main.output, skeletonLauncher).configure {
+    systemProperty 'tanghulu.qa.main', 'dev.tanghulu.stash.AncientLootChecks'
+}
+javaCheck('mixinApiChecks', ['compatQaClasses', ':ancient:classes'], sourceSets.compatQa.runtimeClasspath,
+    'dev.tanghulu.compat.MixinApiChecks').configure {
+    args layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath,
+        project(':ancient').layout.buildDirectory.dir('classes/java/main').get().asFile.absolutePath
+}
+
+// Standalone logic checks compile without launching Minecraft.
+tasks.register('compileBaritoneAssistantAudit', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/stash/navigation/OneClickTravel.java',
+                   'navigation/qa/OneClickTravelChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('navigation/audit')
+    options.release = 21
+}
+javaCheck('baritoneAssistantChecks', 'compileBaritoneAssistantAudit', files(layout.buildDirectory.dir('navigation/audit')),
+    'dev.tanghulu.stash.navigation.OneClickTravelChecks')
+
+tasks.register('compileNotebotAudit', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/addon/util/notebot/TuneConfirmation.java',
+                   'src/main/java/dev/tanghulu/addon/util/notebot/PlaybackCursor.java',
+                   'src/main/java/dev/tanghulu/addon/util/notebot/TuneRetryPolicy.java',
+                   'notebot/qa/TuneConfirmationChecks.java', 'notebot/qa/PlaybackCursorChecks.java',
+                   'notebot/qa/TuneRetryChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('notebot/audit')
+    options.release = 21
+}
+[
+    notebotChecks: 'TuneConfirmationChecks',
+    notebotPlaybackChecks: 'PlaybackCursorChecks',
+    notebotRetryChecks: 'TuneRetryChecks'
+].each { name, auditMain ->
+    javaCheck(name, 'compileNotebotAudit', files(layout.buildDirectory.dir('notebot/audit')),
+        "dev.tanghulu.notebot.${auditMain}")
+}
+
+tasks.register('compileTextFilterChecks', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/addon/util/textfilter/TextFilterRules.java',
+                   'text-filter/qa/dev/tanghulu/textfilter/TextFilterChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('text-filter/audit')
+    options.release = 21
+}
+javaCheck('textFilterChecks', 'compileTextFilterChecks', files(layout.buildDirectory.dir('text-filter/audit')),
+    'dev.tanghulu.textfilter.TextFilterChecks')
+
+tasks.register('compileOreSearchChecks', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/addon/util/seeds/OreSearchProgress.java',
+                   'src/main/java/dev/tanghulu/addon/util/seeds/AutoMineController.java',
+                   'seed-search/qa/OreSearchChecks.java', 'seed-search/qa/AutoMineChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('seed-search/audit')
+    options.release = 21
+}
+[
+    oreSearchChecks: 'OreSearchChecks',
+    autoMineChecks: 'AutoMineChecks'
+].each { name, auditMain ->
+    javaCheck(name, 'compileOreSearchChecks', files(layout.buildDirectory.dir('seed-search/audit')),
+        "dev.tanghulu.seedsearch.${auditMain}")
+}

@@ -13,8 +13,8 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
 MC = sys.argv[1] if len(sys.argv) > 1 else "1.21.11"
-if MC not in ("1.21.4", "1.21.11"):
-    raise SystemExit("Supported targets: 1.21.4 and 1.21.11")
+if MC != "1.21.11":
+    raise SystemExit("Only Minecraft 1.21.11 is supported")
 DEST = ROOT / "libs" / MC
 DEST.mkdir(parents=True, exist_ok=True)
 
@@ -81,7 +81,7 @@ lock = {"minecraft": MC, "meteor": meteor()}
 for project, preferred in [("xaeros-minimap", "26.4.2"), ("xaeros-world-map", "1.44.2"), ("xaeroplus", "2.35.1")]:
     lock[project] = modrinth(project, preferred)
 maps = json_url(f"https://meta.fabricmc.net/v2/versions/yarn/{MC}", "yarn-versions.json")
-lock["yarn"] = {"1.21.4": "1.21.4+build.8", "1.21.11": "1.21.11+build.3"}[MC]
+lock["yarn"] = "1.21.11+build.3"
 assert any(m["version"] == lock["yarn"] for m in maps), "Pinned Yarn mappings unavailable"
 (DEST / "dependencies.json").write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", "utf-8")
 print(f"Dependency lock ready for {MC}", flush=True)

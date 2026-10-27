@@ -97,7 +97,8 @@ public class SignTextEsp extends Module {
             }
 
             SignText text = signEntity.getText(true);
-            Text[] msgs = text.getMessages(true);
+            Text[] msgs = InformationTextFilter.filterSign(text.getMessages(true));
+            if (msgs == null) continue;
 
             renderNametagLines(
                     new Vector3d(entity.getPos().getX() + 0.5, entity.getPos().getY() + 0.5,
