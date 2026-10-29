@@ -32,10 +32,24 @@ public final class AncientLootChecks {
             var book=EnchantmentHelper.getEnchantedBookWith(new EnchantmentLevelEntry(swift,level));
             var target=new ChestTarget(0,-48,0,0,0,1,"ancient_city",0,LootSignature.of(List.of(book),registries));
             check(TargetLoot.count(book)==(level==3?1:0),"server book level "+level);
+            check(TargetLoot.selectedForQuickLoot(book,false,false,false,true)==(level==3),"quick loot book level "+level);
+            check(!TargetLoot.selectedForQuickLoot(book,true,true,true,false),"unchecked books rejected");
             check(target.swiftSneakBooks==(level==3?1:0),"native serialized book level "+level);
         }
         check(TargetLoot.count(Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack())==1,"apple retained");
         check(TargetLoot.count(Items.BOOK.getDefaultStack())==0,"plain book rejected");
+        var quickLootItems=List.of(Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack(),
+            Items.EXPERIENCE_BOTTLE.getDefaultStack(),Items.GOLDEN_CARROT.getDefaultStack(),
+            EnchantmentHelper.getEnchantedBookWith(new EnchantmentLevelEntry(swift,3)));
+        for(int mask=0;mask<16;mask++) {
+            for(int item=0;item<4;item++) {
+                check(TargetLoot.selectedForQuickLoot(quickLootItems.get(item),(mask&1)!=0,(mask&2)!=0,(mask&4)!=0,(mask&8)!=0)
+                    ==((mask&(1<<item))!=0),"independent quick loot selection mask "+mask+" item "+item);
+            }
+        }
+        for(var item:List.of(Items.GOLDEN_APPLE,Items.GLASS_BOTTLE,Items.CARROT,Items.BOOK,Items.DIAMOND))
+            check(!TargetLoot.selectedForQuickLoot(item.getDefaultStack(),true,true,true,true),"unrelated item "+item);
+        check(!TargetLoot.selectedForQuickLoot(net.minecraft.item.ItemStack.EMPTY,true,true,true,true),"empty stack rejected");
         int books=0,chests=0;
         for(var version:LootVersion.values()) {
             var loot=new AncientLoot(registries,version);

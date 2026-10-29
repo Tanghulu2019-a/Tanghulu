@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "tanghulu_miku_conflict_fixture",
+  "version": "1.0.0",
+  "name": "Miku redirect conflict test only",
+  "environment": "client",
+  "mixins": ["miku-conflict.mixins.json"]
+}

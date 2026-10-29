@@ -21,4 +21,10 @@ public final class TargetLoot {
     public static int count(ItemStack stack) {
         return stack.isOf(Items.ENCHANTED_GOLDEN_APPLE) ? stack.getCount() : swiftSneakBooks(stack);
     }
+    public static boolean selectedForQuickLoot(ItemStack stack, boolean apples, boolean bottles, boolean carrots, boolean books) {
+        return !stack.isEmpty() && ((apples && stack.isOf(Items.ENCHANTED_GOLDEN_APPLE))
+            || (bottles && stack.isOf(Items.EXPERIENCE_BOTTLE))
+            || (carrots && stack.isOf(Items.GOLDEN_CARROT))
+            || (books && swiftSneakBooks(stack)>0));
+    }
 }

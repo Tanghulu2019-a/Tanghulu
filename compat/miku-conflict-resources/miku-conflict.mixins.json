@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "priority": ${priority},
+  "package": "dev.tanghulu.compat.miku",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["MikuMineProcessMixin"],
+  "injectors": { "defaultRequire": 1 }
+}

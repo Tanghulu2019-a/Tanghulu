@@ -8,6 +8,7 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
+VERSION = re.search(r"(?m)^version\s*=\s*'([^']+)'", (ROOT / 'build.gradle').read_text('utf-8')).group(1)
 EXCLUDED = {'.git', '.gradle', '.gradle-user', '.gradle-proxy', 'build', 'dist', '__pycache__', 'run', 'config',
             'logs', 'log', '.idea', '.vscode', '.settings', '.cache', 'out', 'classes'}
 # Hashes of removed identifiers; private identifiers are not embedded in public tools.
@@ -26,6 +27,8 @@ PATTERNS = [
     re.compile(rb'/(?:home|Users)/[^\s/]+/'),
     re.compile(rb'github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}'),
     re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
+    re.compile(rb'https?://(?:logshare\.cn|mclo\.gs|pastebin\.com)/[^\s\x00"<>]+'),
+    re.compile(rb'https?://(?:discord(?:app)?\.com/api/webhooks|hooks\.slack\.com)/[^\s\x00"<>]+'),
 ]
 REMOVED_CLASSES = [
     'dev/tanghulu/addon/modules/Beyblade.class',
@@ -64,7 +67,7 @@ def inspect_archive(data, label, main_jar=False):
         if main_jar:
             assert names.count('fabric.mod.json') == 1
             meta = json.loads(archive.read('fabric.mod.json'))
-            assert meta['id'] == 'tanghulu' and meta['version'] == '1.0.6'
+            assert meta['id'] == 'tanghulu' and meta['version'] == VERSION
             assert meta['authors'] == ['Tanghulu2019']
             assert meta['contributors'] == ['Cqb13', 'Mikumiku', 'Jefff']
             assert meta['depends']['minecraft'] == '1.21.11'
@@ -96,7 +99,7 @@ def main():
     parser.add_argument('--source', type=Path)
     args = parser.parse_args()
     if args.jar is None:
-        args.jar = ROOT / f'build/libs/Tanghulu-mc{args.mc_version}-1.0.6.jar'
+        args.jar = ROOT / f'build/libs/Tanghulu-mc{args.mc_version}-{VERSION}.jar'
     paths = list(source_paths())
     for path in paths:
         rel = path.relative_to(ROOT).as_posix()

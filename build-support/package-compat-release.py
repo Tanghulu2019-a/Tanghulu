@@ -12,14 +12,15 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = Path(sys.argv[1]).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
 TARGETS = ('1.21.11',)
-VERSION = '1.0.6'
+VERSION = re.search(r"(?m)^version\s*=\s*'([^']+)'", (ROOT / 'build.gradle').read_text('utf-8')).group(1)
+FILE_VERSION = VERSION.replace('+', '-')
 VARIANT = sys.argv[2] if len(sys.argv) > 2 else ''
 if VARIANT and not re.fullmatch(r'[a-z0-9-]+', VARIANT):
     raise SystemExit('Variant must contain only lowercase letters, digits and hyphens')
 records = []
 
 for mc in TARGETS:
-    filename = f'Tanghulu-mc{mc}-{VERSION}-{VARIANT}.jar' if VARIANT else f'Tanghulu-{VERSION}.jar'
+    filename = f'Tanghulu-mc{mc}-{FILE_VERSION}-{VARIANT}.jar' if VARIANT else f'Tanghulu-{FILE_VERSION}.jar'
     source = ROOT / 'build/libs' / f'Tanghulu-mc{mc}-{VERSION}.jar'
     with zipfile.ZipFile(source) as jar:
         assert jar.testzip() is None, f'Invalid archive: {mc}'
@@ -28,7 +29,7 @@ for mc in TARGETS:
         assert mod['depends']['minecraft'] == mc
         assert mod['depends']['meteor-client'] == '*'
         assert mod['version'] == VERSION
-        assert not any('compat/smoke/' in n or '/qa/' in n or n.endswith('.java') for n in jar.namelist())
+        assert not any('compat/smoke/' in n or 'compat/miku/' in n or '/qa/' in n or n.endswith('.java') for n in jar.namelist())
         classes = [n for n in jar.namelist() if n.endswith('.class')]
         assert all(struct.unpack('>H', jar.read(n)[6:8])[0] <= 65 for n in classes), 'Main addon must run on Java 21'
         for config in mod['mixins']:
@@ -38,7 +39,7 @@ for mc in TARGETS:
         assert 'tanghulu/prediction/prediction26.jar' in jar.namelist()
         assert 'tanghulu/mushroom/worker.jar' in jar.namelist()
         assert 'dev/tanghulu/addon/modules/InformationTextFilter.class' in jar.namelist()
-        for module in ('SeedMine', 'NoJumpDelay'):
+        for module in ('SeedMine', 'NoJumpDelay', 'AutoTreeChop'):
             assert f'dev/tanghulu/addon/modules/{module}.class' in jar.namelist()
         assert not any(n.startswith('dev/tanghulu/addon/modules/Beyblade') for n in jar.namelist())
         assert 'dev/tanghulu/addon/mixin/ModuleInitialMixin.class' in jar.namelist()
@@ -51,7 +52,7 @@ for mc in TARGETS:
                     'sha256': hashlib.sha256(source.read_bytes()).hexdigest(), 'metadataValidated': True,
                     'mainClassesJava21': True, 'inGameTested': False})
 
-source_zip = OUT / (f'Tanghulu-{VERSION}-{VARIANT}-source.zip' if VARIANT else f'Tanghulu-{VERSION}-source.zip')
+source_zip = OUT / (f'Tanghulu-{FILE_VERSION}-{VARIANT}-source.zip' if VARIANT else f'Tanghulu-{FILE_VERSION}-source.zip')
 with zipfile.ZipFile(source_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
     for path in sorted(ROOT.rglob('*')):
         if not path.is_file():

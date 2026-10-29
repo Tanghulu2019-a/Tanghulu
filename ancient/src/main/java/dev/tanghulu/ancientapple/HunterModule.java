@@ -3,6 +3,8 @@ package dev.tanghulu.ancientapple;
 import dev.tanghulu.ancientapple.core.*;
 import dev.tanghulu.ancientapple.integration.XaeroBridge;
 import dev.tanghulu.ancientapple.navigation.ManualCollectionObserver;
+import dev.tanghulu.ancientapple.navigation.QuickLootCollector;
+import dev.tanghulu.ancientapple.navigation.AutoChestLooter;
 import dev.tanghulu.ancientapple.prediction.PredictionEngine;
 import dev.tanghulu.ancientapple.prediction.SearchArea;
 import dev.tanghulu.ancientapple.prediction.LootVersion;
@@ -29,6 +31,15 @@ import java.util.*;
 
 public final class HunterModule extends Module {
     private final SettingGroup general=settings.getDefaultGroup(), display=settings.createGroup("标记");
+    private final SettingGroup quickLoot=settings.createGroup("快速拿取");
+    private final Setting<Boolean> quickLootEnabled=quickLoot.add(new BoolSetting.Builder().name("快速拿取").description("拿取勾选物品并自动关闭，可自动搜索附近箱子；背包放不下时保持打开。").defaultValue(false).onChanged(v -> resetQuickLoot()).build());
+    private final Setting<Boolean> autoOpen=quickLoot.add(new BoolSetting.Builder().name("自动搜箱").description("自动搜索并依次打开附近箱子，无需手动点击。关闭后仍可手动开箱快速拿取。").defaultValue(true).visible(quickLootEnabled::get).onChanged(v -> resetQuickLoot()).build());
+    private final Setting<Double> openRange=quickLoot.add(new DoubleSetting.Builder().name("自动搜箱范围").description("单位：格，以玩家眼睛到箱子中心计算，实际距离不超过当前玩家方块交互距离。").defaultValue(4.5).min(1).max(6).sliderRange(1,6).visible(() -> quickLootEnabled.get() && autoOpen.get()).build());
+    private final Setting<Boolean> openThroughWalls=quickLoot.add(new BoolSetting.Builder().name("隔墙开箱").description("尝试直接交互范围内被遮挡的箱子；最终是否允许由服务器判定。").defaultValue(true).visible(() -> quickLootEnabled.get() && autoOpen.get()).build());
+    private final Setting<Boolean> takeApples=quickLoot.add(new BoolSetting.Builder().name("附魔金苹果").defaultValue(true).visible(quickLootEnabled::get).onChanged(v -> resetQuickLoot()).build());
+    private final Setting<Boolean> takeBottles=quickLoot.add(new BoolSetting.Builder().name("附魔之瓶").defaultValue(true).visible(quickLootEnabled::get).onChanged(v -> resetQuickLoot()).build());
+    private final Setting<Boolean> takeCarrots=quickLoot.add(new BoolSetting.Builder().name("金胡萝卜").defaultValue(true).visible(quickLootEnabled::get).onChanged(v -> resetQuickLoot()).build());
+    private final Setting<Boolean> takeBooks=quickLoot.add(new BoolSetting.Builder().name("迅捷潜行3附魔书").description("只拿取含迅捷潜行 III 的附魔书，不拿取 I、II 级或其他附魔书。").defaultValue(true).visible(quickLootEnabled::get).onChanged(v -> resetQuickLoot()).build());
     public final Setting<String> seed=general.add(new StringSetting.Builder().name("世界种子").description("输入完整有符号 64 位世界种子。多人游戏请选择服务器实际使用的战利品版本。").defaultValue("-7346913998703726680").onChanged(s -> contextChanged()).build());
     private final Setting<String> seedNote=general.add(new dev.tanghulu.ancientapple.gui.NoteSetting("种子备注","多人游戏请选择服务器版本。"));
     private final Setting<LootSelection> lootSelection=general.add(new EnumSetting.Builder<LootSelection>().name("定位物品").description("选择附魔金苹果、迅捷潜行3或全部；切换后立即筛选现有结果，无需重新搜索。").defaultValue(LootSelection.All).onChanged(v -> selectionChanged()).build());
@@ -46,6 +57,8 @@ public final class HunterModule extends Module {
     private final PredictionEngine prediction=new PredictionEngine();
     private final XaeroBridge xaero=new XaeroBridge();
     private final ManualCollectionObserver manual=new ManualCollectionObserver(targets,this::collected,this::opened);
+    private final AutoChestLooter autoLooter=new AutoChestLooter(this::shouldTake);
+    private final QuickLootCollector collector=new QuickLootCollector(this::shouldTake, text -> warning("%s",text),autoLooter::completed);
     private final WorldMarkerRenderer markers=new WorldMarkerRenderer();
     private WorldStore store;
     private Object loadedWorld;
@@ -55,13 +68,14 @@ public final class HunterModule extends Module {
     private String lastFailure="";
     private String lastFailureTrace="";
     private SearchArea surveyArea;
-    public HunterModule() { super(AncientAppleAddon.CATEGORY,"古城战利品定位","古城附魔金苹果与迅捷潜行 III 附魔书预测与定位，手动搜取记录黑名单。"); runInMainMenu=true; }
+    public HunterModule() { super(AncientAppleAddon.CATEGORY,"古城战利品定位","古城战利品预测与定位，支持可选物品快速拿取及搜取黑名单。"); runInMainMenu=true; }
     @Override public void onDeactivate() { contextChanged(); }
     private void contextChanged() {
         // Setting callbacks may fire while the module is being constructed/deserialized.
         if(prediction==null)return;
         invalidateSearch();
         manual.reset();
+        resetQuickLoot();
         save();
         store=null;
         loadedWorld=null;
@@ -124,18 +138,38 @@ public final class HunterModule extends Module {
         } catch(Exception e) { warning("清除黑名单失败：%s",e.getMessage()); }
     }
     @EventHandler private void tick(TickEvent.Pre event) {
-        if(mc.world==null || mc.player==null) { if(loadedWorld!=null)contextChanged(); return; }
-        if(!ensureContext())return;
+        if(mc.world==null || mc.player==null) { resetQuickLoot(); if(loadedWorld!=null)contextChanged(); return; }
+        boolean contextReady=ensureContext();
+        if(quickLootEnabled.get() && hasQuickLootSelection()) {
+            collector.tick();
+            if(autoOpen.get())autoLooter.tick(openRange.get(),openThroughWalls.get(),collector.isCollecting());
+        } else resetQuickLoot();
+        if(!contextReady)return;
         manual.tick();
         if(++ticks%40==0) {
             if(xaeroEnabled.get())syncWaypoints(); else xaero.release();
         }
     }
-    public void serverContainerOpened(int sync) { manual.serverContainerOpened(sync); }
-    public void serverInventory(int sync,List<ItemStack> stacks) { manual.serverInventory(sync,stacks); }
+    private boolean hasQuickLootSelection() { return takeApples.get() || takeBottles.get() || takeCarrots.get() || takeBooks.get(); }
+    private void resetQuickLoot() {
+        if(collector!=null)collector.reset();
+        if(autoLooter!=null)autoLooter.reset();
+    }
+    private boolean shouldTake(ItemStack stack) {
+        return TargetLoot.selectedForQuickLoot(stack,takeApples.get(),takeBottles.get(),takeCarrots.get(),takeBooks.get());
+    }
+    public void serverContainerOpened(int sync) {
+        manual.serverContainerOpened(sync); collector.serverContainerOpened(sync);
+        autoLooter.opened(collector.openedChest());
+    }
+    public void serverInventory(int sync,List<ItemStack> stacks) { manual.serverInventory(sync,stacks); collector.serverInventory(sync,stacks); }
     public void serverSlot(int sync,int slot,ItemStack stack) { manual.serverSlot(sync,slot,stack); }
     public void serverPlayerSlot(int slot,ItemStack stack) { manual.serverPlayerSlot(slot,stack); }
-    public void manualChestInteraction(BlockPos pos) { if(ensureContext())manual.onInteractBlock(pos); }
+    public void manualChestInteraction(BlockPos pos) {
+        boolean ready=ensureContext();
+        if(quickLootEnabled.get() && hasQuickLootSelection())collector.onInteractBlock(pos);
+        if(ready)manual.onInteractBlock(pos);
+    }
     public void manualClickBefore(int sync,int slot,int button,SlotActionType action) { manual.onClickSlotBefore(sync,slot,button,action); }
     public void manualClickAfter(int sync,int slot,int button,SlotActionType action) { manual.onClickSlotAfter(sync,slot,button,action); }
     public void manualCursorStack(ItemStack stack) { manual.serverCursor(stack); }
@@ -257,7 +291,7 @@ public final class HunterModule extends Module {
         WTable table=theme.table();
         button(table,theme,"定位箱子",this::scan); button(table,theme,"取消定位",this::cancelSearch); table.row();
         button(table,theme,"黑名单管理",() -> openBlacklist(theme)); table.row();
-        table.add(theme.label("仅显示定位航标，请自行移动、开箱和拿取。"));
+        table.add(theme.label("快速拿取可自动搜取附近箱子；远处箱子请自行前往。"));
         return table;
     }
     private void button(WTable table,GuiTheme theme,String text,Runnable action) { WButton b=table.add(theme.button(text)).widget(); b.action=action; }

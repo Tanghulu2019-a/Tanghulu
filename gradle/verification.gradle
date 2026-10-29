@@ -116,6 +116,24 @@ javaCheck('mixinApiChecks', ['compatQaClasses', ':ancient:classes'], sourceSets.
 }
 
 // Standalone logic checks compile without launching Minecraft.
+
+tasks.register('compileTreeChopChecks', JavaCompile) {
+    source = files('src/main/java/dev/tanghulu/addon/util/tree/TreePlan.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeSpecies.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeCycle.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeMovementProgress.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeApproach.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeActionLog.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/TreeDescent.java',
+        'src/main/java/dev/tanghulu/addon/util/tree/PillarRoute.java', 'tree-chop/qa/TreePlanChecks.java')
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('tree-chop/audit')
+    options.release = 21
+}
+javaCheck('treeChopChecks', 'compileTreeChopChecks', files(layout.buildDirectory.dir('tree-chop/audit')),
+    'dev.tanghulu.treechop.TreePlanChecks')
+
+checked('classDebugChecks', Exec) { commandLine 'python', 'build-support/verify-class-debug.py' }
 tasks.register('compileBaritoneAssistantAudit', JavaCompile) {
     source = files('src/main/java/dev/tanghulu/stash/navigation/OneClickTravel.java',
                    'navigation/qa/OneClickTravelChecks.java')

@@ -49,6 +49,7 @@ public class TanghuluApp {
         modules.add(new NotebotFix());
         modules.add(new AutoTrashModule());
         modules.add(new AutoMiner());
+        modules.add(new AutoTreeChop());
         modules.add(new StructureFinder());
         modules.add(new MushroomFinder());
         modules.add(new ElytraFinder());

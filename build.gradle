@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.tanghulu'
-version = '1.0.6'
+version = '1.0.7'
 apply from: 'compatibility.gradle'
 base { archivesName = "Tanghulu-mc${mcVersion}" }
 
@@ -109,6 +109,7 @@ jar {
 
 tasks.named('remapJar') {
     inputs.file('build-support/compress-jar.py')
+    inputs.file('build-support/class-debug.py')
     doLast {
         def compression = providers.exec {
             commandLine 'python', 'build-support/compress-jar.py', archiveFile.get().asFile.absolutePath
@@ -123,6 +124,14 @@ tasks.register('remapCompatSmokeJar', net.fabricmc.loom.task.RemapJarTask) {
     inputFile = tasks.named('compatSmokeJar', Jar).flatMap { it.archiveFile }
     destinationDirectory = layout.buildDirectory.dir("packaged-smoke-mod/${mcVersion}")
     archiveFileName = 'tanghulu-compat-smoke-test-only.jar'
+    addNestedDependencies = false
+}
+
+tasks.register('remapMikuConflictJar', net.fabricmc.loom.task.RemapJarTask) {
+    dependsOn 'mikuConflictJar'
+    inputFile = tasks.named('mikuConflictJar', Jar).flatMap { it.archiveFile }
+    destinationDirectory = layout.buildDirectory.dir('miku-conflict')
+    archiveFileName = 'miku-redirect-conflict-test-only.jar'
     addNestedDependencies = false
 }
 

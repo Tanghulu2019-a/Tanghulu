@@ -1,10 +1,27 @@
 // Optional development and packaged Fabric launch checks.
 sourceSets {
+    mikuConflict {
+        java.srcDir 'compat/miku-conflict'
+        resources.srcDir 'compat/miku-conflict-resources'
+        compileClasspath += sourceSets.main.compileClasspath
+    }
     compatSmoke {
         java.srcDir 'compat/smoke'
         resources.srcDir 'compat/smoke-resources'
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
+}
+
+tasks.named('processMikuConflictResources') {
+    def priority = providers.gradleProperty('smokeMikuPriority').getOrElse('1000')
+    inputs.property('priority', priority)
+    filesMatching('miku-conflict.mixins.json') { expand priority: priority }
+}
+tasks.register('mikuConflictJar', Jar) {
+    dependsOn 'mikuConflictClasses'
+    from sourceSets.mikuConflict.output
+    destinationDirectory = layout.buildDirectory.dir('miku-conflict/dev')
+    archiveFileName = 'miku-redirect-conflict-test-only.jar'
 }
 def smokeJar = tasks.register('compatSmokeJar', Jar) {
     dependsOn 'compatSmokeClasses'
@@ -30,6 +47,7 @@ def packagedSmokeJar = tasks.named('remapCompatSmokeJar')
 
 tasks.register('runPackagedSmoke', JavaExec) {
     dependsOn 'remapJar', packagedSmokeJar
+    if (project.hasProperty('smokeMikuConflict')) dependsOn 'remapMikuConflictJar'
     def artifact = tasks.named('remapJar').flatMap { it.archiveFile }
     def vanilla = new File(gradle.gradleUserHomeDir, "caches/fabric-loom/${mcVersion}/minecraft-client.jar")
     classpath = configurations.runtimeClasspath.filter { f ->
@@ -42,15 +60,21 @@ tasks.register('runPackagedSmoke', JavaExec) {
     systemProperty 'java.awt.headless', 'true'
     systemProperty 'tanghulu.smoke.minecraft', mcVersion
     systemProperty 'tanghulu.smoke.baritone', project.hasProperty('smokeBaritone')
+    systemProperty 'tanghulu.smoke.mikuConflict', project.hasProperty('smokeMikuConflict')
     doFirst {
         workingDir.mkdirs()
-        def smokeMods = [artifact.get().asFile, meteorJar, packagedSmokeJar.get().archiveFile.get().asFile]
+        def addon = project.hasProperty('smokeAddonJar') ? file(project.property('smokeAddonJar')) : artifact.get().asFile
+        def smokeMods = [addon, meteorJar, packagedSmokeJar.get().archiveFile.get().asFile]
+        if (project.hasProperty('smokeMikuConflict')) {
+            if (!project.hasProperty('smokeBaritone')) throw new GradleException('smokeMikuConflict requires smokeBaritone')
+            smokeMods.add(tasks.named('remapMikuConflictJar').get().archiveFile.get().asFile)
+        }
         if (project.hasProperty('smokeBaritone')) {
             smokeMods.addAll(configurations.detachedConfiguration(
                 dependencies.create("meteordevelopment:baritone:${mcVersion}-SNAPSHOT")
             ).files)
         }
         systemProperty 'fabric.addMods', smokeMods.collect { it.absolutePath }.join(File.pathSeparator)
-        systemProperty 'tanghulu.smoke.classes', artifact.get().asFile.absolutePath
+        systemProperty 'tanghulu.smoke.classes', addon.absolutePath
     }
 }
